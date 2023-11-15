@@ -1,0 +1,26 @@
+.htaccess
+wp-config.php
+wp-content/uploads/*
+wp-content/wflogs/*
+wp-content/cache/*
+
+wp-content/debug.log 
+
+/node_modules
+.DS_Store
+package-lock.json
+
+# Gulp
+gulpfile.js
+wp-content/ewww/*
+
+error.json
+
+_DB
+error_log
+
+#Live folders
+.ftpquota
+.user.ini
+.well-known
+php.ini
