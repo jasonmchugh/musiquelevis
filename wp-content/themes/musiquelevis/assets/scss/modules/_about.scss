@@ -1,0 +1,36 @@
+/*
+	Modules
+		About
+ */
+
+.about {
+	background-color: $black;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-position: center center;
+
+	@media #{$md} {
+		background-size: auto 160%;
+	}
+
+}
+
+.about__content {
+	padding: 6.250em 0;
+	color: $white;
+	text-align: center;
+	overflow: hidden;
+
+	img {
+		margin-bottom: -100%;
+	}
+
+	@media #{$md} {
+
+		._col--md-3 {
+			display: none;
+		}
+
+	}
+
+}

@@ -1,0 +1,74 @@
+.menu-item-has-children {
+
+	&:hover {
+
+		.sub-menu {
+			margin-top: 1em;
+
+			@media #{$md} {
+				display: none;
+				margin: 0;
+			}
+
+		}
+
+	}
+
+}
+
+.sub-menu {
+	background: $black;
+	position: absolute;
+	left: 0;
+	margin: -45em -5.375rem 0;
+	padding: 2em 5.375rem 1em;
+	transition: 0.5s;
+	z-index: -1;
+
+	@media #{$md} {
+		width: 100%;
+		position: relative;
+		padding: 1em 1em 0;
+		margin: 0;
+		z-index: 0;
+		display: none;
+	}
+
+	li {
+		width: 16%;
+
+		@media #{$md} {
+			width: 100%;
+			font-size: 0.8em;
+			padding-left: 1em;
+		}
+
+		&:after {
+			display: none;
+		}
+
+	}
+
+}
+
+.submenu-button {
+	display: none;
+	width: 1em;
+	height: 1em;
+	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23FFE01A'%2F%3E%3C%2Fsvg%3E");
+	background-repeat: no-repeat;
+	background-position: right center;
+	transform: rotate(0deg);
+	transition: 0.5s;
+
+	@media #{$md} {
+		display: block;
+		position: absolute;
+		right: 0;
+	}
+
+	&.opened {
+		transform: rotate(90deg);
+	}
+
+}

@@ -1,0 +1,147 @@
+.main-nav {
+
+	.sub-menu {
+
+		.menu-item {
+			text-align: center;
+			margin-bottom: 1.5em;
+			padding: 0;
+			vertical-align: top;
+
+			@media #{$md} {
+				text-align: left;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+
+			}
+
+			a {
+				display: inline-block;
+
+				&:before {
+					content: "";
+					width: 75px;
+					height: 75px;
+					display: block;
+					margin: 0 auto 0.625em;
+					background-size: contain;
+					background-repeat: no-repeat;
+					background-position: center center;
+					background-attachment: scroll;
+
+					@media #{$md} {
+						display: none;
+					}
+
+				}
+
+			}
+
+		}
+
+		.submenu__icon--arme a:before {
+			background-image: url('/wp-content/uploads/2018/06/armes.png');
+			background-size: 100% auto;
+		}
+
+		.submenu__icon--bijoux a:before {
+			background-image: url('/wp-content/uploads/2018/06/bijoux.png');
+		}
+
+		.submenu__icon--maison a:before {
+			// background-image: url('/wp-content/uploads/2018/06/equipement-maison.png');
+			background-image: url('/wp-content/uploads/2018/06/micro_onde.png');
+			background-size: 100% auto;
+		}
+
+		.submenu__icon--securite a:before {
+			// background-image: url('/wp-content/uploads/2018/06/equipement-maison.png');
+			background-image: url('/wp-content/uploads/2018/06/securite.png');
+			background-size: 100% auto;
+		}
+
+		.submenu__icon--loisirs a:before {
+			// background-image: url('/wp-content/uploads/2018/06/equipement-maison.png');
+			background-image: url('/wp-content/uploads/2018/06/tattoo.png');
+			background-size: 100% auto;
+		}
+
+		.submenu__icon--informatique a:before {
+			// background-image: url('/wp-content/uploads/2018/06/equipement-maison.png');
+			background-image: url('/wp-content/uploads/2018/06/informatique.png');
+			background-size: 100% auto;
+		}
+
+		.submenu__icon--artistique a:before {
+			background-image: url('/wp-content/uploads/2018/06/tattoo.png');
+			background-size: 100% auto;
+		}
+
+		.submenu__icon--outils a:before {
+			background-image: url('/wp-content/uploads/2018/06/outils.png');
+		}
+
+		.submenu__icon--musique a:before {
+			background-image: url('/wp-content/uploads/2018/06/musique.png');
+		}
+
+		.submenu__icon--telephone a:before {
+			background-image: url('/wp-content/uploads/2018/06/telephone.png');
+		}
+
+		.submenu__icon--photo a:before {
+			background-image: url('/wp-content/uploads/2018/06/photo.png');
+		}
+
+		.submenu__icon--television a:before {
+			background-image: url('/wp-content/uploads/2018/06/tele.png');
+			background-size: 100% auto;
+		}
+
+		.submenu__icon--son a:before {
+			background-image: url('/wp-content/uploads/2018/06/appareil-son.png');
+		}
+
+		.submenu__icon--sport a:before {
+			background-image: url('/wp-content/uploads/2018/06/sports.png');
+		}
+
+		.submenu__icon--auto a:before {
+			background-image: url('/wp-content/uploads/2018/06/equip_auto.png');
+		}
+
+		.submenu__icon--moteur a:before {
+			background-image: url('/wp-content/uploads/2018/06/moteur.png');
+		}
+
+		.submenu__icon--collection a:before {
+			background-image: url('/wp-content/uploads/2018/06/objet-collection.png');
+			background-size: 100% auto;
+		}
+
+		.submenu__icon--jeux a:before {
+			background-image: url('/wp-content/uploads/2018/06/jeux_video.png');
+			background-size: 100% auto;
+		}
+
+		.submenu__icon--instruments a:before {
+			background-image: url('/wp-content/uploads/2018/06/guitar.png');
+		}
+
+		.submenu__icon--sono a:before {
+			background-image: url('/wp-content/uploads/2018/06/sonorisation-eclairage.png');
+		}
+
+		.submenu__icon--orthopedique a:before {
+			background-image: url('/wp-content/uploads/2018/06/ortho.png');
+		}
+
+		.submenu__icon--bureau a:before {
+			background-image: url('/wp-content/uploads/2018/06/caisse.png');
+		}
+
+	}
+
+}

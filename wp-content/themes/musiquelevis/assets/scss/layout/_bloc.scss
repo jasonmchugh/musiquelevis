@@ -1,0 +1,60 @@
+.bloc__image {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	height: 25em;
+	margin: 2em 0;
+	position: relative;
+
+	@media #{$sm} {
+		height: 15em;
+	}
+
+	@media #{$xs} {
+		height: 10em;
+	}
+
+	h2 {
+		color: $white;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		text-align: center;
+		width: 100%;
+	}
+
+}
+
+.bloc__image--overlay {
+	background: rgba(0,0,0,0.5);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.bloc__texte {
+	padding-top: 3.75em;
+	padding-bottom: 3.75em;
+
+	h3 {
+		text-align: center;
+		text-transform: uppercase;
+		font-size: 1.875em;
+	}
+
+}
+
+.bloc__texte--intro {
+	font-weight: bold;
+	margin-bottom: 1.25em;
+	text-transform: uppercase;
+}
+
+
+.page-id-17 {
+
+	.page__content {
+		display: none;
+	}
+
+}

@@ -1,0 +1,59 @@
+.table {
+
+	td {
+
+		&.actions {
+			background: $grey-lighter;
+			padding: 0.5rem 1rem;
+			margin: 0;
+
+			@media #{$sm} {
+				padding: 0.5rem 1rem 1rem;
+			}
+
+		}
+
+	}
+
+}
+
+.coupon {
+	text-align: right;
+}
+
+.coupon__code {
+	display: inline-block;
+	margin-right: 1em;
+
+	@media #{$sm} {
+		width: 49%;
+		margin: 0;
+		border-radius: .5em 0 0 .5em;
+		border: none;
+	}
+
+	@media #{$xs} {
+		display: block;
+		border-radius: 0;
+		width: 100%;
+	}
+
+}
+
+.coupon__apply {
+	display: inline-block;
+
+	@media #{$sm} {
+		width: 49%;
+		margin: 0;
+		border-radius: 0 .5em .5em 0;
+		padding: 13px 10px;
+	}
+
+	@media #{$xs} {
+		display: block;
+		border-radius: 0;
+		width: 100%;
+	}
+
+}

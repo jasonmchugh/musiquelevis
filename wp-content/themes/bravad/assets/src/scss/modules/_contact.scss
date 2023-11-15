@@ -1,0 +1,50 @@
+.contact__wrap {
+	padding: 3.75em;
+	text-align: center;
+
+	@media #{$md} {
+		padding: 2.625rem;
+	}
+
+	h2 {
+		margin-bottom: 1em;
+	}
+
+}
+
+.contact__form {
+	width: 70%;
+	margin: 0 auto;
+
+	@media #{$md} {
+		width: 100%;
+	}
+
+	p {
+		margin: 0;
+	}
+
+	label {
+		color: $black;
+		margin: 0;
+	}
+
+	select {
+		background: url('/wp-content/themes/bravad/assets/dist/img/arrow-down.svg') no-repeat scroll 98% center;
+		background-size: 20px auto;
+	}
+
+	textarea {
+		min-height: 200px;
+	}
+
+	form {
+		margin-top: 2em;
+	}
+
+	.ft-field--submit {
+		clear: both;
+		padding: 0 1.3125rem;
+	}
+
+}

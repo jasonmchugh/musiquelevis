@@ -1,0 +1,49 @@
+.restore-item {
+	font-weight: bold;
+	color: $blue;
+}
+
+.woocommerce-info {
+	margin: 3.75rem 0 0;
+	background: $blue;
+	padding: 1rem;
+	color: $white;
+	width: 100%;
+
+	a {
+		font-weight: bold;
+	}
+}
+
+.showcoupon {
+	font-weight: bold;
+}
+
+.woocommerce-password-strength {
+	padding: 5px 10px;
+	margin: 10px 0 5px 0;
+	border-radius: 5px;
+
+	&.short,
+	&.bad {
+		background: $red;
+		color: $white;
+	}
+
+	&.good {
+		background: $yellow;
+	}
+
+	&.strong {
+		background: $green;
+		color: $white;
+	}
+}
+
+.woocommerce-result-count {
+	padding: 0 36px;
+
+	@media #{$xs} {
+		padding: 0;
+	}
+}

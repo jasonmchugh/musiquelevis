@@ -1,0 +1,40 @@
+.woocommerce-error,
+.woocommerce-message {
+	color: $white;
+	position: relative;
+	left: 0;
+	list-style-type: none;
+	padding: 0.5em;
+	margin: 0 0 1rem 0;
+	text-align: center;
+
+	a {
+		padding: 0;
+	}
+
+	// @media #{$xs} {
+	// 	margin: 1rem -2.6rem;
+	// }
+}
+
+.woocommerce-error {
+	background: $red;
+}
+
+.woocommerce-error > li {
+	margin: 0;
+}
+
+.woocommerce-message {
+	background: $blue;
+}
+
+.woocommerce-cart .woocommerce-error .button,
+.woocommerce-cart .woocommerce-message .button {
+	display: none;
+}
+
+.errorpage {
+	margin-bottom: 3.75rem;
+	text-align: center;
+}

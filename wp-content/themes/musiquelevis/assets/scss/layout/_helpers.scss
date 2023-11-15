@@ -1,0 +1,35 @@
+/*
+	OBJECTS
+		Helpers
+*/
+/* Spacer */
+._spacer {
+	min-width: 1px;
+	height: map-get($gutters, medium);
+	clear: both;
+	overflow: hidden;
+	display: block;
+}
+._spacer--small {
+	height: map-get($gutters, small);
+}
+._spacer--medium {
+	height: map-get($gutters, small) * 3;
+}
+._spacer--large {
+	height: map-get($gutters, large);
+}
+._spacer--txt {
+	height: map-get($gutters, txt);
+}
+._txt-spacer {
+	width: 1.1em;
+	display: inline-block;
+}
+/* Inner */
+._inner {
+	padding: map-get($gutters, medium);
+}
+._inner--small {
+	padding: map-get($gutters, small);
+}

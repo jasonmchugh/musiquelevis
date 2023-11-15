@@ -1,0 +1,109 @@
+.retailers__results {
+	width: 100%;
+	background-color: $black;
+	background-image: url('/wp-content/themes/bravad/assets/dist/img/nos-succursales.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: block;
+	color: $white;
+	padding: 3.75em 0;
+
+	a {
+		color: $yellow;
+		text-transform: uppercase;
+		font-weight: bold;
+		display: block;
+
+		&:hover {
+			color: $white;
+		}
+
+		@media #{$sm} {
+			margin-bottom: 1em;
+
+			&:last-child {
+				margin: 0;
+			}
+
+		}
+
+	}
+
+	h1,
+	h2 {
+		text-align: center;
+		margin-bottom: 1em;
+	}
+
+	h3 {
+		text-transform: uppercase;
+	}
+
+	._col {
+		text-align: center;
+
+		a {
+			text-transform: none;
+			color: $white;
+
+			&[href^="tel:"] {
+
+				&:hover {
+					color: $white;
+				}
+
+			}
+
+			&:hover {
+				color: $yellow;
+			}
+
+			&.facebook {
+				color: $yellow;
+
+				&:hover {
+					color: $white;
+				}
+
+			}
+
+		}
+
+		@media #{$sm} {
+			margin-bottom: 2em;
+
+			&:last-child {
+				margin: 0;
+			}
+
+		}
+
+	}
+
+}
+
+#retailers {
+	width: 70%;
+	margin: 0 auto;
+
+	@media #{$md} {
+		width: 100%
+	}
+
+}
+
+.retailer {
+	width: 50%;
+	display: inline-block;
+
+	@media #{$sm} {
+		width: 100%;
+		display: block;
+		text-align: center;
+	}
+
+}
+
+.retailer_header {
+	height: 25em;
+}

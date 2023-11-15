@@ -1,0 +1,21 @@
+.table {
+
+	&.order-details {
+
+		td {
+
+			&.product-name,
+			&.product-succursale,
+			&.product-price  {
+				padding: 1rem;
+			}
+
+		}
+
+	}
+
+	.product-quantity {
+		display: none;
+	}
+
+}

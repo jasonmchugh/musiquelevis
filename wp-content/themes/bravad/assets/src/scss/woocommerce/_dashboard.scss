@@ -1,0 +1,82 @@
+.dashboard__button {
+	margin: 1em 0;
+
+	a {
+		background: $yellow;
+		display: block;
+		padding: 2em;
+		text-align: center;
+		transition: 0.5s;
+
+		&:hover {
+			background: $blue;
+
+			h2 {
+				color: $white;
+			}
+
+			[class^='dashboard__icon'] {
+
+				&:after {
+					color: $white;
+				}
+
+			}
+
+		}
+
+	}
+
+	h2 {
+		margin: 0.75em 0 0;
+		font-size: 1.5em;
+	}
+
+}
+
+[class^='dashboard__icon'] {
+
+	&:after {
+		font: normal normal normal 4em/1 FontAwesome;
+	}
+}
+
+.dashboard__icon--orders {
+
+	&:after {
+		content: "\f07a";
+	}
+
+}
+
+.dashboard__icon--payment-methods {
+
+	&:after {
+		content: "\f0d6";
+	}
+
+}
+
+.dashboard__icon--address {
+
+	&:after {
+		content: "\f015";
+	}
+
+}
+
+.dashboard__icon--account {
+
+	&:after {
+		content: "\f007";
+	}
+
+}
+
+.dashboard__icon--logout {
+
+	&:after {
+		content: "\f08b";
+	}
+
+}

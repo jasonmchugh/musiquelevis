@@ -1,0 +1,8 @@
+#account_password_field {
+	width: 49%;
+
+	@media #{$md} {
+		width: 100%;
+	}
+
+}

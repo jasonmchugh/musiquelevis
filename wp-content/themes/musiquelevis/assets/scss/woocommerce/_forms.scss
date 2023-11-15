@@ -1,0 +1,66 @@
+.form-row {
+	display: inline-block;
+}
+
+.form-row-first {
+	width: 49%;
+	margin-right: 2%;
+
+	@media #{$sm} {
+		width: 100%;
+		margin: 0 0 1em;
+	}
+
+}
+
+.form-row-last {
+	width: 49%;
+
+	@media #{$sm} {
+		width: 100%;
+		margin: 0 0 1em;
+	}
+
+}
+
+.form-row-wide {
+	width: 100%;
+}
+
+// Checkout
+.woocommerce-checkout {
+	margin: 3.75rem 0;
+}
+body.woocommerce-checkout {
+	margin: 0;
+}
+
+.checkout_coupon {
+	padding: 1em;
+	background: $grey-lighter;
+
+	#coupon_code {
+		width: 25%;
+		display: inline-block;
+	}
+
+}
+
+#order_comments_field {
+	width: 100%;
+	margin: 0;
+}
+
+.required {
+	display: none;
+}
+
+#billing_country_field,
+#shipping_country_field {
+	display: none;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+	top: 5px;
+	right: 7px;
+}

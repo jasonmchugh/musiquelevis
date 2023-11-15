@@ -1,0 +1,73 @@
+.main-nav__btn--wrapper {
+	display: none;
+	z-index: 100;
+
+	@media #{$md} {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 2.625rem;
+		height: 100%;
+		padding: 0 2.625rem 0 0;
+	}
+
+}
+
+.main-nav__btn {
+	position: absolute;
+	display: block;
+	width: 2.625em;
+	height: 1.438em;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+
+	&:before {
+	    background: $blue none repeat scroll 0 0;
+	    top: 0;
+	    right: 0;
+	    display: block;
+	    height: 4px;
+	    width: 100%;
+	    content: '';
+	    transition: all $speed $easing;
+	    position: absolute;
+	}
+
+	&:after {
+		top: 8px;
+		right: 0;
+		display: block;
+		height: 12px;
+		width: 100%;
+		border-top: 4px solid $blue;
+		border-bottom: 4px solid $blue;
+		content: '';
+		transition: all $speed $easing;
+		position: absolute;
+	}
+
+	&.opened {
+		transition: all .2s ease-out;
+
+		&:after {
+			top: 10px;
+			border: 0;
+			height: 4px;
+			width: 100%;
+			background: $blue;
+			transform: rotate(45deg);
+			transition: all $speed $easing;
+		}
+
+		&:before {
+			top: 10px;
+			background: $blue;
+			width: 100%;
+			transform: rotate(-45deg);
+			transition: all $speed $easing;
+		}
+
+	}
+
+}

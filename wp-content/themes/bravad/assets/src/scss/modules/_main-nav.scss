@@ -1,0 +1,81 @@
+/*
+	Modules
+		Main navigation
+à*/
+
+.main-nav__wrap {
+	background: $black;
+	transition: 0.5s;
+
+	@media #{$md} {
+		top: -60em;
+		position: absolute;
+		width: 100%;
+		height: calc(100vh - 5em);
+		overflow: scroll;
+
+		&.open {
+			top: 5em;
+		}
+
+	}
+
+}
+
+.main-nav {
+	position: relative;
+	z-index: 2;
+
+	@media #{$md} {
+		padding-top: 0;
+
+		li {
+			font-size: 1.2em;
+		}
+
+	}
+
+}
+
+#menu-main-nav {
+	position: relative;
+	transition: all .3s ease-out;
+	background: $black;
+}
+
+.menu-item {
+	display: inline-block;
+	color: $white;
+	transition: all $speed $easing;
+	margin: 0;
+	padding: 1em 0;
+
+	&:after {
+		content: "|";
+		color: $white;
+		margin: 0 1em;
+
+		@media #{$md} {
+			display: none;
+		}
+
+	}
+
+	&.current_page_item {
+		color: $yellow;
+	}
+
+	&:hover {
+		color: $yellow;
+
+		&:after {
+			color: $white;
+		}
+
+	}
+
+	@media #{$md} {
+		display: block;
+	}
+
+}

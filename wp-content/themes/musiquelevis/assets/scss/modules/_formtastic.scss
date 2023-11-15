@@ -1,0 +1,18 @@
+.ft-invalid {
+	color: red;
+}
+
+.ft-field {
+	text-align: left;
+	margin-bottom: 1em;
+}
+
+.ft-submit {
+	clear: both;
+	text-align: center;
+}
+
+.ft-confirmation {
+	font-weight: 700;
+	margin: 0 0 map-get($gutters, txt);
+}

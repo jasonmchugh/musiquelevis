@@ -1,0 +1,4 @@
+* 2022/09/25
+There is an issue with @wordpress/scripts in its 24.2.0 version.
+The webpack cannot be override. It seems it will be fixed later.
+For now, let's stay on 24.0.0.

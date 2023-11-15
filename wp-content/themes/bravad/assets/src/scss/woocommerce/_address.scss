@@ -1,0 +1,58 @@
+.woocommerce-Address {
+	margin-bottom: 2em;
+	background: $grey-lighter;
+	padding: 1em;
+
+	.edit {
+		margin-bottom: 1em;
+	}
+
+}
+
+.woocommerce-columns--addresses,
+.woocommerce-Addresses {
+
+	.woocommerce-column--1 ,
+	.woocommerce-column--2 {
+		width: 50%;
+		float: left;
+
+		@media #{$md} {
+			width: 100%;
+		}
+
+	}
+
+	.col-1 {
+		width: 49%;
+		float: left;
+		margin-right: 1%;
+
+		@media #{$md} {
+			width: 100%;
+			margin-right: 0;
+		}
+
+	}
+
+	.col-2 {
+		width: 49%;
+		float: left;
+		margin-left: 1%;
+
+		@media #{$md} {
+			width: 100%;
+			margin-left: 0;
+		}
+
+	}
+
+}
+
+.woocommerce-column--billing-address {
+
+	@media #{$md} {
+		margin-bottom: 3.75em;
+	}
+
+}

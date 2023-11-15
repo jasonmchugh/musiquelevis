@@ -1,0 +1,93 @@
+//Carrousel
+.woocommerce-product-gallery {
+	position: relative;
+	overflow: hidden;
+}
+
+.flex-viewport {
+	margin: 0 0 1em 0;
+}
+
+.woocommerce-product-gallery__image {
+	height: auto;
+	position: relative;
+
+	// @media #{$md} {
+	// 	height: 400px;
+	// }
+
+	// @media #{$sm} {
+	// 	height: auto;
+	// }
+
+}
+
+.woocommerce-product-gallery__trigger {
+	position: absolute;
+	left: 1em;
+	top: 1em;
+	z-index: 2;
+	display: block;
+	width: 4rem;
+	height: 4rem;
+	line-height: 4rem;
+	text-align: center;
+}
+
+.woocommerce-product-gallery__wrapper {
+	margin: 0;
+	cursor: crosshair;
+}
+
+.attachment-product-full,
+.attachment-shop_single {
+	width: auto;
+	// min-height: 100%;
+	min-width: 100%;
+	max-height: none;
+	// position: absolute;
+	// top: 50%;
+	// transform: translateY(-50%);
+}
+
+
+// Tabs
+.flex-control-nav {
+	padding: 0;
+	margin: 0 1.25em 0 0;
+	display: none;
+	position: relative;
+	bottom: 0;
+
+	li {
+		display: inline-block;
+		margin: 0;
+		height: auto;
+		width: 100%
+	}
+
+	[class^="products__button"] {
+		transition: 0.5s;
+	}
+
+	[class^="products__button---prev"] {
+		left: -1.1em;
+	}
+
+	[class^="products__button---next"] {
+		right: -1.1em;
+	}
+
+	&:hover {
+
+		[class^="products__button---prev"] {
+			left: 1em;
+		}
+
+		[class^="products__button---next"] {
+			right: 1em;
+		}
+
+	}
+
+}

@@ -1,0 +1,102 @@
+/*
+	Modules
+		Newsletter
+ */
+
+.newsletter {
+	text-align: center;
+	margin: 3.750em 0;
+
+	p {
+		width: 70%;
+		margin: 0 auto 0.938em;
+
+		@media #{$md} {
+			width: 100%;
+		}
+
+	}
+
+	.ft-row {
+		width: 75%;
+		float: left;
+	}
+
+	.ft-field--submit {
+		width: 25%;
+		float: left;
+	}
+
+	form {
+		width: 20%;
+		margin: 0 auto;
+		border: solid 1px $black;
+		border-radius: 0.5em;
+		overflow: hidden;
+
+		@media #{$md} {
+			width: 50%;
+		}
+
+		@media #{$sm} {
+			width: 100%;
+		}
+
+		input {
+			width: 100%;
+			max-width: none;
+			border: none;
+			height: 45px;
+		}
+
+		button {
+			height: 45px;
+			width: 100%;
+			background: $yellow url('/wp-content/themes/bravad/assets/src/svg/fullarrow.svg') no-repeat scroll center center;
+			background-size: 2em auto;
+			border-left: solid 1px $black;
+			padding: 0;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+			text-indent: -9999px;
+
+			&:hover {
+				background-color: $blue;
+			}
+
+		}
+
+		.ft-form-wrapper {
+			width: 80%;
+			float: left;
+		}
+
+		.ft-submit {
+			width: 20%;
+			float: right;
+			clear: none;
+		}
+
+		.ft-field {
+			margin: 0;
+		}
+
+		span.ft-invalid {
+			position: absolute;
+			margin-top: 0.5em;
+		}
+
+	}
+
+	.ft-confirm {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		margin-top: 50px;
+	}
+
+}
+
+.ft-autofill {
+	display: none;
+}

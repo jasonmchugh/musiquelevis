@@ -1,0 +1,55 @@
+body.login {
+  background: #ffffff; }
+
+.login h1 a {
+  background-image: url(../img/logos/cote_de_beaupre.png);
+  background-size: 70%;
+  width: 235px;
+  margin-bottom: 0;
+  height: 125px; }
+
+body.login form {
+  background: transparent;
+  box-shadow: none;
+  padding: 0; }
+
+body.login form label {
+  color: #221f1f; }
+
+body.login #backtoblog, .login #nav {
+  font-size: 15px;
+  padding: 0px; }
+
+body.login #backtoblog a, .login #nav a {
+  color: #20A8AE; }
+
+body.login #backtoblog a:hover, .login #nav a:hover {
+  color: #221f1f; }
+
+body.login .button-primary {
+  background: #20A8AE;
+  border-color: #ffffff;
+  border-radius: 0;
+  font-weight: 500;
+  color: #ffffff;
+  height: auto !important;
+  box-shadow: none;
+  text-shadow: none;
+  text-decoration: none;
+  padding: 10px 20px !important;
+  font-size: 1.2em; }
+
+body.login .button-primary:hover, body.login .button-primary:focus, body.login .button-primary:active {
+  background: #999;
+  border-color: #fff;
+  font-weight: 500;
+  color: #fff;
+  box-shadow: none;
+  text-shadow: none;
+  text-decoration: none; }
+
+body.login input[type=checkbox] {
+  border: 1px solid #575756; }
+
+body.login input[type=checkbox]:checked:before {
+  color: #01143f; }

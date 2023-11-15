@@ -1,0 +1,75 @@
+/*!
+ * WP Custom Functions: wpcf-admin.css v1.0
+ * http://marcandre.ca
+ * Author: Marc-André Lavigne
+ * License: GPLv2 or later
+ */
+
+
+/* Drag and drop reorder */
+#the-list.sp-dragging .row-actions {
+	visibility: hidden !important;
+}
+
+td.column-sortable,
+th.column-sortable {
+	width: 10px;
+	padding: 4px 2px;
+}
+
+th.column-sortable {
+	text-align: center;
+	font-size: 1.7em;
+}
+
+td.column-sortable {
+	cursor: move;
+}
+
+.sp-sortable-handle {
+	display: block;
+	width: 10px;
+	height: 42px;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAI0lEQVQY02Po7+//f+zYsf8MOACTubk5A50BupuY0BVQ300AdQkNSULnhRAAAAAASUVORK5CYII=);
+	margin-top: 6px;
+}
+
+.sp-placeholder {
+	background-color: #F5F5F5;
+	outline: 1px dashed #BBB;
+}
+tr.sp-dragging {
+	border: 1px dashed #BBB;
+}
+
+.hide-children .is-child {
+	display: none;
+}
+
+
+/* Admin Settings */
+.wpcf-tabs-nav {
+	margin-top: 20px;
+}
+.wpcf-tabs-nav div {
+	display: inline-block;
+	padding: 10px 20px;
+	border-top: solid 1px #23282D;
+	border-left: solid 2px #23282D;
+	border-right: solid 1px #23282D;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+.wpcf-tabs-nav div.active {
+	background: #9EA3A8;
+	color: #FFF;
+}
+
+.wpcf-tabs {
+	border: solid 2px #23282D;
+	padding: 0 30px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+}

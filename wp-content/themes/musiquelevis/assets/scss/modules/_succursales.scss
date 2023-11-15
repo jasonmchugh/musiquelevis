@@ -1,0 +1,83 @@
+/*
+	Modules
+		Succursales
+ */
+
+.succursales {
+	color: $white;
+	font-family: $font-oswald;
+	text-align: center;
+
+	@media #{$sm} {
+		overflow: hidden;
+	}
+
+	._col {
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+
+		@media #{$md} {
+
+			&:first-child {
+				order: 2;
+			}
+
+		}
+
+	}
+
+	@media #{$md} {
+
+		._row {
+			flex-direction: column;
+		}
+
+	}
+
+}
+
+.succursales__content {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+
+	@media #{$md} {
+		padding: 3.75em 0;
+		top: 0;
+		transform: none;
+	}
+
+	@media #{$sm} {
+
+		.btn {
+			padding: .875em 1.250em;
+		}
+
+	}
+
+}
+
+.succursales__content--wrap {
+	font-size: 1vw;
+
+	@media #{$md} {
+		font-size: 0.8em;
+	}
+
+}
+
+.succursales__title {
+	text-transform: uppercase;
+	font-size: 2.5em;
+	display: block;
+	line-height: 1;
+	margin: 16px 0;
+}
+
+.succursales__title--number {
+	color: $yellow;
+	font-size: 7.5em;
+	display: block;
+	line-height: 1;
+}

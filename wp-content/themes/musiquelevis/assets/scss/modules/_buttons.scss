@@ -1,0 +1,55 @@
+.btn,
+.button {
+	border: none;
+	border-radius: 0.5em;
+	text-transform: uppercase;
+	transition: all $speed $easing;
+	display: inline-block;
+	text-align: center;
+	font-weight: bold;
+	letter-spacing: -0.02em;
+	padding: 0.875em 2.250em;
+	line-height: 1;
+	font-family: $font-worksans;
+	font-size: 1em;
+}
+
+.btn--yellow {
+	background: $yellow;
+	color: $black;
+
+	&:hover,
+	&:active,
+	&:focus {
+		background: $blue;
+		color: $white;
+	}
+
+}
+
+.btn--blue,
+.woocommerce-form .button {
+	background: $blue;
+	color: $white;
+
+	&:hover,
+	&:active,
+	&:focus {
+		background: $white;
+		color: $black;
+	}
+
+}
+
+.btn--white {
+	background: $white;
+	color: $black;
+
+	&:hover,
+	&:active,
+	&:focus {
+		background: $blue;
+		color: $white;
+	}
+
+}

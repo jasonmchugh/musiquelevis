@@ -1,0 +1,21 @@
+.related {
+	// margin-top: 3.75rem;
+
+	h2 {
+		text-align: center;
+		margin: 3.75rem 0;
+	}
+
+	[class^="products__slider"] {
+		padding: 0;
+	}
+
+	[class^="products__button---next"] {
+		right: -1em;
+	}
+
+	[class^="products__button---prev"] {
+		left: -1em;
+	}
+
+}

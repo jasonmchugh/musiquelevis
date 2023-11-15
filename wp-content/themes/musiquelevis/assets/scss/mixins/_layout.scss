@@ -1,0 +1,78 @@
+//	MIXINS
+//		Layout
+
+// Columns in grid system
+$columnsWidth: (
+	8.333333333333333%,
+	16.66666666666667%,
+	25%,
+	33.33333333333333%,
+	41.66666666666667%,
+	50%,
+	58.33333333333334%,
+	66.66666666666667%,
+	75%,
+	83.33333333333333%,
+	91.66666666666666%,
+	100%
+);
+
+// Gutters
+$gutters: (
+	small: 0.75rem, // 12px
+	medium: 2.625rem, // 42px
+	large: 5.375rem, // 86px
+	txt: 1.225em
+);
+$guttersLg: (
+	small: 2.5rem,
+	medium: 3rem,
+	large: 3.5rem,
+	txt: 1.225em
+);
+
+// Breakpoints widths
+// Edit them at one place
+$bpWidths: (
+	lg: '1350px',
+	md: '979px',
+	sm: '760px',
+	xs: '560px',
+);
+
+// Media queries shortcuts
+// Usage : @media #{$md} {}
+$lg: 'screen and (max-width: #{map-get($bpWidths, lg)})';
+$md: 'screen and (max-width: #{map-get($bpWidths, md)})';
+$sm: 'screen and (max-width: #{map-get($bpWidths, sm)})';
+$xs: 'screen and (max-width: #{map-get($bpWidths, xs)})';
+$iphone1: 'all and (device-width: 320px) and (device-height: 480px) and (orientation:portrait)';
+$iphone2: 'all and (device-width: 320px) and (device-height: 480px) and (orientation:landscape)';
+
+// Breakpoints
+// Used to generate grid system
+$breakpoints: (
+	(
+		name: xl,
+		max-width: null
+	),
+	(
+		name: lg,
+		max-width: map-get($bpWidths, lg)
+	),
+	(
+		name: md,
+		max-width: map-get($bpWidths, md)
+	),
+	(
+		name: sm,
+		max-width: map-get($bpWidths, sm)
+	),
+	(
+		name: xs,
+		max-width: map-get($bpWidths, xs)
+	)
+);
+
+// Z-Indexes
+$z-main-nav-sub-links: 10;

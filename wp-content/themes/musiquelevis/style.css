@@ -1,0 +1,303 @@
+/*
+Theme Name: Musique Lévis
+Author: Comrad
+Author URI: http://comrad.ca
+Description: Wordpress comrad base theme.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: comrad
+*/
+
+.sos_head .logo__wrap img {
+  max-width: 300px;
+}
+.sos_head .main-nav .menu-main-nav-container .logo-small {
+  display: none;
+  opacity: 0;
+}
+.page-numbers.current{
+	background: #fff;
+    color: #000;
+    padding: 10px;
+	font-weight: bold;
+}
+body.postid-135 #street-view {
+  display: none;
+}
+.custom_shipping{
+	font-size: 12px !important;
+	color: #000 !important;
+}
+
+.custom_store{
+	font-size: 11px !important;
+	color: #000 !important;
+}
+
+.product_type_simple{
+	background: #ffe01a !important;
+    color: #282828 !important;
+	padding: .875em 2.250em !important;
+	border-radius: .5em !important;
+	text-transform: uppercase !important;
+	border: 0 !important;
+    border-radius: .5em !important;
+    text-transform: uppercase !important;
+    -webkit-transition: all .15s ease-out !important;
+    transition: all .15s ease-out !important;
+    display: inline-block !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1 !important;
+    font-family: "Work Sans",sans-serif !important;
+    font-size: 1em !important;
+}
+.product_type_simple:hover, .button_style:active, .button_style:focus {
+    background: #003876 !important;
+    color: #fff !important;
+}
+/**
+ * Tooltip Styles
+ */
+
+/* Add this attribute to the element that needs a tooltip */
+[data-tooltip] {
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  font-size: 18px !important;
+  padding: 0px 5px !important;
+}
+
+/* Hide the tooltip content by default */
+[data-tooltip]:before,
+[data-tooltip]:after {
+  visibility: hidden;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Position tooltip above the element */
+[data-tooltip]:before {
+  position: absolute;
+  bottom: 80%;
+  left: 50%;
+  margin-bottom: 5px;
+  margin-left: -80px;
+  padding: 7px;
+  width: 160px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #000;
+  background-color: hsla(0, 0%, 20%, 0.9);
+  color: #fff;
+  content: attr(data-tooltip);
+  text-align: center;
+  font-size: 18px !important;
+  line-height: 1.2;
+}
+
+/* Triangle hack to make tooltip look like a speech bubble */
+[data-tooltip]:after {
+  position: absolute;
+  bottom: 80%;
+  left: 50%;
+  margin-left: -5px;
+  width: 0;
+  border-top: 5px solid #000;
+  border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  content: " ";
+  font-size: 0;
+  line-height: 0;
+}
+
+/* Show tooltip content on hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+  visibility: visible;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+
+.woocommerce-pagination > .page-numbers{
+	background: #000 !important;
+	color: #fff !important;
+}
+.product__thumb{
+	background-size: contain !important;
+    background-repeat: no-repeat !important;
+}
+#payment .wc_payment_methods .wc_payment_method {
+  display: table;
+  clear: both;
+  margin-bottom: 20px;
+}
+#payment .wc_payment_methods .wc_payment_method .payment_box {
+  display: inline-block;
+  padding-left: 20px;
+}
+#payment .wc_payment_methods .wc_payment_method .payment_box p {
+  font-size: 0.9em;
+}
+#payment .place-order {
+  display: block;
+  clear: both;
+}
+
+
+.formulaire_contact {
+  margin-top: 10px;
+  display: block;
+  position: relative;
+  font-size: 0.9em;
+}
+.formulaire_contact .content_label, .formulaire_contact .content_action {
+  display: block;
+  clear: both;
+  text-align: left;
+}
+.formulaire_contact label {
+  display: block;
+  width: 100%;
+}
+.formulaire_contact .single {
+  width: 50%;
+  float: left;
+  margin-bottom: 20px;
+}
+.formulaire_contact .single input {
+  border: none;
+  background: none;
+  width: 100%;
+  padding: 10px 25px;
+  border: 2px solid #212536;
+}
+.formulaire_contact .single:nth-child(odd) {
+  padding-right: 10px;
+}
+.formulaire_contact .single:nth-child(even) {
+  padding-left: 10px;
+}
+.formulaire_contact .large {
+  display: block;
+  width: 100%;
+}
+.formulaire_contact .large span.message {
+  display: block;
+  margin-bottom: 5px;
+}
+.formulaire_contact .large .select-style {
+  border: 2px solid #212536;
+  width: 100%;
+  display: block;
+  border-radius: 0;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.formulaire_contact .large select {
+  padding: 10px 25px;
+  border: none;
+  width: 100%;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+.formulaire_contact fieldset {
+  display: block;
+  width: 100%;
+}
+.formulaire_contact .area_title {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  display: inline-block;
+  margin-right: 50px;
+}
+.formulaire_contact textarea {
+  border: 2px solid #212536;
+  font-size: 1em;
+  width: 100%;
+  padding: 10px 25px;
+}
+.formulaire_contact .radio_question {
+  display: block;
+}
+.formulaire_contact .radio_question .wpcf7-list-item {
+  display: inline-block;
+}
+.formulaire_contact .radio_question .wpcf7-list-item:first-child {
+  margin-right: 50px;
+}
+.formulaire_contact .select-style {
+  border: 2px solid #212536;
+  border-radius: 0;
+  overflow: hidden;
+  font-weight: 400;
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 20.9 11.1' style='enable-background:new 0 0 20.9 11.1;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:%2377787b;%7D%0A%3C/style%3E%3Cg%3E%3Cpath class='st0' d='M0,0.7c0-0.2,0.1-0.3,0.2-0.5c0.3-0.3,0.7-0.3,0.9,0l9.3,9.3l9.3-9.3c0.3-0.3,0.7-0.3,0.9,0s0.3,0.7,0,0.9 l-9.8,9.8c-0.3,0.3-0.7,0.3-0.9,0L0.2,1.1C0.1,1,0,0.8,0,0.7z'/%3E%3C/g%3E%3C/svg%3E%0A");
+  background-size: 18px 12px;
+  background-position: 96% center;
+  background-repeat: no-repeat;
+  padding: 0;
+  width: 100%;
+  color: #77787b;
+  font-weight: 700;
+  border-radius: 0.5em;
+}
+.formulaire_contact .select-style select {
+  padding: 10px 20px;
+  border: none;
+  box-shadow: none;
+  width: 98%;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+  color: #77787b;
+}
+.formulaire_contact .select-style select:focus {
+  outline: none;
+}
+.formulaire_contact .btn_submit {
+  position: relative;
+  margin-top: 10px;
+  display: inline-block;
+}
+.formulaire_contact .btn_submit .wpcf7-submit {
+  border: 2px solid #000000;
+  cursor: pointer;
+  line-height: 20px;
+  padding: 15px 50px 15px 30px;
+  width: 250px;
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='14px' height='12px' viewBox='0 0 14 12' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 61 (89581) - https://sketch.com --%3E%3Ctitle%3E317-arrow-right2%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cg id='Prehos' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Accueil---Prehos' transform='translate(-984.000000, -651.000000)' fill='%234D4D4D' fill-rule='nonzero'%3E%3Cg id='Presentation-Home' transform='translate(-14.000000, -32.000000)'%3E%3Cg id='317-arrow-right2' transform='translate(998.000000, 683.000000)'%3E%3Cpath d='M8.707,11.707 L13.707,6.707 C14.098,6.317 14.098,5.683 13.707,5.293 L8.707,0.293 C8.316,-0.098 7.683,-0.098 7.293,0.293 C6.903,0.684 6.902,1.317 7.293,1.707 L10.586,5 L1,5 C0.448,5 1.77635684e-15,5.448 1.77635684e-15,6 C1.77635684e-15,6.552 0.448,7 1,7 L10.586,7 L7.293,10.293 C7.098,10.488 7,10.744 7,11 C7,11.256 7.098,11.512 7.293,11.707 C7.684,12.098 8.317,12.098 8.707,11.707 Z' id='Path'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 90% center;
+  background-color: #ffe01a;
+  color: #282828;
+  background-size: 14px;
+  font-size: 1.1em;
+}
+.formulaire_contact .btn_submit .ajax-loader {
+  position: absolute;
+}
+
+.copyrights .right {
+  text-align: right;
+} 
+.copyrights .consent {
+  display: inline-block;
+}
+.copyrights .consent:before {
+    content: "|";
+    color: #fff;
+    margin: 0 1em;
+}
+.copyrights #nav_menu-5 {
+  display: inline-block;
+}

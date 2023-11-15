@@ -1,0 +1,17 @@
+//	MIXINS
+//		Animation
+$speed: 0.15s;
+$speed-slow: $speed * 3;
+$easing: ease-out;
+
+@keyframes opacity-pulse {
+	0 {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.25;
+	}
+	100% {
+		opacity: 1;
+	}
+}

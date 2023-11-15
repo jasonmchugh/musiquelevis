@@ -1,0 +1,62 @@
+body.login{
+  background: #ffffff;
+}
+  .login h1 a {
+    background-image: url(../assets/img/logos/maneige_favicon.svg);
+    /*background-size: 90%;*/
+    width: 90px;
+    margin-bottom: 0;
+    height: 65px;
+  }
+
+  body.login form{
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    border: none;
+  }
+    body.login form label{
+      color: #221f1f;
+    }
+
+body.login #backtoblog, .login #nav {
+    font-size: 15px;
+    padding: 0px;
+}
+  body.login #backtoblog a, .login #nav a{
+      color: #057aff;
+  }
+    body.login #backtoblog a:hover, .login #nav a:hover{
+        color: #0cb2ff;
+    }
+
+  body.login .button-primary {
+      background: rgb(5,122,255);
+      border-radius: 50px;
+      border: none;
+      font-weight: 500;
+      color: #fffffff;
+      height: auto!important;
+      box-shadow: none;
+      text-shadow: none;
+      text-decoration: none;
+      padding: 5px 20px!important;
+      font-size: 1.2em;
+      transition: background-color 0.5s ease-out 100ms
+  }
+  body.login .button-primary:hover,body.login .button-primary:focus,body.login .button-primary:active{
+      background: rgb(12,178,255,1);
+      border-color: #fff;
+      font-weight: 500;
+      color: #fff;
+      box-shadow: none;
+      text-shadow: none;
+      text-decoration: none
+  }
+  
+  body.login input[type=checkbox] {
+    border: 1px solid #575756;
+  }
+  body.login input[type=checkbox]:checked:before {
+    color: #01143f;
+  }

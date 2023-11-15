@@ -1,0 +1,106 @@
+.filters {
+	text-align: right;
+	font-size: .875em;
+	color: $grey-light;
+	margin-bottom: 3.75rem;
+
+	@media #{$sm} {
+		text-align: left;
+		margin-top: 1em;
+	}
+
+	form {
+		display: inline-block;
+		margin-left: 0.5em;
+
+		@media #{$xs} {
+			margin: 0;
+			width: 73%;
+		}
+
+	}
+
+	select {
+		border: solid 1px $grey-light;
+		background: url('/wp-content/themes/bravad/assets/dist/img/arrow-down-grey.svg)') no-repeat scroll right 0.5rem center;
+		background-size: 10px;
+		padding: 0 25px 0 10px;
+		height: 2em;
+		color: $grey-light;
+
+		@media #{$xs} {
+			margin: 0;
+			width: 100%;
+		}
+
+	}
+
+	@media #{$xs} {
+
+		span {
+			display: inline-block;
+			width: 25%;
+		}
+
+	}
+
+
+}
+
+.woocommerce-widget-layered-nav-list li {
+	a {
+		padding-left: 3rem;
+		position: relative;
+
+		&:before {
+			content: '';
+			background: $white;
+			background-image: none !important;
+			border: solid 1px $grey-light;
+			width: 16px;
+			height: 16px;
+			position: absolute;
+			top: 2px;
+			left: 0;
+			border-radius: 3px;
+		}
+	}
+
+	&.chosen a:after {
+		content: '';
+		background: $blue;
+		width: 12px;
+		height: 12px;
+		position: absolute;
+		top: 4px;
+		left: 2px;
+		z-index: 1;
+		opacity: 1;
+		transition: opacity $speed $easing;
+		border-radius: 3px;
+	}
+}
+
+.woocommerce-ordering {
+	margin-right: 2rem;
+}
+
+.products {
+	opacity: 1;
+	transition: 0.5s;
+
+	&.hide_products {
+		// opacity: 0.3;
+	}
+
+}
+
+.products-per-page {
+	display: inline-block;
+
+	@media #{$xs} {
+		display: block;
+		margin-top: 1em;
+	}
+
+}

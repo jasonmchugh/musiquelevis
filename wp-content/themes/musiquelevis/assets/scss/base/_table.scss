@@ -1,0 +1,45 @@
+/*
+	Base
+		Table
+ */
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+th {
+	background: transparent;
+	text-align: left;
+	text-transform: uppercase;
+	padding: (map-get($gutters, small)) (map-get($gutters, small)) 2em;
+}
+td {
+	background: $white;
+	vertical-align: middle;
+	padding: map-get($gutters, medium) (map-get($gutters, medium) / 2);
+}
+
+tr {
+	border-bottom: map-get($gutters, small) solid $grey-lighter;
+}
+
+tfoot {
+
+	tr {
+		border-bottom: none;
+	}
+
+}
+
+/* SM and smaller */
+@media #{$sm} {
+	td {
+		padding: map-get($gutters, small);
+		display: block;
+	}
+	td + td {
+		padding-top: 0;
+	}
+	td:last-child {
+		margin: 0 0 (map-get($gutters, small));
+	}
+}

@@ -1,0 +1,111 @@
+.woocommerce-payment-methods {
+
+	.woocommerce-info {
+		margin: 0 0 3.75rem;
+	}
+
+}
+
+#payment {
+	background: $grey-lighter;
+	padding: 2em;
+
+	@media #{$lg} {
+
+		input[type="radio"] + label,
+		input[type="checkbox"] + label {
+			padding: 0 0 0 2.5rem;
+		}
+
+	}
+
+	@media #{$sm} {
+
+		input[type="radio"] + label,
+		input[type="checkbox"] + label {
+			padding: 0 0 0 3rem;
+		}
+
+	}
+
+}
+
+.payment__title {
+	float: left;
+	margin-right: 1em;
+}
+
+.payment__icons {
+	float: left;
+	margin-top: -4px;
+}
+
+#wc-moneris-account-number {
+	height: auto !important;
+}
+
+#wc-moneris-csc {
+	width: 100px;
+}
+
+.payment_method_moneris {
+
+	label {
+		height: 1.75rem;
+
+		img {
+			margin-right: 0.5rem;
+		}
+
+	}
+
+}
+
+.wc-moneris-new-payment-method-form {
+
+	input[type="checkbox"] + label::before {
+		top: 2px;
+	}
+
+	input[type="checkbox"] + label::after {
+		top: 4px;
+	}
+
+}
+
+.payment__registeredcard {
+	display: inline-block;
+	width: 100%;
+	padding-left: 80px !important;
+
+	img {
+		position: absolute;
+		left: 1.5rem;
+		top: -4px;
+
+		@media #{$lg} {
+			left: 3rem;
+			top: 1px;
+		}
+
+	}
+
+}
+
+.btn__manage {
+	padding: 0.875em 0;
+
+	&:hover {
+		color: $black;
+	}
+
+}
+
+.payment_box {
+
+	p {
+		display: block;
+		margin-top: 1em;
+	}
+
+}

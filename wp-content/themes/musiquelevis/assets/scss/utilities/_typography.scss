@@ -1,0 +1,97 @@
+/*
+	Utilities
+		Typography
+*/
+.u-txt-smaller {
+	font-size: $txt-smaller !important;
+}
+.u-txt-medium {
+	font-size: $txt-medium !important;
+}
+.u-txt-larger {
+	font-size: $txt-larger !important;
+}
+.u-txt-largest {
+	font-size: $txt-largest !important;
+}
+
+@media #{$md} {
+	.u-txt-medium,
+	.u-txt-larger,
+	.u-txt-largest {
+		font-size: 1.4em !important;
+	}
+}
+@media #{$sm} {
+	.u-txt-medium,
+	.u-txt-larger,
+	.u-txt-largest {
+		font-size: 1.1em !important;
+	}
+	.u-txt-smaller {
+		font-size: 1em !important;
+	}
+}
+.u-bold {
+	font-weight: 700 !important;
+}
+.u-400 {
+	font-weight: 400 !important;
+}
+.u-500 {
+	font-weight: 500 !important;
+}
+.u-uppercase {
+	text-transform: uppercase !important;
+}
+.u-underline {
+	text-decoration: underline !important;
+}
+.u-txt-center {
+	text-align: center !important;
+}
+.u-txt-right {
+	text-align: right !important;
+}
+.u-txt-left {
+	text-align: left !important;
+}
+.u-txt-stroked {
+	text-decoration: line-through;
+}
+.u-input-line-height {
+	line-height: 3.157em !important;
+}
+.u-select-small-line-height {
+	line-height: 2.25em !important;
+}
+.u-no-wrap {
+	white-space: nowrap !important;
+}
+@media #{$md} {
+	.u-txt-left-md {
+		text-align: left !important;
+	}
+	.u-txt-center-md {
+		text-align: center !important;
+	}
+}
+@media #{$sm} {
+	.u-txt-left-sm {
+		text-align: left !important;
+	}
+	.u-txt-center-sm {
+		text-align: center !important;
+	}
+}
+@media #{$xs} {
+	.u-txt-center-xs {
+		text-align: center !important;
+	}
+}
+.u-alternate-font-family {
+	font-family: $font-oswald;
+}
+.u-field-line-height {
+	line-height: 2.841em !important;
+}

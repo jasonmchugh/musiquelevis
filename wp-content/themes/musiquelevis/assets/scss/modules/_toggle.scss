@@ -1,0 +1,26 @@
+.js-toggle,
+.widget-title {
+	position: relative;
+
+	&:before {
+		display: block;
+		content: "";
+		background: url('/wp-content/themes/bravad/assets/dist/img/arrow-down-grey.svg)') no-repeat scroll center center;
+		background-size: 100% auto;
+		width: 16px;
+		height: 16px;
+		position: absolute;
+		right: 0;
+		transition: 0.5s;
+		transform: rotate(-90deg);
+	}
+
+	&.closed {
+
+		&:before {
+			transform: rotate(0deg);
+		}
+
+	}
+
+}

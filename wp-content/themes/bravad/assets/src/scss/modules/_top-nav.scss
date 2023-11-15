@@ -1,0 +1,30 @@
+.top-nav-outer {
+	text-align: right;
+	position: absolute;
+	right: 0;
+	top: 2em;
+	z-index: 10;
+
+	@media #{$md} {
+		position: relative;
+		text-align: left;
+		top: 0;
+	}
+}
+
+.top-nav {
+	font-size: $txt-smaller;
+}
+
+.top-nav {
+
+	a {
+
+		@media #{$md} {
+			color: $white;
+			display: block;
+		}
+
+	}
+
+}

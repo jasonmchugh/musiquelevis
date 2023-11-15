@@ -1,0 +1,32 @@
+/*
+	Modules
+		Logo
+ */
+.logo__wrap {
+	display: block;
+	width: auto;
+	max-width: 30em;
+	transition: all $speed $easing;
+
+	@media #{$md} {
+		height: 5em;
+
+		img {
+			top: 50%;
+			position: relative;
+			transform: translateY(-50%);
+		}
+
+	}
+
+}
+
+.logo-small {
+	background: url('../img/instant-comptant-small.svg') no-repeat scroll center center;
+	background-size: 100% auto;
+	width: 2.813em;
+	height: 1.875em;
+	position: absolute;
+	top: 12px;
+	left: 0;
+}

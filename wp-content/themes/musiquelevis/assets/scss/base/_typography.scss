@@ -1,0 +1,119 @@
+/*
+	BASE
+		Typography
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $font-oswald;
+	font-weight: 400;
+	clear: both;
+
+	&:first-child {
+		margin-top: 0;
+	}
+	p + &,
+	ul + &,
+	ol + & {
+		margin-top: 2em;
+	}
+}
+h1,
+.h1 {
+	font-family: $font-oswald;
+	font-size: 1.875em;
+	line-height: 1.2;
+	font-weight: 500;
+	text-transform: uppercase;
+	text-align: center;
+	margin: 0 0 0.5em;
+
+	&:only-child {
+		margin: 0;
+	}
+	@media #{$sm} {
+		font-size: 2em;
+	}
+	@media #{$xs} {
+		font-size: 1.8em;
+	}
+}
+h2,
+.h2 {
+	font-family: $font-oswald;
+	font-size: 2.500em;
+	text-transform: uppercase;
+	margin: 0 0 20px;
+	line-height: 1;
+
+	.no-touchevents &[href]:hover,
+	&[href]:active {
+		color: 	$grey;
+	}
+	&:first-child {
+		margin-top: 0;
+	}
+	@media #{$sm} {
+		font-size: 1.4em;
+	}
+}
+.h2[href^="tel:"] {
+	color: $blue !important;
+}
+h3,
+.h3 {
+	font-size: 1.19em;
+	font-weight: 600;
+
+	@media #{$sm} {
+		font-size: 1.3em;
+	}
+	@media #{$xs} {
+		font-size: 1.1em;
+	}
+}
+p,
+label,
+ol,
+ul {
+	margin: 0 0 map-get($gutters, txt);
+}
+a {
+	color: inherit;
+	text-decoration: none;
+	transition: all $speed $easing;
+
+	&[href^="mailto:"] {
+		white-space: nowrap;
+	}
+
+}
+p > a {
+	color: $red;
+	border-bottom: 1px solid transparent;
+
+	.no-touchevents &:hover,
+	&:active {
+		border-color: inherit;
+	}
+}
+strong {
+	font-weight: 700;
+}
+small {
+	font-size: $txt-smallest;
+
+	@media #{$xs} {
+		font-size: 1em;
+	}
+}
+li {
+	margin: 0 0 (map-get($gutters, txt) / 4);
+}
+hr {
+	border-top: 1px solid $grey;
+	margin: (map-get($gutters, medium)) 0;
+}

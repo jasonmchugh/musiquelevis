@@ -1,0 +1,27 @@
+--------------------------------------------------
+Cron id:1253496|2023-10-04 00:12:01	STARTING SYNC
+                                   		Time elapsed: 0.005 secs
+Cron id:1253496|2023-10-04 00:12:01		 `ic_sync_categories` - Starting sync
+                                   			Time elapsed: 0.0052 secs
+Cron id:1253496|2023-10-04 00:12:01		 `ic_sync_categories` - Nothing to sync
+                                   			Time elapsed: 0.0058 secs
+Cron id:1253496|2023-10-04 00:12:01		 `ic_sync_products` - Starting sync
+                                   			Time elapsed: 0.0058 secs
+Cron id:1253496|2023-10-04 00:12:01		 `ic_sync_products` - Nothing to sync
+                                   			Time elapsed: 0.0085 secs
+Cron id:1253496|2023-10-04 00:12:01		 `update_LiveNbOfImagesInWP` - Start
+                                   			Time elapsed: 0.0086 secs
+Cron id:1253496|2023-10-04 00:12:01		 `update_LiveNbOfImagesInWP` - ERROR - Not decodable JSON
+                                   			Time elapsed: 0.0115 secs
+Cron id:1253496|2023-10-04 00:12:03		 `update_LiveNbOfImagesInWP` - End
+                                   			Time elapsed: 2.7119 secs
+Cron id:1253496|2023-10-04 00:12:03		 `ic_sync_inventories_in` - Starting sync
+                                   			Time elapsed: 2.7258 secs
+Cron id:1253496|2023-10-04 00:12:04		 `ic_sync_inventories_in` - Nothing to sync
+                                   			Time elapsed: 2.7271 secs
+Cron id:1253496|2023-10-04 00:12:04		 `ic_sync_inventories_out` - Starting sync
+                                   			Time elapsed: 2.7271 secs
+Cron id:1253496|2023-10-04 00:12:51		 `ic_sync_inventories_out` - Done syncing
+                                   			Time elapsed: 50.0306 secs
+Cron id:1253496|2023-10-04 00:12:51	DONE SYNCING
+                                   		Time elapsed: 50.039 secs

@@ -1,0 +1,42 @@
+[class^='products__loading'] {
+	text-align: center;
+	position: absolute;
+	width: 100%;
+	z-index: 2;
+	left: 0;
+
+	svg {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+
+		#loading1 {
+			fill: $blue;
+		}
+
+		#loading2 {
+			fill: $yellow;
+		}
+
+		#loading3 {
+			fill: $black;
+		}
+
+	}
+
+}
+
+.cart-loading {
+	position: absolute;
+
+	svg {
+
+		#loading1,
+		#loading2,
+		#loading3 {
+			fill: $white;
+		}
+
+	}
+
+}

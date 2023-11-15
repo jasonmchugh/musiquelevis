@@ -1,0 +1,9 @@
+/*
+	IMAGES
+ */
+/* Fallback for IE */
+html[class*="ie"] img[src$=".svg"],
+html[class*="ie"] img[src$=".SVG"] {
+	width: 100%;
+	height: 100%;
+}

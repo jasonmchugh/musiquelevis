@@ -1,0 +1,204 @@
+/*
+	Modules
+		Cart
+ */
+
+ #site-header-cart {
+
+	@media #{$md} {
+		position: absolute;
+		width: 100%;
+		left: 0;
+		margin-top: 1em;
+	}
+
+ }
+
+.cart-content {
+	background: $yellow;
+	color: $black;
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	padding: 0.8rem 2.18rem;
+	transition: all $speed $easing;
+
+	&:hover {
+		background: $blue;
+		color: $white;
+
+		.amount {
+			color: $white;
+		}
+
+		svg {
+
+			path {
+				fill: $white;
+			}
+
+		}
+
+	}
+
+	svg {
+
+		path {
+			fill: $black;
+		}
+
+	}
+
+	.amount {
+		color: $black;
+		font-weight: normal;
+	}
+
+	@media #{$md} {
+		display: block;
+		position: relative;
+		padding: 2rem 2.18rem;
+	}
+
+}
+
+.cart-btn {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.cart-icon {
+	margin-left: 0.25em;
+
+	svg {
+		height: auto;
+		width: 1.688em;
+		position: relative;
+		top: 2px;
+	}
+
+}
+
+.cart-result {
+	min-width: 40px;
+	display: inline-block;
+	transition: 0.5s;
+	overflow: hidden;
+	height: 1.1em;
+}
+
+.cart-dropdown {
+	background: $black;
+	color: white;
+	margin-top: -100%;
+	transition: 0.5s;
+	position: absolute;
+	padding: 1em 2.18em;
+	right: 0;
+	z-index: -1;
+	max-width: 100%;
+	min-width: 28rem;
+
+	@media #{$md} {
+		display: none;
+	}
+
+	li {
+		margin-bottom: 1em;
+		list-style-type: none;
+		min-height: 3.75em;
+	}
+
+	img {
+		height: 3.750em;
+		width: 3.750em;
+		float: right;
+		margin-left: 1em;
+	}
+
+	.cart_list {
+		float: left;
+		width: 100%;
+	}
+
+	.amount {
+		color: $white;
+		font-weight: normal;
+	}
+
+	.remove {
+		background: $yellow;
+		color: $black;
+		padding: 0 0.25em;
+		border-radius: 10px;
+		font-size: 0.688em;
+		margin-left: -1.125em;
+		transition: 0.5s;
+		padding: 0 4px;
+
+		&:hover {
+			background: $blue;
+			color: $white;
+		}
+
+	}
+
+	.quantity {
+		display: block;
+	}
+
+	.total {
+		clear: both;
+		text-align: center;
+		margin: 1em 0;
+		float: left;
+		width: 100%;
+	}
+
+	.buttons {
+		clear: both;
+		margin: 0;
+
+	}
+
+	.button {
+		background: $white;
+		color: $black;
+		margin-top: 1em;
+		width: 100%;
+
+		&:hover {
+			background: $blue;
+			color: $white;
+		}
+
+		&.checkout {
+			background: $yellow;
+
+			&:hover {
+				background: $blue;
+			}
+
+		}
+
+	}
+
+}
+
+#site-header-cart {
+
+	&:hover {
+
+		.cart-dropdown {
+			margin-top: 0;
+		}
+
+	}
+
+}
+
+.quantity {
+	width: 85px;
+	margin-bottom: 20px;
+}

@@ -1,0 +1,85 @@
+/*
+ * (C) 2018 by Kolja Nolte
+ * kolja.nolte@gmail.com
+ * https://www.koljanolte.com
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * @project Thumbnail Cleaner
+ */
+
+#thumbnail-cleaner-admin-page {
+   width: 85%;
+}
+
+#thumbnail-cleaner-admin-page i {
+   margin-right: 5px;
+}
+
+#thumbnail-cleaner-admin-page .updated,
+#thumbnail-cleaner-admin-page .error {
+   margin-top: 15px;
+}
+
+#thumbnail-cleaner-admin-page .box-container {
+   background:         #fff;
+   border:             1px solid #e5e5e5;
+   box-shadow:         0 1px 1px rgba(0, 0, 0, .04);
+   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+   margin-bottom:      40px;
+   margin-top:         25px;
+}
+
+#thumbnail-cleaner-admin-page .box-container .box-title-container {
+   border-bottom: 1px solid #eee;
+   padding:       15px 20px;
+}
+
+#thumbnail-cleaner-admin-page .box-container .box-title-container .box-title {
+   display: inline-block;
+   margin:  0;
+}
+
+#thumbnail-cleaner-admin-page .box-container .box-content {
+   padding: 5px 20px;
+}
+
+#thumbnail-cleaner-admin-page .box-container .box-content p {
+   color:       #72777c;
+   font-size:   16px;
+   line-height: 1.5em;
+}
+
+#thumbnail-cleaner-admin-page .button,
+#thumbnail-cleaner-admin-page .button-primary {
+   margin-right: 5px;
+}
+
+#thumbnail-cleaner-admin-page .intro {
+   margin-bottom: 30px;
+}
+
+#thumbnail-cleaner-admin-page .analysis-results {
+   margin-bottom: 40px;
+}
+
+#thumbnail-cleaner-admin-page .analysis-results thead td {
+   font-weight: bold;
+}
+
+#thumbnail-cleaner-admin-page #clean-thumbnails {
+   margin-bottom: 10px;
+}
+
+#thumbnail-cleaner-admin-page .last-backup {
+   font-size: 12px;
+}
+
+#thumbnail-cleaner-admin-page .report-bug {
+   color:      #777;
+   font-size:  12px;
+   margin-top: 30px;
+}

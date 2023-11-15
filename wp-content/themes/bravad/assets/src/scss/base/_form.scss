@@ -1,0 +1,174 @@
+/*
+	Form
+
+
+Markup:
+<label>This is a label</label>
+
+
+Style guide: Base.Forms
+*/
+label {
+	color: $black;
+	font-size: $txt-medium;
+	font-weight: 700;
+	margin: 0 0 0.75em;
+	display: block;
+}
+fieldset {
+	border: 0 none;
+	margin: 0;
+	padding: 0;
+}
+legend {
+	color: $blue;
+	font-size: $txt-medium;
+	font-weight: 700;
+	text-transform: uppercase;
+	border-top: 1px solid $grey;
+	padding: (map-get($gutters, medium)) 0 0;
+	margin: (map-get($gutters, medium)) 0;
+	width: 100%;
+	display: block;
+}
+input {
+	@include input-base();
+
+	table & {
+		width: auto;
+	}
+}
+/*
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+	max-width: 40em;
+}
+*/
+textarea {
+	@include input-base();
+	height: 6.3em;
+	resize: none;
+}
+select {
+   appearance: none;
+   border: solid 1px $black;
+   width: 100%;
+   cursor: pointer;
+   background: $white;
+   border-radius: .5em;
+   height: 2.841em;
+   line-height: 1;
+   padding: .7em 1.285em;
+
+   &::-ms-expand {
+       /* Hide arrow on IE */
+       display: none;
+   }
+}
+button,
+[type="submit"] {
+	@include btn-base();
+	color: $black;
+	background: transparent;
+	border-color: $black;
+	white-space: normal;
+	height: auto;
+	cursor: pointer;
+}
+/* Radio / Checkbox */
+input[type="radio"],
+input[type="checkbox"] {
+	display: none;
+}
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+	color: inherit;
+	font-size: $txt-smaller;
+	padding: 0 0 0 1.7rem;
+	position: relative;
+
+	@media screen and (max-width: 1600px) {
+		padding: 0 0 0 2.2rem;
+	}
+	
+	@media #{$sm} {
+		padding: 0 0 0 2.5rem;
+	}
+
+}
+input[type="radio"] + label::before {
+	content: '';
+	background: $white;
+	background-image: none !important;
+	border: solid 1px $grey-light;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	top: 2px;
+	left: 0;
+	border-radius: 3px;
+}
+input[type="checkbox"] + label::before {
+	content: '';
+	background: $white;
+	background-image: none !important;
+	border: solid 1px $grey-light;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	top: 2px;
+	left: 0;
+	border-radius: 3px;
+}
+input[type="radio"] + label::after {
+	content: '';
+	background: $blue;
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	top: 4px;
+	left: 2px;
+	z-index: 1;
+	opacity: 0;
+	transition: opacity $speed $easing;
+	border-radius: 3px;
+}
+input[type="checkbox"] + label::after {
+	content: '';
+	background: $blue;
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	top: 4px;
+	left: 2px;
+	z-index: 1;
+	opacity: 0;
+	transition: opacity $speed $easing;
+	border-radius: 3px;
+}
+input[type="radio"]:checked + label::after,
+input[type="checkbox"]:checked + label::after {
+	opacity: 1;
+}
+input[type="radio"] + label::before,
+input[type="radio"] + label::after {
+	border-radius: 50%;
+}
+/* Autocomplete styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+select:-webkit-autofill,
+select:-webkit-autofill:hover {
+	border-color: $grey-lighter;
+	-webkit-text-fill-color: #000;
+	-webkit-box-shadow: 0 0 0 1000px $grey-lighter inset;
+
+	&:focus {
+		border-color: $grey;
+	}
+}

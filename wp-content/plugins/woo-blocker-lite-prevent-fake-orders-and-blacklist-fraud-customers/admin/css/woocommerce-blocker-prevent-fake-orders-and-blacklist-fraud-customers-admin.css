@@ -1,0 +1,80 @@
+.wc_blacklist_user_containter .wcblu-col-container .set_wcblu_containter{border-radius:10px;box-shadow:0 0 30px rgba(0, 0, 0, 0.28);margin:20px 0;padding:20px;width:95%}
+.wc_blacklist_user_containter .wcblu-col-container .set_wcblu_containter h3{border-left:5px solid #ddd;font-size:20px;line-height:30px;padding-left:20px}
+.wc_blacklist_user_containter .wcblu-col-container .set_wcblu_containter fieldset{border:1px solid #ccc;margin-bottom:30px;padding:20px;background:#fff}
+.wc_blacklist_user_containter .wcblu-col-container .set_wcblu_containter fieldset legend{background-color:#e7e7e7;border:1px solid #ccc;padding:5px 10px;font-weight:bold;font-size:15px}
+.wc_blacklist_user_containter .wcblu-col-container .set_wcblu_containter textarea.set_message_box{height:100px;width:70%}
+.wc_blacklist_user_containter .wcblu-col-container .set_wcblu_containter .form-table p{color:#636363;font-style:italic}
+.wcblu_container .wcblu_send_email_field form#send_user_bulk_email table.form-table .error{color:#d60000;margin-left:3px}
+.wcblu_container .wcblu_send_email_field form#send_user_bulk_email table.form-table .wp-core-ui.wp-editor-wrap.tmce-active{width:70%}
+.wcblu-col-container .set_wcblu_containter table.form-table p.ext_bl_tool{display:inline-block}
+.woocommerce_black_list_content h2{font-size:1.8em;text-align:left;font-weight:400;padding:0;margin:20px 0}
+.changelog .woocommerce_black_list_content p{max-width:100%;font-size:15px}
+.woocommerce_black_list_content p span{font-size:20px}
+.woocommerce_black_list_content ul.bulets{padding:0 0 0 30px;list-style-type:disc}
+.about-wrap .changelog{margin-bottom:0}
+.return-to-dashboard{font-size:17px!important}
+a.btn_view_red{background-color:#00a0d2;padding:10px;color:#FFFFFF;border-radius:3px;font-size:13px;font-weight:600}
+th label input#wcblu_lead_cancel_btn{background:#0085ba;border-color:#0073aa #006799 #006799;-webkit-box-shadow:0 1px 0 #006799;box-shadow:0 1px 0 #006799;color:#fff;text-decoration:none;text-shadow:0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;margin-left:10px;padding:0 10px;border-width:1px;border-style:solid}
+.email_1{width:170px;text-align:left}
+.review_3{width:180px;text-align:left}
+.attempts_2{width:120px;text-align:left}
+.woocommerce_black_list_content h3{font-size:18px!important}
+#wbl_dialog{width:500px;font-size:15px;font-weight:bold}
+#wbl_dialog p{font-size:15px;font-weight:bold}
+.free_plugin{margin-bottom:20px}
+.paid_plugin{margin-bottom:20px}
+.paid_plugin h3{border-bottom:1px solid #ccc;padding-bottom:20px;font-size:22px}
+.free_plugin h3{padding-bottom:20px;border-bottom:1px solid #ccc}
+.plug-containter{width:100%;display:inline-block;margin-left:20px}
+.plug-containter .contain-section{width:25%;display:inline-block;margin-top:30px}
+.plug-containter .contain-section .contain-img{width:30%;display:inline-block}
+.plug-containter .contain-section .contain-title{width:50%;display:inline-block;vertical-align:middle;margin-left:10px}
+.plug-containter .contain-section .contain-title a{text-decoration:none;line-height:20px;font-weight:bold}
+.version_logo_img{position:absolute;right:0;top:0}
+input#export-information-woocommerce-bloger-prevent-csv{margin-bottom:6%}
+.excel_div{display:block;float:right;width:60%; }
+#email_chosen{width:40%}
+.chosen-rtl .chosen-choices li.search-choice{background-size:0px!important}
+.wcblu_button_container{display:inline-block}
+.wcblu_content_container{display:block;padding-top:10px}
+.notification_popup{display:inline-block;-webkit-transition:0.5s all;-o-transition:0.5s all;transition:0.5s all;position:fixed;right:-100%;top:10%;padding:10px;box-shadow:0 0 0 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color:#B9584F;color:#FFF;z-index:99999999999999;min-width:320px}
+.notification_popup:hover{background-color:#B0483E}
+.notification_popup.is-success{background:rgba(64, 151, 64, 0.6313725490196078)}
+.notification_popup.is-success:hover{background-color:#409740}
+.notification_popup.is-error{background:rgba(185, 88, 79, 0.7019607843137254)}
+.notification_popup.is-error:hover{background-color:#B9584F}
+.notification_popup.active{right:10px}
+.notification_popup .notification_icon{display:inline-block;width:35px;vertical-align:top;font-size:26px;padding:5px 5px 0 0;box-sizing:border-box}
+.notification_popup .notification_message{width:calc(100% - 40px);display:inline-block;vertical-align:top;line-height:normal}
+.notification_popup .notification_message .title{font-size:21px;margin:0 0 5px;color:#FFF}
+.notification_popup .notification_message p{margin:0 0 6px;line-height:normal}
+.notification_popup .notification_message ul{margin:0}
+.notification_popup .notification_message ul li{margin-bottom:3px}
+.notification_popup .notification_close{position:absolute;right:15px;top:5px;cursor:pointer;font-weight:600}
+.notification_popup .notification_close::before{content:'x';display:inline-block;font-size:18px}
+.welcome_message_plugin{font-size:2.1em}
+p.woocommerce_extra_cost_overview{max-width:100%!important;margin-left:auto;margin-right:auto;font-size:15px;line-height:1.5}
+.woocommerce_extra_cost_content_ul ul li{margin-left:3%;list-style:initial;line-height:23px}
+.blk_dashboard td.email_1{word-break:break-all;}
+.main_excel_div {
+  display: block;
+  float: right;
+  width: 65%;
+}
+@media screen and (max-width: 1440px) {
+  .main_excel_div {width: 52%;}
+}
+.all_chk {
+  display: block;
+  float: left;
+}
+.mb-score-label{display: block;font-size: 1.3em;padding: 10px 0 0px;font-weight: 700;text-align: center;}
+.wcbfc_position {text-align: center;margin-top: 20px;}
+.mb-score-label-list ul {display: none;}
+.mb-score-label-list:before {content: 'Show Risk Details';margin-top: 16px;display: block;background: #eee;padding: 7px 7px;cursor: pointer;color: #818181;}
+.mb-score-label-list ul li {list-style: circle;margin-left: 15px;font-weight: 500;}
+.wcblu_anti_fraud span.dashicons.dashicons-shield-alt.low {color: #7AD03A;}
+.wcblu_anti_fraud span.dashicons.dashicons-shield-alt.medium {color: #feae00;}
+.wcblu_anti_fraud span.dashicons.dashicons-shield-alt.high {color: #D54E21;}
+.wcblu_anti_fraud span.dashicons.dashicons-shield-alt.empty {color: #e5e5e5;}
+.wcblu_anti_fraud span.dashicons.dashicons-shield-alt.wh-empty {color: #adadad;}

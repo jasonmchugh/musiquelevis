@@ -1,0 +1,57 @@
+#shipping_method {
+	list-style-type: none;
+	margin: 0;
+
+	li {
+		display: inline-block;
+		margin-left: 1em;
+	}
+
+}
+
+.shipping {
+
+	@media #{$sm} {
+		border-bottom: solid 0.75rem $grey-lighter;
+
+		&:nth-child(even) {
+			background: $grey-lighter;
+		}
+
+		td {
+			background: none;
+			width: 100% !important;
+
+			&:before {
+				display: none;
+			}
+
+		}
+
+	}
+
+	th {
+
+		@media #{$sm} {
+
+			br {
+				display: none;
+			}
+
+		}
+
+	}
+
+}
+
+.woocommerce-shipping-contents {
+	margin: 0;
+}
+
+.woocommerce-billing-fields__field-wrapper {
+	margin-top: 4em;
+}
+
+.shipped_via {
+	display: none;
+}

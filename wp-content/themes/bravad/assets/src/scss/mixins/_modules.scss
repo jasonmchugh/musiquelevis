@@ -1,0 +1,45 @@
+//	Mixins
+//		Modules
+@mixin btn-base() {
+	border: none;
+	font-size: 0.82em;
+	font-weight: 700;
+	line-height: 1.2em;
+	text-align: center;
+	text-transform: uppercase;
+	padding: 1em 1.15em;
+	width: auto;
+	display: inline-block;
+	transition: all $speed $easing;
+
+	@media #{$sm} {
+		border-width: 1px;
+	}
+}
+@mixin hero() {
+	font-family: $font-oswald;
+	text-align: center;
+	padding: 5.075rem 0 5.675rem;
+	height: 34.723rem;
+	display: block;
+	position: relative;
+
+	.flexbox & {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	.flexbox & ._container {
+		width: 100%;
+	}
+}
+@mixin absolute-bg() {
+	background: no-repeat 50% 50%;
+	background-size: cover;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}

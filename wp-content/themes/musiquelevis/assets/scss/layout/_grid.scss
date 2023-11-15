@@ -1,0 +1,197 @@
+/*
+	OBJECTS
+		Grid
+ */
+/* Container */
+._container {
+	padding: 0 (map-get($gutters, large));
+	clear: both;
+	// overflow-x: hidden;
+	@extend .clearfix;
+
+	@media #{$lg} {
+		padding: 0 (map-get($gutters, medium));
+	}
+}
+._container--no-overflow {
+	overflow: visible;
+}
+._container--small {
+	padding: 0;
+	margin: 0 auto;
+	max-width: 70.708rem;
+
+	@media #{$lg} {
+		max-width: 97.917rem;
+	}
+	@media #{$md} {
+		max-width: 100%;
+		padding: 0 (map-get($gutters, medium));
+	}
+}
+._container--medium {
+	padding: 0;
+	margin: 0 auto;
+	max-width: 85.25rem;
+
+	@media #{$lg} {
+		max-width: 97.917rem;
+	}
+	@media #{$md} {
+		max-width: 100%;
+		padding: 0 (map-get($gutters, medium));
+	}
+}
+._container--full {
+	padding: 0;
+}
+._container--full-sm {
+
+	@media #{$sm} {
+		padding: 0;
+	}
+}
+._container--stacked {
+	padding-top: map-get($gutters, large);
+	padding-bottom: map-get($gutters, large);
+}
+._container--stacked + ._container--stacked {
+	padding-top: 0;
+}
+
+/* Row */
+._row {
+	@extend .clearfix;
+	margin: 0 (-(map-get($gutters, medium) / 2));
+}
+._row--small {
+	margin: 0 (-(map-get($gutters, small) / 2));
+}
+._row--large {
+	margin: 0 (-(map-get($gutters, large) / 2));
+}
+._row--no-margin {
+	margin: 0;
+}
+.flexbox ._row--flex {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@media #{$sm} {
+	._row {
+		margin: 0 (-(map-get($gutters, medium) / 2));
+	}
+}
+
+/* Columns */
+._col {
+	padding: 0 (map-get($gutters, medium) / 2);
+	min-height: 1px;
+	float: left;
+}
+._col--small {
+	padding: 0 (map-get($gutters, small) / 2);
+}
+._col--large {
+	padding: 0 (map-get($gutters, large) / 2);
+}
+._col--no-padding {
+	padding: 0;
+}
+.flexbox ._col--flex {
+	display: flex;
+	flex-grow: 1;
+	flex-basis: auto;
+}
+.flexbox ._col--flex > * {
+	min-width: 100%;
+}
+
+@media #{$sm} {
+	._col {
+		padding: 0 (map-get($gutters, medium) / 2);
+	}
+}
+
+.clear {
+	clear: both;
+}
+
+/*
+	All possible widths
+		- Alike : All sibling columns have same width. Applies only to
+				  breakpoint specified with class.
+		- Total : Use column count instead of width
+*/
+@each $bp in $breakpoints {
+	// Reset "alike" columns float
+	@media screen and (max-width: #{map-get($bp, max-width)}) {
+		._col[class*="--alike"] {
+			clear: none;
+		}
+	}
+	@for $i from 1 through length($columnsWidth) {
+		@if map-get($bp, max-width) == null {
+			// Column width
+			._col--#{map-get($bp, name)}-#{$i} {
+				width: nth($columnsWidth, $i);
+				max-width: nth($columnsWidth, $i);
+
+				.flexbox &._col--flex {
+					width: auto;
+					max-width: nth($columnsWidth, $i);
+					// flex-basis: nth($columnsWidth, $i);
+				}
+			}
+			// Alike
+			$colCount: 12 / $i;
+			$nextColCount: $colCount + 1;
+			._col--#{map-get($bp, name)}-#{$i}--alike:nth-of-type(#{$colCount}n+#{$nextColCount}) {
+				clear: both;
+			}
+			// Total
+			._col--#{map-get($bp, name)}-total-#{$i} {
+				width: 100% / $i;
+			}
+			// Custom (Values used as percents)
+			._col--#{map-get($bp, name)}-20 {
+				width: 20%;
+			}
+			._col--#{map-get($bp, name)}-80 {
+				width: 80%;
+			}
+		} @else {
+			@media screen and (max-width: #{map-get($bp, max-width)}) {
+				// Column width
+				._col--#{map-get($bp, name)}-#{$i} {
+					width: nth($columnsWidth, $i);
+					max-width: nth($columnsWidth, $i);
+
+					.flexbox &._col--flex {
+						width: auto;
+						max-width: nth($columnsWidth, $i);
+						// flex-basis: nth($columnsWidth, $i);
+					}
+				}
+				// Alike
+				$colCount: 12 / $i;
+				$nextColCount: $colCount + 1;
+				._col--#{map-get($bp, name)}-#{$i}--alike:nth-of-type(#{$colCount}n+#{$nextColCount}) {
+					clear: both;
+				}
+				// Total
+				._col--#{map-get($bp, name)}-total-#{$i} {
+					width: 100% / $i;
+				}
+				// Custom (Values used as percents)
+				._col--#{map-get($bp, name)}-20 {
+					width: 20%;
+				}
+				._col--#{map-get($bp, name)}-80 {
+					width: 80%;
+				}
+			}
+		}
+	}
+}

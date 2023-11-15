@@ -1,0 +1,24 @@
+
+https://instantcomptant.bravad-dev.com/wp-content/themes/bravad/sync/sync.php
+
+
+cPanel:     https://bravad-dev.com:2083 / ab52337 / cbN/6veI=9Px2eM
+PHPmyAdmin: https://bravad-dev.com:2083/cpsess4226037219/3rdparty/phpMyAdmin/index.php / ab52337_instantcomptant / ab52337_instantc / _5%TUf+la-gn
+FTP:        ftp.bravad-dev.com / marcl@bravad-dev.com					/ aQhFQ3h1D^sP "/instantcomptant"
+								 synch@instantcomptant.bravad-dev.com	/ ???????????? "/"
+WP:
+    https://instantcomptant.bravad-dev.com/wp-admin / bravad_adm / )aIxsKD^QZVF$OTer@
+    https://bravad-dev.com:2083/cpsess8337730228/3rdparty/phpMyAdmin/sql.php?db=ab52337_instantcomptant&table=ic_sync_categories&sql_query=SELECT+%2A+FROM+%60ic_sync_categories%60++%0AORDER+BY+%60ic_sync_categories%60.%60IdTransaction%60++DESC&session_max_rows=25&is_browse_distinct=0
+    https://instantcomptant.bravad-dev.com/wp-admin/admin.php?page=wc-settings&tab=shipping&section=classes
+    https://instantcomptant.bravad-dev.com/wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product
+    https://instantcomptant.bravad-dev.com/wp-admin/edit.php?post_type=product
+    https://instantcomptant.bravad-dev.com/wp-admin/edit.php?post_type=shop_order
+    https://instantcomptant.bravad-dev.com/wp-admin/term.php?taxonomy=product_cat&tag_ID=28&post_type=product&wp_http_referer=%2Fwp-admin%2Fedit-tags.php%3Ftaxonomy%3Dproduct_cat%26post_type%3Dproduct
+API:
+    Key:    ck_fbcb961c8e6a7e9152e31bcf5a93f1f326116d48
+    Secret: cs_d8fa239c0117ed104628241b3504fda8031b1769
+    Docs:	http://woocommerce.github.io/woocommerce-rest-api-docs
+				E:/SVNs/instantcomptant.bravad-dev.com/wp-content/plugins/woocommerce/includes/api:
+					class-wc-rest-products-controller.php::get_item_schema()
+					class-wc-rest-products-controller.php::get_collection_params()
+					class-wc-rest-product-categories-controller.php::get_item_schema()

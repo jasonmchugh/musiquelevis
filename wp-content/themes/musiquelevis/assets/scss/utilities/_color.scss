@@ -1,0 +1,48 @@
+/*
+	Utilities
+		Color
+ */
+.u-white {
+	color: $white !important;
+}
+.u-black {
+	color: $black !important;
+}
+.u-grey {
+	color: $grey !important;
+}
+.u-grey-light {
+	color: $grey-light !important;
+}
+.u-grey-lighter {
+	color: $grey-lighter !important;
+}
+.u-blue {
+	color: $blue !important;
+}
+.u-red {
+	color: $red !important;
+}
+.u-bg-white {
+	background-color: $white !important;
+}
+.u-bg-black {
+	background-color: $black !important;
+}
+.u-bg-grey-light {
+	background-color: $grey-light !important;
+}
+.u-bg-grey-lighter {
+	background-color: $grey-lighter !important;
+}
+.u-bg-grey {
+	background-color: $grey !important;
+}
+.u-bg-blue {
+	background-color: $blue !important;
+}
+
+/* Border */
+.u-no-border {
+	border: 0 none !important;
+}

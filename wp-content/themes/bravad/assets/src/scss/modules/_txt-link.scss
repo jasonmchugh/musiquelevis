@@ -1,0 +1,13 @@
+/*
+	Modules
+		Text link
+ */
+
+.txt-link {
+	color: $black;
+
+	&:hover {
+		color: $blue;
+	}
+
+}

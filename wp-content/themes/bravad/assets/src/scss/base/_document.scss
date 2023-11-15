@@ -1,0 +1,60 @@
+/*
+	BASE
+		Document
+*/
+html {
+	color: $black;
+	font-family: $font-worksans;
+	font-weight: 400;
+	font-size: 0.99rem;
+	line-height: 1.4;
+
+	@media screen and (max-width: 1600px) {
+		font-size: 0.9rem;
+	}
+	@media #{$lg} {
+		font-size: 0.6rem;
+	}
+	@media #{$xs} {
+		font-size: 0.47rem;
+	}
+}
+body {
+	background: $white;
+	font-size: 1em;
+	min-width: 320px;
+	overflow-x: hidden;
+
+	@media #{$lg} {
+		font-size: 1.5em;
+	}
+	@media #{$md} {
+		&.is-not-scrolleable {
+			overflow: hidden;
+		}
+	}
+	@media #{$xs} {
+		font-size: 1.8em;
+	}
+}
+body:before {
+	display: none;
+	// color: #000;
+	// background: #fff;
+	// padding: 10px;
+	// position: fixed;
+	// bottom: 0;
+	// right: 0;
+	// z-index: 1500;
+	// opacity: 0.5;
+
+	@each $bp in $breakpoints {
+		@if map-get($bp, max-width) == null {
+				content: '#{map-get($bp, name)}';
+		} @else {
+			@media screen and (max-width: #{map-get($bp, max-width)}) {
+				content: '#{map-get($bp, name)}';
+			}
+		}
+	}
+}
