@@ -217,6 +217,8 @@ class AttributeValueByType {
 		} elseif ( false !== strpos( $this->attribute, self::PRODUCT_TAXONOMY_PREFIX ) ) {
 			$this->attribute = str_replace( self::PRODUCT_TAXONOMY_PREFIX, '', $this->attribute );
 			$output          = ProductHelper::get_product_taxonomy( $this->attribute, $this->product, $this->config );
+			//[For getting exact attribute name need to added "PRODUCT_TAXONOMY_PREFIX" which is removed before cz in ProductHelper check  '$productAttribute !== $str_replace['subject']', 'Jira tkt: CTX-656']
+			$this->attribute = self::PRODUCT_TAXONOMY_PREFIX.$this->attribute;
 		} elseif ( false !== strpos( $this->attribute, self::PRODUCT_CATEGORY_MAPPING_PREFIX ) ) {
 			$id = $this->product->is_type( 'variation' ) ? $this->product->get_parent_id() : $this->product->get_id();
 			//$output = ProductHelper::get_category_mapping( $this->attribute, $id );
@@ -328,6 +330,19 @@ class AttributeValueByType {
 		 */
 		$merchant_attribute= ($merchant_attribute === null ? '' : $merchant_attribute);
 		$merchant_attribute = str_replace( [ ' ', 'g:' ], '', $merchant_attribute );
+
+		if( isset( $this->config->provider ) && $this->config->provider === 'google' && $merchant_attribute === 'certification'){
+			if( $this->config->feedType === 'xml' ){
+				$output = array(
+					'g:certification_authority'=>'EC',
+					'g:certification_name'=>'EPREL',
+					'g:certification_code'=>$output,
+				);
+			}else {
+				$output = "EC:EPREL:$output";
+			}
+
+		}
 
 		//$output = "woo_feed_get_{$this->config->provider}_{$merchant_attribute}_attribute";
 		return apply_filters( "woo_feed_get_{$this->config->provider}_{$merchant_attribute}_attribute", $output, $this->product, $this->config, $product_attribute, $merchant_attribute );

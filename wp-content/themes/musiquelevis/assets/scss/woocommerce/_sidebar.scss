@@ -59,7 +59,7 @@ ul.woo__sidebar--links {
 select.woo__sidebar--links {
 	display: none;
 	margin-bottom: 2em;
-	background: $grey-lighter url("/wp-content/themes/bravad/assets/dist/img/arrow-down.svg") no-repeat scroll 98% center;
+	background: $grey-lighter url("/wp-content/themes/musiquelevis/assets/img/arrow-down.svg") no-repeat scroll 98% center;
 	background-size: 20px auto;
 
 	@media #{$sm} {
@@ -217,7 +217,7 @@ select.woo__sidebar--links {
 		.js-catToggle {
 			display: block;
 			content: "";
-			background: url("/wp-content/themes/bravad/assets/dist/img/arrow-down-grey.svg") no-repeat scroll center center;
+			background: url("/wp-content/themes/musiquelevis/assets/img/arrow-down-grey.svg") no-repeat scroll center center;
 			background-size: 100% auto;
 			width: 12px;
 			height: 12px;
@@ -232,7 +232,7 @@ select.woo__sidebar--links {
 				transform: rotate(0);
 			}
 			&:hover {
-				background-image: url("/wp-content/themes/bravad/assets/dist/img/arrow-down-red.svg");
+				background-image: url("/wp-content/themes/musiquelevis/assets/img/arrow-down-red.svg");
 			}
 		}
 

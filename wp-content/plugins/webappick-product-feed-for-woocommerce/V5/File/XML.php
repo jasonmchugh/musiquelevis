@@ -54,6 +54,10 @@ class XML implements FileInterface {
 		foreach ( $array as $key => $value ) {
 			if ( is_array( $value ) ) {
 				if ( ! is_numeric( $key ) ) {
+					if( $key == "certification"){
+						error_log( print_r( ['value'=>$value, 'key'=>$key], true ));
+					}
+
 					$this->feedBody .= "<$key>" . PHP_EOL;
 					self::array_to_xml( $value, $child );
 					$this->feedBody .= "</$key>" . PHP_EOL;

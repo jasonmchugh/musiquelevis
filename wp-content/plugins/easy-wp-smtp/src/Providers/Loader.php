@@ -24,8 +24,10 @@ class Loader {
 	protected $providers = [
 		'sendlayer'  => 'EasyWPSMTP\Providers\Sendlayer\\',
 		'amazonses'  => 'EasyWPSMTP\Providers\AmazonSES\\',
+		'gmail'      => 'EasyWPSMTP\Providers\Gmail\\',
 		'mailgun'    => 'EasyWPSMTP\Providers\Mailgun\\',
 		'outlook'    => 'EasyWPSMTP\Providers\Outlook\\',
+		'sendgrid'   => 'EasyWPSMTP\Providers\Sendgrid\\',
 		'sendinblue' => 'EasyWPSMTP\Providers\Sendinblue\\',
 		'smtpcom'    => 'EasyWPSMTP\Providers\SMTPcom\\',
 		'smtp'       => 'EasyWPSMTP\Providers\SMTP\\',

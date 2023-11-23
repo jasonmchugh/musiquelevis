@@ -58,6 +58,7 @@ class MerchantAttributesFactory {
 						'images_8'         => 'Additional Image 8 [additional_image_link]',
 						'images_9'         => 'Additional Image 9 [additional_image_link]',
 						'images_10'        => 'Additional Image 10 [additional_image_link]',
+						'lifestyle_image'  => 'Lifestyle Image Link[lifestyle_image_link]',
 						'condition'        => 'Condition[condition]',
 					),
 				),
@@ -72,6 +73,7 @@ class MerchantAttributesFactory {
 						'sale_price'                => 'Sale Price[sale_price]',
 						'cost_of_goods_sold'        => 'Cost of Goods Sold[cost_of_goods_sold]',
 						'sale_price_effective_date' => 'Sale Price Effective Date[sale_price_effective_date]',
+						'auto_pricing_min_price'    => 'Auto pricing minimum price[auto_pricing_min_price]',
 					),
 				),
 				3  => array(
@@ -113,6 +115,7 @@ class MerchantAttributesFactory {
 						'section_name'         => 'Section Name (Product Detail)[section_name]',
 						'attribute_name'       => 'Attribute Name  (Product Detail)[attribute_name]',
 						'attribute_value'      => 'Attribute Value  (Product Detail)[attribute_value]',
+						'capacity'      	   => 'capacity[capacity]',
 					),
 				),
 				5  => array(
@@ -155,6 +158,7 @@ class MerchantAttributesFactory {
 					'optionGroup' => 'Ads Attributes',
 					'options'     => array(
 						'ads_redirect' => 'Ads Redirect[ads_redirect]',
+						'pause' => 'Pause[pause]',
 					),
 				),
 				9  => array(
@@ -195,6 +199,7 @@ class MerchantAttributesFactory {
 						'energy_efficiency_class'     => 'Energy Efficiency Class[energy_efficiency_class]',
 						'min_energy_efficiency_class' => 'Min Energy Efficiency Class[energy_efficiency_class]',
 						'max_energy_efficiency_class' => 'Max Energy Efficiency Class[energy_efficiency_class]',
+						'certification'            	  => 'Certification [certification_code]',
 					),
 				),
 				13 => array(

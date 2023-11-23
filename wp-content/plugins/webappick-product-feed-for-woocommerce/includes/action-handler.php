@@ -5,6 +5,9 @@ use CTXFeed\V5\Common\DownloadFiles;
 use CTXFeed\V5\Common\ExportFeed;
 use CTXFeed\V5\Common\Factory;
 use CTXFeed\V5\Common\ImportFeed;
+use CTXFeed\V5\Compatibility\JWTAuth;
+use CTXFeed\V5\CustomFields\CustomFieldFactory;
+use CTXFeed\V5\Compatibility\MultiVendor;
 use CTXFeed\V5\Override\OverrideFactory;
 use CTXFeed\V5\Utility\Logs;
 use CTXFeed\V5\Compatibility\WPMLTranslation;
@@ -46,6 +49,28 @@ if ( is_plugin_active( 'woocommerce-multilingual/wpml-woocommerce.php' ) ) {
  * Process TranslatePress Request
  */
 if ( is_plugin_active( 'translatepress-multilingual/index.php' ) ) {
+
+
+	global $CTX_TRP_RENDERER;
+	global $CTX_TRP_Url_Converter;
+	/**
+	 * TRP_Settings and TRP_Translation_Render must be instantiated here because.
+	 * If both class instantiated at AttributeValueByType class then for every attribute will create
+	 * a new instance of TRP_Translation_Render which is unnecessary and time/memory consuming.
+	 */
+	if ( ! class_exists( 'TRP_Settings' ) || ! class_exists( 'TRP_Translation_Render' ) || ! class_exists( 'TRP_Url_Converter' ) ) {
+		include_once WP_PLUGIN_DIR . '/translatepress-multilingual/includes/external-functions.php';
+		include_once WP_PLUGIN_DIR . '/translatepress-multilingual/includes/class-settings.php';
+		include_once WP_PLUGIN_DIR . '/translatepress-multilingual/includes/class-translation-render.php';
+		include_once WP_PLUGIN_DIR . '/translatepress-multilingual/includes/class-url-converter.php';
+	}
+
+	$settings = ( new \TRP_Settings() )->get_settings();
+
+	$CTX_TRP_RENDERER      = new \TRP_Translation_Render( $settings );
+	$CTX_TRP_Url_Converter = new \TRP_Url_Converter( $settings );
+
+
 	new TranslatePress();
 }
 /**
@@ -53,6 +78,13 @@ if ( is_plugin_active( 'translatepress-multilingual/index.php' ) ) {
  */
 if ( is_plugin_active( 'woocommerce-multilingual/wpml-woocommerce.php' ) ) {
 	new WCMLCurrency();
+}
+
+/**
+ * Process JWT-Auth Request
+ */
+if ( is_plugin_active( 'jwt-auth/jwt-auth.php' ) ) {
+	new JWTAuth();
 }
 
 /**
@@ -65,6 +97,10 @@ new MultiCurrency();
  */
 new DynamicDiscount();
 
+/**
+ * Process Custom Identifier
+ */
+CustomFieldFactory::init();
 
 /**
  * Display Notice
@@ -182,4 +218,11 @@ if ( ! function_exists( 'woo_feed_get_product_information' ) ) {
 	}
 
 	add_action( 'wp_ajax_get_product_information', 'woo_feed_get_product_information' );
+}
+
+/**
+ * Show Feed Link In MultiVendor Menu
+ */
+if ( MultiVendor::woo_feed_is_multi_vendor() ) {
+	new MultiVendor();
 }

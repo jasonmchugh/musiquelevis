@@ -811,6 +811,7 @@ class Core {
 		$medium   = 'plugin-settings';
 		$campaign = $this->is_pro() ? 'plugin' : 'liteplugin';
 		$content  = 'general';
+		$locale   = get_user_locale();
 
 		if ( is_array( $utm ) ) {
 			if ( isset( $utm['source'] ) ) {
@@ -825,6 +826,9 @@ class Core {
 			if ( isset( $utm['content'] ) ) {
 				$content = $utm['content'];
 			}
+			if ( isset( $utm['locale'] ) ) {
+				$locale = $utm['locale'];
+			}
 		} elseif ( is_string( $utm ) ) {
 			$content = $utm;
 		}
@@ -833,6 +837,7 @@ class Core {
 			'utm_source'   => esc_attr( rawurlencode( $source ) ),
 			'utm_medium'   => esc_attr( rawurlencode( $medium ) ),
 			'utm_campaign' => esc_attr( rawurlencode( $campaign ) ),
+			'utm_locale'   => esc_attr( sanitize_key( $locale ) ),
 		];
 
 		if ( ! empty( $content ) ) {

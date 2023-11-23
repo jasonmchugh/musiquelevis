@@ -60,6 +60,10 @@ class Options {
 			'domain',
 			'region',
 		],
+		'sendgrid'             => [
+			'api_key',
+			'domain',
+		],
 		'smtpcom'    => [
 			'api_key',
 			'channel',
@@ -88,8 +92,10 @@ class Options {
 		'smtpcom',
 		'sendinblue',
 		'amazonses',
+		'gmail',
 		'mailgun',
 		'outlook',
+		'sendgrid',
 		'smtp',
 	];
 
@@ -533,6 +539,20 @@ class Options {
 
 				break;
 
+			case 'sendgrid':
+				switch ( $key ) {
+					case 'api_key':
+						/** @noinspection PhpUndefinedConstantInspection */
+						$return = $this->is_const_defined( $group, $key ) ? EasyWPSMTP_SENDGRID_API_KEY : $value;
+						break;
+					case 'domain':
+						/** @noinspection PhpUndefinedConstantInspection */
+						$return = $this->is_const_defined( $group, $key ) ? EasyWPSMTP_SENDGRID_DOMAIN : $value;
+						break;
+				}
+
+				break;
+
 			case 'smtpcom':
 				switch ( $key ) {
 					case 'api_key':
@@ -736,6 +756,18 @@ class Options {
 						break;
 					case 'region':
 						$return = defined( 'EASY_WP_SMTP_MAILGUN_REGION' ) && EASY_WP_SMTP_MAILGUN_REGION;
+						break;
+				}
+
+				break;
+
+			case 'sendgrid':
+				switch ( $key ) {
+					case 'api_key':
+						$return = defined( 'EasyWPSMTP_SENDGRID_API_KEY' ) && EasyWPSMTP_SENDGRID_API_KEY;
+						break;
+					case 'domain':
+						$return = defined( 'EasyWPSMTP_SENDGRID_DOMAIN' ) && EasyWPSMTP_SENDGRID_DOMAIN;
 						break;
 				}
 
@@ -963,8 +995,8 @@ class Options {
 					case 'user': // smtp.
 					case 'encryption': // smtp.
 					case 'region': // mailgun/amazonses.
-					case 'api_key': // mailgun/sendinblue/smtpcom/sendlayer.
-					case 'domain': // mailgun/sendinblue.
+					case 'api_key': // mailgun/sendinblue/smtpcom/sendlayer/sendgrid.
+					case 'domain': // mailgun/sendinblue/sendgrid.
 					case 'channel': // smtpcom.
 					case 'client_id': // outlook/amazonses.
 					case 'client_secret': // outlook/amazonses.
@@ -994,7 +1026,8 @@ class Options {
 						break;
 
 					case 'access_token': // outlook, is an array.
-					case 'user_details': // outlook, is an array.
+					case 'user_details': // gmail/outlook, is an array.
+					case 'relay_credentials': // gmail is an array.
 						// These options don't support constants.
 						$options[ $mailer ][ $option_name ] = $option_value;
 						break;

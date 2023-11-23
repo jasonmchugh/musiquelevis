@@ -3,7 +3,7 @@
 	<div class="product__thumb" style="background-image: url(<?php echo str_replace("kijiji.","",$img[0]); ?>)">
 		<a href="<?php the_permalink(); ?>">
 			<div class="product__thumb--overlay" style="opacity: 0;">
-				<img src="<?php echo get_template_directory_uri(); ?>/assets/dist/img/plus.svg">
+				<img src="<?php echo get_template_directory_uri(); ?>/assets/img/plus.svg">
 			</div>
 		</a>
 	</div>

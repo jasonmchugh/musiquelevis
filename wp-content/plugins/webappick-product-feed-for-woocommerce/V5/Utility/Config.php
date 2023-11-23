@@ -574,7 +574,7 @@ class Config {
 	 */
 	public function get_vendors_to_include() {
 		if ( isset( $this->config['vendors'] ) && ! empty( $this->config['vendors'] ) ) {
-			return is_array( $this->config['vendors'] ) ? $this->config['vendors'] : implode( ',', $this->config['vendors'] );
+			return is_array( $this->config['vendors'] ) ? $this->config['vendors'] : explode( ',', $this->config['vendors'] );
 		}
 
 		return false;
@@ -614,12 +614,7 @@ class Config {
 	 * @return array|bool
 	 */
 	public function get_ftp_config() {
-		if ( isset( $this->config['ftpenabled'] ) && $this->config['ftpenabled'] ) {
-
-//			if ( '0' === $this->config['ftpenabled'] ) {
-//				return false;
-//			}
-
+		if ( $this->is_ftp_enabled() ) {
 			return [
 				"type"     => $this->config['ftporsftp'],
 				"host"     => $this->config['ftphost'],
@@ -628,7 +623,19 @@ class Config {
 				"password" => $this->config['ftppassword'],
 				"path"     => $this->config['ftppath'],
 				"mode"     => $this->config['ftpmode'],
+				"ftpenabled" => $this->config['ftpenabled'],
 			];
+		}
+
+		return false;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function is_ftp_enabled() {
+		if ( isset( $this->config['ftpenabled'] ) && $this->config['ftpenabled'] ) {
+			return true;
 		}
 
 		return false;
@@ -724,7 +731,7 @@ class Config {
 			'limit'                 => array(), // limit or command
 			// filters tab
 			'composite_price'       => 'all_product_price',
-			'product_ids'           => [],
+			'product_ids'           => array(),
 			'categories'            => array(),
 			'post_status'           => array( 'publish' ),
 			'filter_mode'           => array(),

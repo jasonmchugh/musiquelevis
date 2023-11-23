@@ -40,4 +40,5 @@ class CustomFieldHelper {
 
 		return apply_filters( 'woo_feed_product_custom_fields', $custom_fields );
 	}
+
 }

@@ -7,8 +7,9 @@
 	display: inline-block;
 	position: relative;
 	border: solid 1px $black;
-	border-radius: 0.5em;
+	border-radius: 2em;
 	margin-left: 1em;
+	padding: 0.25em;
 
 	@media #{$md} {
 		margin: 0 0 1em;

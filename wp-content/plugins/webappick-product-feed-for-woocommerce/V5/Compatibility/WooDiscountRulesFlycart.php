@@ -10,21 +10,13 @@ class WooDiscountRulesFlycart
 
 	public function woo_discount_rules_flycart( $price, $product, $config, $price_type ) {
 
-		$wpml_active_currency_status = (is_plugin_active( 'woocommerce-multilingual/wpml-woocommerce.php' ) && $config->get_feed_currency() !== get_woocommerce_currency());
+		$base_price               = $price;
 
+		$wpml_active_currency_status = ( is_plugin_active( 'woocommerce-multilingual/wpml-woocommerce.php' ) && $config->get_feed_currency() !== get_woocommerce_currency() );
 		if ( $wpml_active_currency_status ) {
 			//Wpml custom price start
-			$wpml_product_id = $product->get_id();
-			$wpml_settings = get_option( 'icl_sitepress_settings' );
-			$wpml_default_language = $wpml_settings['default_language'];
-			global $wpdb;
-			$wpml_table_name = $wpdb->prefix . 'icl_translations';
-			$sql = $wpdb->prepare("SELECT `trid` FROM $wpml_table_name  WHERE `element_id` = %d",  $wpml_product_id );
-			$result = $wpdb->get_results( $sql );
-			$wpml_trid = $result[0]->trid;
-			$sql = $wpdb->prepare("SELECT `element_id` FROM $wpml_table_name  WHERE `trid` = %d AND `language_code` = %s",  $wpml_trid, $wpml_default_language );
-			$result = $wpdb->get_results( $sql );
-			$original_id = $result[0]->element_id;
+			$wcmlCurrency  = new WCMLCurrency();
+			$original_id = $wcmlCurrency->woo_feed_wpml_get_original_post_id( $product->get_id() );
 
 			$wpml_regular_price = get_post_meta($original_id, '_regular_price_' . $config->get_feed_currency(), false );
 			$wpml_sale_price = get_post_meta($original_id, '_sale_price_' . $config->get_feed_currency(), false );
@@ -83,6 +75,7 @@ class WooDiscountRulesFlycart
 
 			$price = apply_filters( 'wcml_raw_price_amount', $price, $config->get_feed_currency() );
 		}
+
 		return $price;
 	}
 

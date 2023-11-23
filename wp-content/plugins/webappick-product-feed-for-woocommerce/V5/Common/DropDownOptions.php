@@ -904,6 +904,15 @@ class DropDownOptions {
 			'22' => '',
 		);
 
+		//when wpml or polylang plugin is activated
+		if (
+			 class_exists( 'SitePress', false ) || defined( 'POLYLANG_BASENAME' ) || function_exists( 'PLL' ) // When WPML is active
+			|| is_plugin_active( 'translatepress-multilingual/index.php' ) // Translatepress
+		) {
+			array_push( $output_types, 'parent_lang' );
+			array_push( $output_types, 'parent_lang_if_empty' );
+		}
+
 		return apply_filters( 'woo_feed_output_types', $output_types );
 	}
 

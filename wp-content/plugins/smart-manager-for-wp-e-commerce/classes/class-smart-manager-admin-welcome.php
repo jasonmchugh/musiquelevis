@@ -227,7 +227,10 @@ class Smart_Manager_Admin_Welcome {
 		}
 
 		?>
-		<h1><?php printf( __( 'Thank you for installing Smart Manager %s!', 'smart-manager-for-wp-e-commerce' ), $version ); ?></h1>
+		<h1><?php printf( 
+		/* translators: %s: Plugin version number */
+		__( 'Thank you for installing Smart Manager %s!', 'smart-manager-for-wp-e-commerce' ),
+		$version ); ?></h1>
 
 		<div style="margin-top:0.3em;"><?php _e( "Glad to have you onboard. We hope Smart Manager adds to your desired success 🏆", 'smart-manager-for-wp-e-commerce' ); ?></div>
 
@@ -278,7 +281,9 @@ class Smart_Manager_Admin_Welcome {
 			<div class = "col" style="margin:0 auto;">
 				<br/>
 				<p style="font-size:1em;"><?php echo __( 'Smart Manager is a unique, revolutionary tool that gives you the power to <b>boost your productivity by 10x</b> in managing your <b>WooCommerce</b> store by using a <b>familiar, single page, spreadsheet like interface</b>. ', 'smart-manager-for-wp-e-commerce' ); ?></p>
-				<p><?php echo sprintf(__( 'Apart from WooCommerce post types like Products, Orders, Coupons, now you can manage %s. Be it Posts, Pages, Media, WordPress Users, etc. you can now manage everything using Smart Manager.', 'smart-manager-for-wp-e-commerce' ), '<strong>' . __( 'any custom post type in WordPress', 'smart-manager-for-wp-e-commerce' ) . '</strong>' ); ?></p>
+				<p><?php echo sprintf(
+					/* translators: %s: HTML of Smart Manager about screen */
+					__( 'Apart from WooCommerce post types like Products, Orders, Coupons, now you can manage %s. Be it Posts, Pages, Media, WordPress Users, etc. you can now manage everything using Smart Manager.', 'smart-manager-for-wp-e-commerce' ), '<strong>' . __( 'any custom post type in WordPress', 'smart-manager-for-wp-e-commerce' ) . '</strong>' ); ?></p>
 				<!-- <div class="headline-feature feature-video">
 					<?php echo $embed_code = wp_oembed_get('http://www.youtube.com/watch?v=kOiBXuUVF1U', array('width'=>5000, 'height'=>560)); ?>
 				</div> -->
@@ -292,7 +297,11 @@ class Smart_Manager_Admin_Welcome {
 						<iframe class="sm-video-iframe" src="https://www.youtube.com/embed/20iodFpP5ow" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
 						<p>
-							<?php echo sprintf(__( 'Simply enter the keyword you wish to filter records in the “Simple Search” field at the top of the grid (%s). If you need to have a more specific search result, then you can switch to “%s“ and then search.', 'smart-manager-for-wp-e-commerce' ), '<a href="https://www.storeapps.org/docs/sm-how-to-filter-records-using-simple-search/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'see how', 'smart-manager-for-wp-e-commerce' ) . '</a>', '<a href="https://www.youtube.com/watch?v=hX7CcZYo060" target="_blank">' . __( 'Advanced Search', 'smart-manager-for-wp-e-commerce' ) . '</a>' ); ?>
+							<?php echo sprintf(
+								/* translators: %1$s: Simple search doc link %2$s: Advanced search doc link */
+								__( 'Simply enter the keyword you wish to filter records in the “Simple Search” field at the top of the grid (%1$s). If you need to have a more specific search result, then you can switch to “%2$s“ and then search.', 'smart-manager-for-wp-e-commerce' ),
+								'<a href="https://www.storeapps.org/docs/sm-how-to-filter-records-using-simple-search/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'see how', 'smart-manager-for-wp-e-commerce' ) . '</a>',
+								'<a href="https://www.youtube.com/watch?v=hX7CcZYo060" target="_blank">' . __( 'Advanced Search', 'smart-manager-for-wp-e-commerce' ) . '</a>' ); ?>
 						</p>
 					</div>
 				<div class="column col">
@@ -301,7 +310,10 @@ class Smart_Manager_Admin_Welcome {
 						<iframe class="sm-video-iframe" src="https://www.youtube.com/embed/BrvU6GD9pWU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
 						<p>
-							<?php echo sprintf(__( 'You can quickly update your Products, Orders, Coupons and Posts from Smart Manager itself. This facilitates editing of multiple rows at a time instead of editing and saving each row separately, %s.', 'smart-manager-for-wp-e-commerce' ), '<a href="https://www.storeapps.org/docs/sm-how-to-use-inline-editing/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'see how', 'smart-manager-for-wp-e-commerce' ) . '</a>' ); ?>
+							<?php echo sprintf(
+							/* translators: %s: Inline Editing doc link */
+							__( 'You can quickly update your Products, Orders, Coupons and Posts from Smart Manager itself. This facilitates editing of multiple rows at a time instead of editing and saving each row separately, %s.', 'smart-manager-for-wp-e-commerce' ),
+							'<a href="https://www.storeapps.org/docs/sm-how-to-use-inline-editing/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'see how', 'smart-manager-for-wp-e-commerce' ) . '</a>' ); ?>
 						</p>
 					</div>
 				<div class="column last-feature col">
@@ -321,7 +333,10 @@ class Smart_Manager_Admin_Welcome {
 						<iframe class="sm-video-iframe" src="https://www.youtube.com/embed/e9bpXTPdSqc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
 						<p>
-							<?php echo sprintf(__( 'You can simply select records you want to delete (check the header box if you want to delete all records) and click on the “Delete” icon. All the selected records will be deleted. You can even delete records by applying search filters. %s.', 'smart-manager-for-wp-e-commerce' ), '<a href="https://www.storeapps.org/docs/sm-how-to-delete-rows/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'See how', 'smart-manager-for-wp-e-commerce' ) . '</a>' ); ?>
+							<?php echo sprintf(
+								/* translators: %s: Delete Records doc link */
+								__( 'You can simply select records you want to delete (check the header box if you want to delete all records) and click on the “Delete” icon. All the selected records will be deleted. You can even delete records by applying search filters. %s.', 'smart-manager-for-wp-e-commerce' ),
+								'<a href="https://www.storeapps.org/docs/sm-how-to-delete-rows/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'See how', 'smart-manager-for-wp-e-commerce' ) . '</a>' ); ?>
 						</p>
 					</div>
 				<div class="column col">
@@ -330,7 +345,11 @@ class Smart_Manager_Admin_Welcome {
 								if ( SMPRO === true ) {
 									echo __( 'Bulk Edit', 'smart-manager-for-wp-e-commerce' );											
 								} else {
-									echo sprintf(__( 'Bulk Edit - %1s (only in %2s)', 'smart-manager-for-wp-e-commerce' ), '<span style="color: red;">' . __( 'Biggest Time Saver', 'smart-manager-for-wp-e-commerce' ) . '</span>' , '<a href="https://www.storeapps.org/product/smart-manager/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'Pro', 'smart-manager-for-wp-e-commerce' ) . '</a>' );
+									echo sprintf(
+										/* translators: %1$s: HTML for bulk edit %2$s: link to Smart Manager Pro product page */
+										__( 'Bulk Edit - %1$s (only in %2$s)', 'smart-manager-for-wp-e-commerce' ),
+										'<span style="color: red;">' . __( 'Biggest Time Saver', 'smart-manager-for-wp-e-commerce' ) . '</span>' ,
+										'<a href="https://www.storeapps.org/product/smart-manager/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'Pro', 'smart-manager-for-wp-e-commerce' ) . '</a>' );
 								}
 							?>
 						</h3>
@@ -338,7 +357,10 @@ class Smart_Manager_Admin_Welcome {
 						<iframe class="sm-video-iframe" src="https://www.youtube.com/embed/COXCuX2rFrk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
 						<p>
-							<?php echo sprintf(__( 'You can change / update multiple fields of the entire store OR for selected items by selecting multiple records and then click on Bulk Edit. %s.', 'smart-manager-for-wp-e-commerce' ), '<a href="https://www.storeapps.org/docs/sm-how-to-use-batch-update/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'See how', 'smart-manager-for-wp-e-commerce' ) . '</a>' ); ?>
+							<?php echo sprintf(
+								/* translators: %s: Bulk Edit doc link */
+								__( 'You can change / update multiple fields of the entire store OR for selected items by selecting multiple records and then click on Bulk Edit. %s.', 'smart-manager-for-wp-e-commerce' ),
+								'<a href="https://www.storeapps.org/docs/sm-how-to-use-batch-update/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'See how', 'smart-manager-for-wp-e-commerce' ) . '</a>' ); ?>
 						</p>
 					</div>
 				<div class="column last-feature col">
@@ -346,7 +368,10 @@ class Smart_Manager_Admin_Welcome {
 								if ( SMPRO === true ) {
 									echo __( 'Export CSV', 'smart-manager-for-wp-e-commerce' );											
 								} else {
-									echo sprintf(__( 'Export CSV (only in %s)', 'smart-manager-for-wp-e-commerce' ), '<a href="https://www.storeapps.org/product/smart-manager/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'Pro', 'smart-manager-for-wp-e-commerce' ) . '</a>' );
+									echo sprintf(
+										/* translators: %s: Export CSV doc link */
+										__( 'Export CSV (only in %s)', 'smart-manager-for-wp-e-commerce' ),
+										'<a href="https://www.storeapps.org/product/smart-manager/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_know" target="_blank">' . __( 'Pro', 'smart-manager-for-wp-e-commerce' ) . '</a>' );
 								}
 							?>
 						</h3>
@@ -354,7 +379,10 @@ class Smart_Manager_Admin_Welcome {
 						<iframe class="sm-video-iframe" src="https://www.youtube.com/embed/GMgysSQw7_g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
 						<p>
-							<?php echo sprintf(__( 'You can export all the records OR filtered records (%s) by simply clicking on the Export CSV button at the bottom right of the grid.', 'smart-manager-for-wp-e-commerce' ), '<i>' . __( 'using Simple Search” or Advanced Search', 'smart-manager-for-wp-e-commerce' ) . '</i>' ); ?>
+							<?php echo sprintf(
+								/* translators: %s: HTML of Export CSV */
+								__( 'You can export all the records OR filtered records (%s) by simply clicking on the Export CSV button at the bottom right of the grid.', 'smart-manager-for-wp-e-commerce' ),
+								'<i>' . __( 'using Simple Search” or Advanced Search', 'smart-manager-for-wp-e-commerce' ) . '</i>' ); ?>
 						</p>
 				</div>
 			</div>
@@ -383,7 +411,10 @@ class Smart_Manager_Admin_Welcome {
 				$faqs = array(
 							array(
 									'que' => __( 'Smart Manager is empty?', 'smart-manager-for-wp-e-commerce' ),
-									'ans' => sprintf( __( 'Make sure you are using %s of Smart Manager. If still the issue persist, temporarily de-activate all plugins except WooCommerce/WPeCommerce & Smart Manager. Re-check the issue, if the issue still persists, contact us. If the issue goes away, re-activate other plugins one-by-one & re-checking the fields, to find out which plugin is conflicting.', 'smart-manager-for-wp-e-commerce' ), '<a href="https://www.storeapps.org/docs/sm-changelog/" target="_blank">' . __( 'latest version', 'smart-manager-for-wp-e-commerce' ) . '</a>' )
+									'ans' => sprintf(
+										/* translators: %s: Changelog doc link */
+										__( 'Make sure you are using %s of Smart Manager. If still the issue persist, temporarily de-activate all plugins except WooCommerce/WPeCommerce & Smart Manager. Re-check the issue, if the issue still persists, contact us. If the issue goes away, re-activate other plugins one-by-one & re-checking the fields, to find out which plugin is conflicting.', 'smart-manager-for-wp-e-commerce' ),
+										'<a href="https://www.storeapps.org/docs/sm-changelog/" target="_blank">' . __( 'latest version', 'smart-manager-for-wp-e-commerce' ) . '</a>' )
 								),
 							array(
 									'que' => __( 'Smart Manager search functionality not working', 'smart-manager-for-wp-e-commerce' ),
@@ -399,7 +430,10 @@ class Smart_Manager_Admin_Welcome {
 								),
 							array(
 									'que' => __( 'How to add columns to Smart Manager dashboard?', 'smart-manager-for-wp-e-commerce' ),
-									'ans' => sprintf( __( 'To show / hide columns in the Smart Manager, %s.', 'smart-manager-for-wp-e-commerce' ), '<a href="https://www.storeapps.org/docs/sm-how-to-show-hide-columns-in-dashboard/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_faqs" target="_blank">' . __( 'click here', 'smart-manager-for-wp-e-commerce' ) . '</a>')
+									'ans' => sprintf(
+										/* translators: %s: Show and Hide doc link */
+										__( 'To show / hide columns in the Smart Manager, %s.', 'smart-manager-for-wp-e-commerce' ),
+										'<a href="https://www.storeapps.org/docs/sm-how-to-show-hide-columns-in-dashboard/?utm_source=sm&utm_medium=welcome_page&utm_campaign=sm_faqs" target="_blank">' . __( 'click here', 'smart-manager-for-wp-e-commerce' ) . '</a>')
 								),
 							array(
 									'que' => __( 'Can I import using Smart Manager?', 'smart-manager-for-wp-e-commerce' ),
@@ -411,12 +445,18 @@ class Smart_Manager_Admin_Welcome {
 				if ( SMPRO === true ) {
 					$faqs[] = array(
 									'que' => __( 'I can\'t find a way to do X...', 'smart-manager-for-wp-e-commerce' ),
-									'ans' => sprintf(__( 'Smart Manager is actively developed. If you can\'t find your favorite feature (or have a suggestion) %s. We\'d love to hear from you.', 'smart-manager-for-wp-e-commerce' ), '<a class="thickbox" href="' . admin_url('#TB_inline?inlineId=sa_smart_manager_beta_post_query_form&height=550') .'" title="' . __( 'Submit your query', 'smart-manager-for-wp-e-commerce' ) .'">' . __( 'contact us', 'smart-manager-for-wp-e-commerce' ) . '</a>' )
+									'ans' => sprintf(
+										/* translators: %s: contact us link */
+										__( 'Smart Manager is actively developed. If you can\'t find your favorite feature (or have a suggestion) %s. We\'d love to hear from you.', 'smart-manager-for-wp-e-commerce' ),
+										'<a class="thickbox" href="' . admin_url('#TB_inline?inlineId=sa_smart_manager_beta_post_query_form&height=550') .'" title="' . __( 'Submit your query', 'smart-manager-for-wp-e-commerce' ) .'">' . __( 'contact us', 'smart-manager-for-wp-e-commerce' ) . '</a>' )
 								);
 				} else {
 					$faqs[] = array(
 									'que' => __( 'How do I upgrade a Lite version to a Pro version?', 'smart-manager-for-wp-e-commerce' ),
-									'ans' => sprintf( __( 'Follow steps listed here: %s', 'smart-manager-for-wp-e-commerce' ), '<a href="https://www.storeapps.org/docs/how-to-update-from-lite-to-pro-version/" target="_blank">' . __( 'latest version', 'smart-manager-for-wp-e-commerce' ) . '</a>' )
+									'ans' => sprintf(
+										/* translators: %s: Lite version to a Pro version doc link */
+										__( 'Follow steps listed here: %s', 'smart-manager-for-wp-e-commerce' ),
+										'<a href="https://www.storeapps.org/docs/how-to-update-from-lite-to-pro-version/" target="_blank">' . __( 'latest version', 'smart-manager-for-wp-e-commerce' ) . '</a>' )
 								);
 				}
 
@@ -426,7 +466,7 @@ class Smart_Manager_Admin_Welcome {
 					echo '<div class="has-2-columns is-fullwidth two-col">';
 					foreach ( $fqs as $index => $faq ) {
 						echo '<div' . ( ( $index == 1 ) ? ' class="column col last-feature"' : ' class="column col"' ) . '>';
-						echo '<h4>' . sprintf(__( '%s', 'smart-manager-for-wp-e-commerce' ), $faq['que'] ) . '</h4>';
+						echo '<h4>' . $faq['que'] . '</h4>';
 						echo '<p>' . $faq['ans'] . '</p>';
 						echo '</div>';
 					}

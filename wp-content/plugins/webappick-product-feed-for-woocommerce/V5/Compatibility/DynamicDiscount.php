@@ -12,6 +12,9 @@ class DynamicDiscount {
 		// Discounted price filter
 		add_filter( 'woo_feed_filter_product_sale_price', [$this,'get_dynamic_discounted_product_price'], 9, 5 );
 		add_filter( 'woo_feed_filter_product_sale_price_with_tax', [$this,'get_dynamic_discounted_product_price'], 9, 5 );
+
+		add_filter( 'woo_feed_filter_product_price', [$this,'get_dynamic_discounted_product_price'], 9, 5 );
+		add_filter( 'woo_feed_filter_product_price_with_tax', [$this,'get_dynamic_discounted_product_price'], 9, 5 );
 	}
 
 	/**
@@ -84,7 +87,7 @@ class DynamicDiscount {
 		 * Don't apply discount manually.
 		 */
 
-		if (is_plugin_active('aco-woo-dynamic-pricing/start.php')) {
+		if (is_plugin_active('aco-woo-dynamic-pricing/start.php') || is_plugin_active('aco-woo-dynamic-pricing-pro/start.php')) {
 			$discount_plugin_activate = true;
 			$AcoWooDynamicPricing = new AcoWooDynamicPricing();
 			$price = $AcoWooDynamicPricing->aco_dynamic_pricing( $price, $product );

@@ -61,4 +61,23 @@ class RestConstants {
 	 */
 	const MANAGE_FEEDS_REST_BASE = 'manage_feeds';
 
+	/**
+	 * Status rest base
+	 *
+	 * @since 7.1.0
+	 * @var string
+	 */
+
+	const STATUS_REST_BASE = 'wp-status';
+
+	/**
+	 * Docs rest base
+	 *
+	 * @since 7.2.0
+	 * @var string
+	 */
+	const WOO_FEED_DOCS_REST_BASE = 'woo_feed_docs';
+
+
+
 }

@@ -239,6 +239,9 @@ var EasyWPSMTPDebugEvents = window.EasyWPSMTPDebugEvents || ( function( document
 						btnClass: 'btn-confirm',
 						keys: [ 'enter' ]
 					}
+				},
+				onOpenBefore: function() {
+					this.$contentPane.addClass( 'no-scroll' );
 				}
 			} );
 

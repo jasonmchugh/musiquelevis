@@ -11,6 +11,7 @@
  */
 
 
+use CTXFeed\V5\Compatibility\WCMLCurrency;
 use CTXFeed\V5\Notice\Dismiss;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -248,39 +249,57 @@ if ( ! function_exists( 'woo_feed_black_friday_notice' ) ) {
 	 */
 	function woo_feed_black_friday_notice() {
 		$user_id = get_current_user_id();
-		if ( ! get_user_meta( $user_id, 'woo_feed_black_friday_notice_2022_dismissed' ) ) {
+		if ( ! get_user_meta( $user_id, 'woo_feed_black_friday_notice_2023_dismissed' ) ) {
 			ob_start();
 			?>
-			<script type="text/javascript">
-				(function ($) {
-					$(document).on('click', '.woo-feed-ctx-startup-notice button.notice-dismiss', function (e) {
-						e.preventDefault();
-						let nonce = $('#woo_feed_to_ctx_feed_nonce').val();
+            <script type="text/javascript">
+                (function ($) {
+                    $(document).on('click', '.woo-feed-ctx-startup-notice button.notice-dismiss', function (e) {
+                        e.preventDefault();
+                        let nonce = $('#woo_feed_to_ctx_feed_nonce').val();
 
-						//woo feed black friday notice cancel callback
-						wp.ajax.post('woo_feed_save_black_friday_notice_2022_notice', {
-							_wp_ajax_nonce: nonce,
-							clicked: true,
-						}).then(response => {
-							console.log(response);
-						}).fail(error => {
-							console.log(error);
-						});
-					});
-				})(jQuery)
-			</script>
-			<a  target="_blank" href="https://webappick.com/plugin/woocommerce-product-feed-pro/?utm_source=plugin&utm_medium=banner&utm_campaign=bfcm-banner-22"
-			   class="notice woo-feed-ctx-startup-notice is-dismissible"
-			   style="background: url(<?php echo WOO_FEED_PLUGIN_URL . 'admin/images/ctx-feed-black-friday-banner-2022.png'; ?>) no-repeat top center;">
-				<input type="hidden" id="woo_feed_to_ctx_feed_nonce"
-					   value="<?php echo wp_create_nonce( 'woo-feed-to-ctx-feed-notice' ); ?>">
-			</a>
+                        //woo feed black friday notice cancel callback
+                        wp.ajax.post('woo_feed_save_black_friday_notice_2023_notice', {
+                            _wp_ajax_nonce: nonce,
+                            clicked: true,
+                        }).then(response => {
+                            console.log(response);
+                        }).fail(error => {
+                            console.log(error);
+                        });
+                    });
+                })(jQuery)
+            </script>
+            <a  target="_blank" href="https://webappick.com/plugin/woocommerce-product-feed-pro/?utm_source=BFCM_banner&utm_medium=BFCM_Banner_Free_to_pro&utm_campaign=BFCM23&utm_id=1"
+                class="notice woo-feed-ctx-startup-notice is-dismissible"
+                style="background: url(<?php echo WOO_FEED_PLUGIN_URL . 'admin/images/ctx-feed-black-friday-banner-2023.png'; ?>) no-repeat top center;">
+                <input type="hidden" id="woo_feed_to_ctx_feed_nonce"
+                       value="<?php echo wp_create_nonce( 'woo-feed-to-ctx-feed-notice' ); ?>">
+            </a>
 			<?php
 			$image = ob_get_contents();
 		}
 	}
 }
 
+
+if ( ! function_exists( 'woo_feed_halloween_notice_random' ) ) {
+	/**
+	 * CTX Feed Halloween Notice Random
+	 *
+	 * @since 4.5.3
+	 * @author Nashir Uddin
+	 */
+	function woo_feed_halloween_notice_random() {
+        $randomNumber = rand(1, 2);
+
+        if ($randomNumber === 1) {
+	        woo_feed_halloween_notice();
+        } else {
+	        woo_feed_halloween_notice_2();
+        }
+	}
+}
 
 
 if ( ! function_exists( 'woo_feed_halloween_notice' ) ) {
@@ -292,7 +311,7 @@ if ( ! function_exists( 'woo_feed_halloween_notice' ) ) {
 	 */
 	function woo_feed_halloween_notice() {
 		$user_id = get_current_user_id();
-		if ( ! get_user_meta( $user_id, 'woo_feed_halloween_notice_dismissed' ) ) {
+		if ( ! get_user_meta( $user_id, 'woo_feed_halloween_notice_2023_dismissed' ) ) {
 			ob_start();
 			?>
 			<script type="text/javascript">
@@ -313,12 +332,54 @@ if ( ! function_exists( 'woo_feed_halloween_notice' ) ) {
 					});
 				})(jQuery)
 			</script>
-			<a target="_blank" href="https://webappick.com/plugin/woocommerce-product-feed-pro/?utm_source=hw&utm_medium=ctx-plugin-banner&utm_campaign=hw-cm-22"
+			<a target="_blank" href="https://webappick.com/plugin/woocommerce-product-feed-pro/?utm_source=HW_Banner_1b&utm_medium=HW_Banner_Free_to_pro&utm_campaign=HWbanner23&utm_id=1"
 			   class="notice woo-feed-ctx-halloween-notice is-dismissible"
 			   style="background: url(<?php echo WOO_FEED_PLUGIN_URL . 'admin/images/woo_feed_halloween_notice.png'; ?>) no-repeat top center;">
 				<input type="hidden" id="woo_feed_to_ctx_feed_halloween_nonce"
 					   value="<?php echo wp_create_nonce( 'woo-feed-to-ctx-feed-halloween-nonce' ); ?>">
 			</a>
+			<?php
+			$image = ob_get_contents();
+		}
+	}
+}
+
+if ( ! function_exists( 'woo_feed_halloween_notice_2' ) ) {
+	/**
+	 * CTX Feed Halloween Notice
+	 *
+	 * @since 4.5.3
+	 * @author Nashir Uddin
+	 */
+	function woo_feed_halloween_notice_2() {
+		$user_id = get_current_user_id();
+		if ( ! get_user_meta( $user_id, 'woo_feed_halloween_notice_2023_dismissed' ) ) {
+			ob_start();
+			?>
+            <script type="text/javascript">
+                (function ($) {
+                    $(document).on('click', '.woo-feed-ctx-halloween-notice button.notice-dismiss', function (e) {
+                        e.preventDefault();
+                        let nonce = $('#woo_feed_to_ctx_feed_halloween_nonce').val();
+
+                        //woo feed halloween cancel callback
+                        wp.ajax.post('woo_feed_save_halloween_notice', {
+                            _wp_ajax_nonce: nonce,
+                            clicked: true,
+                        }).then(response => {
+                            console.log(response);
+                        }).fail(error => {
+                            console.log(error);
+                        });
+                    });
+                })(jQuery)
+            </script>
+            <a target="_blank" href="https://webappick.com/plugin/woocommerce-product-feed-pro/?utm_source=HW_Banner_2w&utm_medium=HW_Banner_Free_to_pro&utm_campaign=HWbanner23&utm_id=1"
+               class="notice woo-feed-ctx-halloween-notice is-dismissible"
+               style="background: url(<?php echo WOO_FEED_PLUGIN_URL . 'admin/images/woo_feed_halloween_notice_2.png'; ?>) no-repeat top center;">
+                <input type="hidden" id="woo_feed_to_ctx_feed_halloween_nonce"
+                       value="<?php echo wp_create_nonce( 'woo-feed-to-ctx-feed-halloween-nonce' ); ?>">
+            </a>
 			<?php
 			$image = ob_get_contents();
 		}
@@ -361,6 +422,48 @@ if ( ! function_exists( 'woo_feed_christmas_notice' ) ) {
 				<input type="hidden" id="woo_feed_to_ctx_feed_nonce"
 					   value="<?php echo wp_create_nonce( 'woo-feed-to-ctx-feed-notice' ); ?>">
 			</a>
+			<?php
+			$image = ob_get_contents();
+		}
+	}
+}
+
+if ( ! function_exists( 'woo_feed_christmas_notice' ) ) {
+	/**
+	 * CTX Feed Christmas Notice
+	 *
+	 * @since 4.5.15
+	 * @author Md. Nashir Uddin
+	 */
+	function woo_feed_christmas_notice() {
+		$user_id = get_current_user_id();
+		if ( ! get_user_meta( $user_id, 'woo_feed_christmas_notice_2022_dismissed' ) ) {
+			ob_start();
+			?>
+            <script type="text/javascript">
+                (function ($) {
+                    $(document).on('click', '.woo-feed-ctx-startup-notice button.notice-dismiss', function (e) {
+                        e.preventDefault();
+                        let nonce = $('#woo_feed_to_ctx_feed_nonce').val();
+
+                        //woo feed christmas notice cancel callback
+                        wp.ajax.post('woo_feed_save_christmas_notice_2022', {
+                            _wp_ajax_nonce: nonce,
+                            clicked: true,
+                        }).then(response => {
+                            console.log(response);
+                        }).fail(error => {
+                            console.log(error);
+                        });
+                    });
+                })(jQuery)
+            </script>
+            <a  target="_blank" href="https://webappick.com/plugin/woocommerce-product-feed-pro/?utm_source=plugin&utm_medium=banner&utm_campaign=christmas-new-year-22"
+                class="notice woo-feed-ctx-startup-notice is-dismissible"
+                style="background: url(<?php echo WOO_FEED_PLUGIN_URL . 'admin/images/christmas-web-banner-2022.png'; ?>) no-repeat top center;">
+                <input type="hidden" id="woo_feed_to_ctx_feed_nonce"
+                       value="<?php echo wp_create_nonce( 'woo-feed-to-ctx-feed-notice' ); ?>">
+            </a>
 			<?php
 			$image = ob_get_contents();
 		}
@@ -564,7 +667,7 @@ if ( ! function_exists( 'woo_feed_handle_file_transfer' ) ) {
 	 *
 	 * @return bool
 	 */
-	function woo_feed_handle_file_transfer( $fileFrom, $fileTo, $info ) {
+	function woo_feed_handle_file_transfer( $fileFrom, $fileTo, $info ) { // moved to V5/Helper/FeedHelper method name renamed as handle_file_transfer
 		if ( 1 === (int) $info['ftpenabled'] ) {
 			if ( ! file_exists( $fileFrom ) ) {
 				woo_feed_log_feed_process( $info['filename'], 'Unable to process file transfer request. File does not exists.' );
@@ -2616,14 +2719,14 @@ if ( ! function_exists( 'woo_feed_apply_hooks_before_product_loop' ) ) {
 	 * @param int[] $productIds product id array.
 	 * @param array $feedConfig feed config array.
 	 */
-	function woo_feed_apply_hooks_before_product_loop( $productIds, $feedConfig ) {
-		add_filter( 'woocommerce_get_tax_location', 'woo_feed_apply_tax_location_data', 10, 3 );
-
-		// RightPress dynamic pricing support.
-		add_filter( 'rightpress_product_price_shop_change_prices_in_backend', '__return_true', 999 );
-		add_filter( 'rightpress_product_price_shop_change_prices_before_cart_is_loaded', '__return_true', 999 );
-
-	}
+//	function woo_feed_apply_hooks_before_product_loop( $productIds, $feedConfig ) {
+//		add_filter( 'woocommerce_get_tax_location', 'woo_feed_apply_tax_location_data', 10, 3 );
+//
+//		// RightPress dynamic pricing support.
+//		add_filter( 'rightpress_product_price_shop_change_prices_in_backend', '__return_true', 999 );
+//		add_filter( 'rightpress_product_price_shop_change_prices_before_cart_is_loaded', '__return_true', 999 );
+//
+//	}
 }
 
 if ( ! function_exists( 'woo_feed_remove_hooks_after_product_loop' ) ) {
@@ -2635,14 +2738,14 @@ if ( ! function_exists( 'woo_feed_remove_hooks_after_product_loop' ) ) {
 	 *
 	 * @see woo_feed_apply_hooks_before_product_loop
 	 */
-	function woo_feed_remove_hooks_after_product_loop( $productIds, $feedConfig ) {
-		remove_filter( 'woocommerce_get_tax_location', 'woo_feed_apply_tax_location_data', 10 );
-
-		// RightPress dynamic pricing support.
-		remove_filter( 'rightpress_product_price_shop_change_prices_in_backend', '__return_true', 999 );
-		remove_filter( 'rightpress_product_price_shop_change_prices_before_cart_is_loaded', '__return_true', 999 );
-
-	}
+//	function woo_feed_remove_hooks_after_product_loop( $productIds, $feedConfig ) {
+//		remove_filter( 'woocommerce_get_tax_location', 'woo_feed_apply_tax_location_data', 10 );
+//
+//		// RightPress dynamic pricing support.
+//		remove_filter( 'rightpress_product_price_shop_change_prices_in_backend', '__return_true', 999 );
+//		remove_filter( 'rightpress_product_price_shop_change_prices_before_cart_is_loaded', '__return_true', 999 );
+//
+//	}
 }
 if ( ! function_exists( 'woo_feed_remove_hooks_before_product_loop' ) ) {
 	/**
@@ -2905,6 +3008,12 @@ if ( ! function_exists( 'woo_feed_add_custom_identifier' ) ) {
 				$custom_field_key   = sprintf( 'woo_feed_%s', strtolower( $key ) );
 				$custom_field_value = get_post_meta( get_the_ID(), $custom_field_key, true );
 
+				if( empty( $custom_field_value ) && is_plugin_active( 'woocommerce-multilingual/wpml-woocommerce.php' )){
+					$wcmlCurrency  = new WCMLCurrency();
+					$originalId = $wcmlCurrency->woo_feed_wpml_get_original_post_id( get_the_ID() );
+					$custom_field_value = get_post_meta( $originalId, $custom_field_key, true );
+				}
+
 				if ( empty( $custom_field_value ) && ! empty( $custom_field_value_previous ) ) {
 					$custom_field_key   = $custom_field_key_previous;
 					$custom_field_value = $custom_field_value_previous;
@@ -2930,7 +3039,7 @@ if ( ! function_exists( 'woo_feed_add_custom_identifier' ) ) {
 
 	}
 
-	add_action( 'woocommerce_product_options_inventory_product_data', 'woo_feed_add_custom_identifier' );
+//	add_action( 'woocommerce_product_options_inventory_product_data', 'woo_feed_add_custom_identifier' );
 }
 
 if ( ! function_exists( 'woo_feed_save_custom_identifier' ) ) {
@@ -2975,7 +3084,7 @@ if ( ! function_exists( 'woo_feed_save_custom_identifier' ) ) {
 
 	}
 
-	add_action( 'save_post_product', 'woo_feed_save_custom_identifier', 10, 2 );
+//	add_action( 'save_post_product', 'woo_feed_save_custom_identifier', 10, 2 );
 }
 
 if ( ! function_exists( 'woo_feed_add_custom_identifier_for_variation' ) ) {
@@ -3032,7 +3141,7 @@ if ( ! function_exists( 'woo_feed_add_custom_identifier_for_variation' ) ) {
 		}
 	}
 
-	add_action( 'woocommerce_product_after_variable_attributes', 'woo_feed_add_custom_identifier_for_variation', 10, 3 );
+//	add_action( 'woocommerce_product_after_variable_attributes', 'woo_feed_add_custom_identifier_for_variation', 10, 3 );
 }
 
 if ( ! function_exists( 'woo_feed_save_custom_identifier_for_variation' ) ) {
@@ -3061,7 +3170,7 @@ if ( ! function_exists( 'woo_feed_save_custom_identifier_for_variation' ) ) {
 
 	}
 
-	add_action( 'woocommerce_save_product_variation', 'woo_feed_save_custom_identifier_for_variation', 10, 2 );
+//	add_action( 'woocommerce_save_product_variation', 'woo_feed_save_custom_identifier_for_variation', 10, 2 );
 }
 
 if ( ! function_exists( 'woo_feed_category_mapping' ) ) {
@@ -3461,7 +3570,7 @@ if ( ! function_exists( 'woo_feed_get_approved_reviews_data' ) ) {
 	}
 }
 
-if ( ! function_exists( 'woo_feed_save_black_friday_notice_2022_notice' ) ) {
+if ( ! function_exists( 'woo_feed_save_black_friday_notice_2023_notice' ) ) {
 	/**
 	 * Update user meta to work ctx startup notice once.
 	 *
@@ -3470,11 +3579,11 @@ if ( ! function_exists( 'woo_feed_save_black_friday_notice_2022_notice' ) ) {
 	 * @since 4.3.31
 	 * @author Nazrul Islam Nayan
 	 */
-	function woo_feed_save_black_friday_notice_2022_notice() {
+	function woo_feed_save_black_friday_notice_2023_notice() {
 		if ( isset( $_REQUEST['_wp_ajax_nonce'] ) && wp_verify_nonce( wp_unslash( $_REQUEST['_wp_ajax_nonce'] ), 'woo-feed-to-ctx-feed-notice' ) ) { //phpcs:ignore
 			$user_id = get_current_user_id();
 			if ( isset( $_REQUEST['clicked'] ) ) {
-				$updated_user_meta = add_user_meta( $user_id, 'woo_feed_black_friday_notice_2022_dismissed', 'true', true );
+				$updated_user_meta = add_user_meta( $user_id, 'woo_feed_black_friday_notice_2023_dismissed', 'true', true );
 
 				if ( $updated_user_meta ) {
 					wp_send_json_success( esc_html__( 'User meta updated successfully.', 'woo-feed' ) );
@@ -3488,7 +3597,7 @@ if ( ! function_exists( 'woo_feed_save_black_friday_notice_2022_notice' ) ) {
 		wp_die();
 	}
 }
-add_action( 'wp_ajax_woo_feed_save_black_friday_notice_2022_notice', 'woo_feed_save_black_friday_notice_2022_notice' );
+add_action( 'wp_ajax_woo_feed_save_black_friday_notice_2023_notice', 'woo_feed_save_black_friday_notice_2023_notice' );
 
 
 if ( ! function_exists( 'woo_feed_save_halloween_notice' ) ) {
@@ -3504,7 +3613,7 @@ if ( ! function_exists( 'woo_feed_save_halloween_notice' ) ) {
 		if ( isset( $_REQUEST['_wp_ajax_nonce'] ) && wp_verify_nonce( wp_unslash( $_REQUEST['_wp_ajax_nonce'] ), 'woo-feed-to-ctx-feed-halloween-nonce' ) ) { //phpcs:ignore
 			$user_id = get_current_user_id();
 			if ( isset( $_REQUEST['clicked'] ) ) {
-				$updated_user_meta = add_user_meta( $user_id, 'woo_feed_halloween_notice_dismissed', 'true', true );
+				$updated_user_meta = add_user_meta( $user_id, 'woo_feed_halloween_notice_2023_dismissed', 'true', true );
 
 				if ( $updated_user_meta ) {
 					wp_send_json_success( esc_html__( 'User meta updated successfully.', 'woo-feed' ) );

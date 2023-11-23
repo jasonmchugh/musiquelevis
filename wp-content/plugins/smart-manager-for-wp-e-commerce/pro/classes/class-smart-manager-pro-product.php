@@ -58,10 +58,13 @@ if ( ! class_exists( 'Smart_Manager_Pro_Product' ) ) {
 			add_action('sm_pre_batch_update_db_updates', __CLASS__. '::products_pre_batch_update_db_updates', 10, 2);
 			add_filter('sm_post_batch_update_db_updates', __CLASS__. '::products_post_batch_update_db_updates', 10, 2);
 			add_filter( 'sm_beta_batch_update_prev_value',__CLASS__. '::products_batch_update_prev_value', 12, 2 );
-			add_filter( 'sm_custom_field_name',__CLASS__. '::products_custom_field_name', 12, 1 );
-			add_filter( 'sm_task_update_action_name',__CLASS__. '::products_task_update_action_name', 12, 2 );
 			add_filter( 'sm_task_details_update_by_prev_val',__CLASS__. '::task_details_update_by_prev_val', 12, 1 );
 			add_filter( 'sm_disable_task_details_update',__CLASS__. '::disable_task_details_update', 12, 2 );
+			add_filter( 'sm_get_value_for_copy_from_operator',__CLASS__. '::get_value_for_copy_from_operator', 12, 2 );
+			add_filter( 'sm_update_value_for_copy_from_operator',__CLASS__. '::update_value_for_copy_from_operator', 12, 1 );
+			add_filter( 'sm_process_undo_args_before_update',__CLASS__. '::process_undo_args_before_update', 12, 1 );
+			add_filter( 'sm_task_update_action',__CLASS__. '::task_update_action', 12, 2 );
+			add_filter( 'sm_delete_attachment_get_matching_gallery_images_post_ids',__CLASS__. '::get_matching_gallery_images_post_ids', 12, 2 );
 		}
 		
 		public static function products_post_batch_process_args( $args ) {
@@ -397,7 +400,7 @@ if ( ! class_exists( 'Smart_Manager_Pro_Product' ) ) {
 						update_post_meta( $args['id'], '_sale_price_dates_to', sa_sm_get_utc_timestamp_from_site_date( $args['value'].' 23:59:59' ) );
 						break;
 					// Code to handle setting of 'regular_price' & 'sale_price' in proper way
-					case ( empty( $args['operator'] ) || ( ! empty( $args['operator'] ) && 'set_to_regular_price' !== $args['operator'] && 'set_to_sale_price' !== $args['operator'] ) ):
+					case ( empty( $args['operator'] ) || ( ! empty( $args['operator'] ) && ! in_array( $args['operator'], array( 'set_to_regular_price', 'set_to_sale_price', 'copy_from_field' ) ) ) ):
 						$regular_price = ( '_regular_price' === $args['col_nm'] ) ? $args['value'] : get_post_meta( $args['id'], '_regular_price', true );
 						$sale_price = ( '_sale_price' === $args['col_nm'] ) ? $args['value'] : get_post_meta( $args['id'], '_sale_price', true );	
 						if ( $sale_price >= $regular_price ) {
@@ -442,13 +445,12 @@ if ( ! class_exists( 'Smart_Manager_Pro_Product' ) ) {
 			}
 
 			//Code for updating product attributes
-			if( !empty($args['table_nm']) && $args['table_nm'] == 'custom' && ( (!empty($args['col_nm']) && $args['col_nm'] == 'product_attributes_add') || (!empty($args['col_nm']) && $args['col_nm'] == 'product_attributes_remove') )) {
-				
-				$action = ( !empty($args['operator']) ) ? $args['operator'] : '';
+			if ( ! empty( $args['table_nm'] ) && 'custom' === $args['table_nm'] && ( !empty( $args['col_nm'] ) && in_array( $args['col_nm'], array( 'product_attributes', 'product_attributes_add', 'product_attributes_remove' ) ) || ( ! empty($args['operator'] ) && in_array( $args['operator'], array( 'add_to', 'remove_from', 'copy_from' ) ) ) ) && ( ! empty( $args['meta']['attributeName'] ) ) ) {
+				$action = $args['meta']['attributeName'];
 				$current_term_ids = array();
 
 				if( !empty($action) ) {
-					delete_transient( 'wc_layered_nav_counts_' . $args['operator'] );
+					delete_transient( 'wc_layered_nav_counts_' . $action );
 				}
 
 				$product_attributes = get_post_meta( $args['id'], '_product_attributes', true );
@@ -473,11 +475,11 @@ if ( ! class_exists( 'Smart_Manager_Pro_Product' ) ) {
 					}
 				}
 
-				if( $args['col_nm'] == 'product_attributes_add' ) {
+				if ( 'add_to' === $args['operator'] ) {
 
 					if( !empty($action) && $action != 'custom' ) {
 
-						if( !in_array($args['value'], $current_term_ids) ) {
+						if( ( is_array( $current_term_ids ) ) && !in_array($args['value'], $current_term_ids) ) {
 
 							if( $args['value'] != 'all' ) {
 								$current_term_ids[] = intval( $args['value'] );
@@ -516,7 +518,7 @@ if ( ! class_exists( 'Smart_Manager_Pro_Product' ) ) {
 
 					}
 
-				} else if( $args['col_nm'] == 'product_attributes_remove' ) {
+				} else if ( 'remove_from' === $args['operator'] ) {
 					if( !empty($action) && $action != 'custom' ) {
 
 						$all = ( !empty($args['value']) && $args['value'] == 'all') ? true : false;
@@ -534,6 +536,24 @@ if ( ! class_exists( 'Smart_Manager_Pro_Product' ) ) {
 							unset($product_attributes[$action]);
 						}
 					}
+				} else if ( 'copy_from' === $args['operator'] && ( ! empty( $args['selected_value'] ) ) && ( ! empty( $args['id'] ) ) ) {
+					if ( ! empty( $args['value'] ) && is_array( $args['value'] ) ) {
+						foreach ( $args['value'] as $action => $value ) {
+							wp_set_object_terms( $args['id'], array(), $action );
+							$current_term_ids = wp_get_object_terms( $args['selected_value'], $action, 'orderby=none&fields=ids' );
+							$update_flag = wp_set_object_terms( $args['id'], $current_term_ids, $action );
+							if ( empty( $product_attributes[ $action ] ) ) {
+								$product_attributes[ $action ] = array( 'name' => $action,
+																       'value' => '',
+																       'position' => 1,
+																       'is_visible' => 1,
+																       'is_variation' => 0,
+																        'is_taxonomy' => 1 );
+							}
+
+						}
+					}
+
 				}
 
 				update_post_meta( $args['id'], '_product_attributes', $product_attributes );
@@ -687,32 +707,13 @@ if ( ! class_exists( 'Smart_Manager_Pro_Product' ) ) {
 		* @return result of function call or empty value
 		*/ 
 		public static function products_batch_update_prev_value( $prev_val = '', $args = array() ) {
-			if ( 'custom' === $args['table_nm'] && in_array( $args['col_nm'], array( 'product_attributes_add', 'product_attributes_remove' ), true ) ) {
-				$result = wp_get_object_terms( $args['id'], $args['operator'], 'orderby=none&fields=ids' );
+			if ( 'custom' === $args['table_nm'] && 'product_attributes' === $args['col_nm'] && !empty( $args['meta']['attributeName'] ) ) {
+				$result = wp_get_object_terms( $args['id'], $args['meta']['attributeName'], 'orderby=none&fields=ids' );
 				return ( ( ! empty( $result ) ) && ( ! is_wp_error( $result ) ) ) ? $result : $prev_val;
 			}
 			return $prev_val;
 		}
 
-		/**
-		* Get actual field name
-		*
-		* @param string $field_nm field_nm has field name 
-		* @return string result of actual field name
-		*/ 
-		public static function products_custom_field_name( $field_nm = '' ) {
-			return ( ( ! empty( $field_nm ) )  && ( in_array( $field_nm, array( 'custom/product_attributes_add', 'custom/product_attributes_remove' ), true ) ) ) ? 'custom/product_attributes' : $field_nm;
-		}
-		/**
-		* Get action name
-		*
-		* @param string $action action has action name 
-		* @param string $field_nm has field name 
-		* @return string result of action name
-		*/ 
-		public static function products_task_update_action_name( $action = '', $field_nm = '' ) {
-			return ( ( ! empty( $field_nm ) ) && ( in_array( $field_nm, array( 'custom/product_attributes_add', 'custom/product_attributes_remove' ), true ) ) ) ? $action : 'set_to';
-		}
 
 		/**
 		* Update update_task_details_params param by using previous value
@@ -721,29 +722,41 @@ if ( ! class_exists( 'Smart_Manager_Pro_Product' ) ) {
 		* @return void
 		*/ 
 		public static function task_details_update_by_prev_val( $args = array() ) {
-			$field_name = '';
 			if (  empty( $args ) ) {
 				return $args;
 			}
+			$field_name = '';
 			foreach ( $args as $arg ) {
-				if ( empty( $arg['prev_val'] ) || ! is_array( $arg['prev_val'] ) ) {
-					continue;
-				}
-				foreach ( $arg['prev_val'] as $prev_val ) {
-					switch (true) {
+				if ( ! empty( $arg['prev_val'] ) && is_array( $arg['prev_val'] ) ) {
+					foreach ( $arg['prev_val'] as $key => $prev_val ) {
+						switch (true) {
 							case empty( $prev_val ):
 								$field_name = 'custom/product_attributes_add';
 								break;
-							case ( ! empty( $prev_val ) && ( empty( in_array( $arg['updated_val'], $arg['prev_val'] ) ) && ( 'all' === $arg['updated_val'] && ( 'custom/product_attributes_add' === $arg['field'] ) ) ) ):
+							case ( ! empty( $prev_val ) && ( empty( in_array( $arg['updated_val'], $arg['prev_val'] ) ) && ( 'all' === $arg['updated_val'] && ( 'add_to' === $arg['operator'] ) ) ) ):
 								$field_name = 'custom/product_attributes_remove';
 								break;
 							case ( ! empty( $prev_val ) && ! empty( in_array( $arg['updated_val'], $arg['prev_val'] ) ) ):
 								$field_name = 'custom/product_attributes_add';
 								break;
-							case ( ! empty( $prev_val ) && ( empty( in_array( $arg['updated_val'], $arg['prev_val'] ) ) ||  ( 'all' === $arg['updated_val'] && ( 'custom/product_attributes_remove' === $arg['field'] ) ) ) ):
+							case ( ! empty( $prev_val ) && ( empty( in_array( $arg['updated_val'], $arg['prev_val'] ) ) || ( 'all' === $arg['updated_val'] && ( 'remove_from' === $arg['operator'] ) ) ) ):
 								$field_name = 'custom/product_attributes_add';
 								break;
+						}
+						if ( ( ! empty( $arg['task_id'] ) ) ) {
+							Smart_Manager_Base::$update_task_details_params[] = array(
+								'task_id' => $arg['task_id'],
+								'action' => $arg['action'],
+								'status' => $arg['status'],
+								'record_id' => $arg['record_id'],
+								'field' => $field_name,   
+								'prev_val' => $prev_val,
+								'updated_val' => $arg['updated_val'],
+							); 
+						}
 					}
+				} else if ( empty( $arg['prev_val'] ) && ! is_array( $arg['prev_val'] ) ) {
+					$field_name = 'custom/product_attributes_remove';
 					if ( ( ! empty( $arg['task_id'] ) ) ) {
 						Smart_Manager_Base::$update_task_details_params[] = array(
 							'task_id' => $arg['task_id'],
@@ -751,7 +764,7 @@ if ( ! class_exists( 'Smart_Manager_Pro_Product' ) ) {
 							'status' => $arg['status'],
 							'record_id' => $arg['record_id'],
 							'field' => $field_name,   
-							'prev_val' => $prev_val,
+							'prev_val' => $arg['updated_val'],
 							'updated_val' => $arg['updated_val'],
 						); 
 					}
@@ -768,6 +781,94 @@ if ( ! class_exists( 'Smart_Manager_Pro_Product' ) ) {
 		*/ 
 		public static function disable_task_details_update( $prev_val = array(), $field_nm = '' ) {
 			return ( ( ! empty( $prev_val ) ) && ( 'postmeta/meta_key=_product_attributes/meta_value=_product_attributes' === $field_nm ) ) ? true : false;
+		}
+
+		/**
+		* Get value for copy from operator
+		*
+		* @param string $new_val new value
+		* @param array $args array of selected field, operator and value
+		* @return array value of selected column 
+		*/ 
+		public static function get_value_for_copy_from_operator( $new_val = '', $args = array() ) {
+			if ( empty( $args['selected_column_name'] ) || ( 'product_attributes' !== $args['selected_column_name'] ) || empty( intval( $args['selected_value'] ) ) ) {
+				return $new_val;
+			}
+			return get_post_meta( $args['selected_value'], '_product_attributes', true );
+		}
+		
+		/**
+		* Update value for copy from operator
+		*
+		* @param array $args array of selected field, operator and value
+		* @return boolean 
+		*/ 
+		public static function update_value_for_copy_from_operator( $args = array() ) {
+			if ( empty( $args['id'] ) || ( 'product_attributes' !== $args['col_nm'] ) || ( ! isset( $args['value'] ) ) ) {
+				return false;
+			}
+			return update_post_meta( $args['id'], '_product_attributes', $args['value'] );
+		}
+
+		/**
+		* Update task args before processing undo
+		*
+		* @param array $args array of selected field, operator and value
+		* @return array $args array of updated args 
+		*/ 
+		public static function process_undo_args_before_update( $args = array() ) {
+			if ( empty( $args['type'] ) || empty( $args['operator'] ) || ( ! in_array( $args['type'], array( 'custom/product_attributes_add', 'custom/product_attributes_remove' ) ) ) ) {
+				return $args;
+			}
+			if ( empty( $args['meta']['attributeName'] ) ) {
+				$args['meta']['attributeName'] = $args['operator'];
+			}
+			switch ( $args['type'] ) {
+				case 'custom/product_attributes_add':
+					$args['operator'] = 'add_to';
+					break;
+				case 'custom/product_attributes_remove':
+					$args['operator'] = 'remove_from';
+					break;
+			}
+			$args['type'] = 'custom/product_attributes';
+			return $args;
+		}
+
+		/**
+		* Update task action
+		*
+		* @param string $operator operator name
+		* @param array $args array of field, operator and value
+		* @return string action name 
+		*/ 
+		public static function task_update_action( $operator = '', $args = array() ) {
+			if ( empty( $args['type'] ) || ( 'custom/product_attributes' !== $args['type'] ) || empty( $operator ) || empty( $args['meta']['attributeName'] ) ) {
+				return $operator;
+			}
+			return $args['meta']['attributeName'];
+		}
+
+		/**
+		* Get gallery images post ids
+		*
+		* @param array $attached_media_post_ids attached media post ids
+		* @param array $args array of post id and attachment id
+		* @return array $attached_media_post_ids Updated value of attached media post ids
+		*/ 
+		public static function get_matching_gallery_images_post_ids( $attached_media_post_ids = array(), $args = array() ) {
+			if ( ! is_array( $attached_media_post_ids ) || empty( $args ) || ! is_array( $args ) || empty( $args['post_id'] ) || empty( $args['attachment_id'] ) ) {
+				return $attached_media_post_ids;
+			}
+			global $wpdb;
+			$results = $wpdb->get_col(
+				$wpdb->prepare( "SELECT DISTINCT post_id 
+				FROM {$wpdb->prefix}postmeta WHERE post_id <> %d AND meta_key = %s AND meta_value REGEXP %s", $args['post_id'], '_product_image_gallery', $args['attachment_id'] )
+			); // Improve REGEXP.
+			if ( empty( $results ) || ! is_array( $results ) ) {
+				return $attached_media_post_ids;
+			}
+			return array_merge( $attached_media_post_ids, $results );
 		}
 
 	} //End of Class

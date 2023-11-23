@@ -26,21 +26,17 @@ if ( ! class_exists( 'Smart_Manager_Pro_Task' ) ) {
 		 */
 		public $entire_task = false;
 		/**
+		 * Smart_Manager_Task object
+		 *
+		 * @var object
+		 */
+		public $task = null;
+		/**
 		 * Singleton class
 		 *
 		 * @var object
 		 */
 		protected static $_instance = null;
-		/**
-		 * Advanced search table types
-		 *
-		 * @var array
-		 */
-		public $advanced_search_table_types = array(
-			'flat' => array(
-				'sm_tasks' => 'id'
-			) 
-		);
 		/**
 		 * Instance of the class
 		 *
@@ -63,7 +59,11 @@ if ( ! class_exists( 'Smart_Manager_Pro_Task' ) ) {
 			parent::__construct( $dashboard_key );
 			self::actions();
 			$this->dashboard_key = $dashboard_key;
-			global $current_user;
+			if ( file_exists(SM_PLUGIN_DIR_PATH . '/classes/class-smart-manager-task.php') ) {
+				include_once SM_PLUGIN_DIR_PATH . '/classes/class-smart-manager-task.php';
+				$this->task = new Smart_Manager_Task( $dashboard_key );
+			}
+			$this->store_col_model_transient_option_nm = 'sa_sm_' . $this->dashboard_key . '_tasks'; // Kept this here as it will override the base file $this->store_col_model_transient_option_nm.
 		}
 		/**
 		 * Add filters for doing actions
@@ -77,6 +77,22 @@ if ( ! class_exists( 'Smart_Manager_Pro_Task' ) ) {
 			add_action( 'sm_background_process_complete', __CLASS__ . '::background_process_complete' );
 		}
 
+		public function __call( $function_name, $arguments = array() ) {
+
+			if( empty( $this->task ) ) {
+				return;
+			}
+
+			if ( ! is_callable( array( $this->task, $function_name ) ) ) {
+				return;
+			}
+
+			if ( ! empty( $arguments ) ) {
+				return call_user_func_array( array( $this->task, $function_name ), $arguments );
+			} else {
+				return call_user_func( array( $this->task, $function_name ) );
+			}
+		}
 		/**
 		 * Undo changes for task records
 		 *
@@ -116,11 +132,10 @@ if ( ! class_exists( 'Smart_Manager_Pro_Task' ) ) {
 					'fetch'            => 'all',
 				)
 			);
-			$type = apply_filters( 'sm_custom_field_name', $args['type'] );
-			$args['date_type'] = ( ! empty( $col_data_type[ $type ] ) ) ? $col_data_type[ $type ] : 'text';
+			$args['date_type'] = ( ! empty( $col_data_type[ $args['type'] ] ) ) ? $col_data_type[ $args['type'] ] : 'text';
 			$args['dashboard_key'] = $dashboard_key;
 			$arg_values = ( ! empty( $args['value'] ) ) ? explode( ',', $args['value'] ) : '';
-
+			$args = apply_filters( 'sm_process_undo_args_before_update', $args );
 			if ( 'set_to' === $args['operator'] && 'sm.multilist' === $args['date_type'] && ( ! empty( $arg_values ) && ( count( $arg_values ) > 0 ) ) && ( ! empty( $args['updated_value'] ) ) ) {
 				$arg_updated_values = explode( ',', $args['updated_value'] );
 				foreach ( $arg_updated_values as $arg_updated_value ) {

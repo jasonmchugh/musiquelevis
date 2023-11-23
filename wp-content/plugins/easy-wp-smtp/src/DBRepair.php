@@ -5,6 +5,7 @@ namespace EasyWPSMTP;
 use EasyWPSMTP\Admin\Area;
 use EasyWPSMTP\Admin\DebugEvents\DebugEvents;
 use EasyWPSMTP\Admin\DebugEvents\Migration as DebugMigration;
+use EasyWPSMTP\Migrations\GeneralMigration;
 use EasyWPSMTP\Tasks\Meta;
 
 /**
@@ -75,7 +76,7 @@ class DBRepair {
 		if ( $missing_table === DebugEvents::get_table_name() ) {
 			update_option( DebugMigration::OPTION_NAME, 0 );
 		} elseif ( $missing_table === Meta::get_table_name() ) {
-			update_option( Migration::OPTION_NAME, 1 );
+			update_option( GeneralMigration::OPTION_NAME, 0 );
 		}
 	}
 
@@ -120,7 +121,7 @@ class DBRepair {
 		} elseif ( $missing_table === Meta::get_table_name() ) {
 			$reason .= $this->get_reason_output_message(
 				$missing_table,
-				get_option( Migration::ERROR_OPTION_NAME, $this->get_missing_table_default_error_message() )
+				get_option( GeneralMigration::ERROR_OPTION_NAME, $this->get_missing_table_default_error_message() )
 			);
 		}
 
@@ -141,7 +142,7 @@ class DBRepair {
 
 		return sprintf(
 			wp_kses( /* translators: %1$s - missing table name; %2$s - error message. */
-				__( '<strong>Table</strong> %1$s: <strong>Reason</strong> %2$s', 'easy-wp-smtp' ),
+				__( '<strong>Table:</strong> %1$s. <strong>Reason:</strong> %2$s', 'easy-wp-smtp' ),
 				[
 					'strong' => [],
 				]

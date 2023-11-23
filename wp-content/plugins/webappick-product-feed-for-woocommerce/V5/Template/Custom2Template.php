@@ -1,4 +1,11 @@
 <?php
+/**
+ * Class Custom2Template
+ *
+ * @package    CTXFeed
+ * @subpackage CTXFeed\V5\Template
+ * @category   MyCategory
+ */
 
 namespace CTXFeed\V5\Template;
 
@@ -14,6 +21,13 @@ use CTXFeed\V5\Product\ProductFactory;
 use CTXFeed\V5\Product\ProductInfo;
 use CTXFeed\V5\Utility\Settings;
 
+/**
+ * Class Custom2Template
+ *
+ * @package    CTXFeed
+ * @subpackage CTXFeed\V5\Template
+ * @category   MyCategory
+ */
 class Custom2Template implements TemplateInterface {
 	/**
 	 * @var Config $config Contain Feed Config.
@@ -42,10 +56,17 @@ class Custom2Template implements TemplateInterface {
 	private $productEngine;
 	private $variationElementsStart;
 
-	public function __construct( $ids, $config ) {
+	/**
+	 * Custom2Template constructor.
+	 *
+	 * @param array  $ids       Product Ids.
+	 * @param Config $config    Feed Config.
+	 * @param array  $structure Feed Structure.
+	 */
+	public function __construct( $ids, $config, $structure ) {
 		$this->ids                    = $ids;
 		$this->config                 = $config;
-		$getStructure                 = TemplateFactory::get_structure( $config );
+		$getStructure                 = $structure;
 		$this->structure              = $getStructure['structure'];
 		$this->variationElementsStart = $getStructure['variationElementsStart'];
 	}
@@ -230,12 +251,12 @@ class Custom2Template implements TemplateInterface {
 				$output = ProductHelper::str_replace( $output, $element['attr_code'], $this->config );
 			} elseif ( 'return' === $element['attr_type'] ) {
 //				$output = $this->getReturnTypeValue( $element, $product );
-				if ( preg_match("/\bround\b/", $element['to_return'] ) ) {
-					$to_return = preg_replace("/round\(|\)/", "", $element['to_return'] );
+				if ( preg_match( "/\bround\b/", $element['to_return'] ) ) {
+					$to_return            = preg_replace( "/round\(|\)/", "", $element['to_return'] );
 					$element['to_return'] = $to_return;
-					$output =  round( $this->getReturnTypeValue( $element, $product ) );
+					$output               = round( $this->getReturnTypeValue( $element, $product ) );
 				} else {
-					$output =  $this->getReturnTypeValue( $element, $product );
+					$output = $this->getReturnTypeValue( $element, $product );
 				}
 			} elseif ( 'php' === $element['attr_type'] ) {
 				if ( isset( $element['to_return'] ) && ! empty( $element['to_return'] ) ) {

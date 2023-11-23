@@ -67,7 +67,7 @@ class Filter {
 		$filters = [
 			'exclude_variable_product',
 			'exclude_empty_title_products',
-			'exclude_hidden_products',
+			'exclude_hidden_products'
 		];
 
 		if(Helper::is_pro()){ // These filters only applied for pro version.
@@ -77,6 +77,8 @@ class Filter {
 				'exclude_empty_price_products',
 				'exclude_out_of_stock_products',
 				'exclude_back_order_products',
+				'exclude_variation_parent_draft_products',
+				'exclude_override_out_of_stock_isibility'
 			];
 
 			$filters = array_merge( $filters, $pro_filters);
@@ -175,6 +177,32 @@ class Filter {
 			return true;
 		}
 
+		return false;
+	}
+
+	/**
+	 * Remove hidden variation products whose parent status is draft.
+	 *
+	 * @return bool
+	 */
+	public function exclude_variation_parent_draft_products() {
+		if( $this->product->is_type('variation') ){
+			$parent_id = $this->product->get_parent_id();
+			if( $this->config->remove_hidden_products() && get_post_status( $parent_id ) === 'draft' ){
+				return true;
+			}
+		}
+		return false;
+	}
+	/**
+	 * Remove hidden variation products whose parent status is draft.
+	 *
+	 * @return bool
+	 */
+	public function exclude_override_out_of_stock_isibility() {
+		if( !$this->config->get_outofstock_visibility() && $this->product->get_stock_status() ==='outofstock' && 'yes' === get_option( 'woocommerce_hide_out_of_stock_items') ){
+			return true;
+		}
 		return false;
 	}
 

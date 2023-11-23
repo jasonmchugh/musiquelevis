@@ -3,9 +3,9 @@ Contributors: wahid0003, webappick, nashirbabu, hasanazizul
 Donate link: https://webappick.com
 Tags: WooCommerce Product Feed, WooCommerce, Google Shopping, Google Merchant, Facebook Catalog, Bing Shopping, Instagram Shop, Skroutz Data Feed, XML Feed, CSV Feed, TXT Feed, Product Feed
 Requires at least: 4.4
-Tested Up To: 6.3
+Tested Up To: 6.4
 Requires PHP: 5.6
-Stable tag: 6.1.2
+Stable tag: 6.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -589,6 +589,68 @@ Using pro version:
 4. Category Mapping
 
 == Changelog ==
+
+= 6.3.2 (2023-11-15) =
+* Updated: Code refactor
+
+= 6.3.1 (2023-11-15)
+* Added: Black Friday Notice Banner
+
+= 6.3.0 (2023-11-13) =
+* Added: New UI/UX feature for the Doc Page
+* Fixed: Auto update button enable on regenerate feed
+* Updated: Code refactor
+
+
+= 6.2.6 (2023-11-09) =
+* Added: Capacity attribute to Google feed attribute list
+* Added: Compatibility issue with multivendorx
+* Added: Primary Category Option in Primary Attribute for Yoast SEO Plugin
+* Fixed: Attribute Mapping Page loading issue
+* Tweak: WordPress 6.4 compatibility checked
+
+= 6.2.5 (2023-11-06) =
+* Fixed: Compatibility issue With Discount Rules Pro By Acowebs plugin.
+* Added: New attribute "pause" for google template
+* Added: New  attribute [auto_pricing_min_price] to google template
+* Updated: Show Notification after the process of clear cache button on Status page.
+* Tweak: WooCommerce 8.2.1 compatibility checked.
+
+= 6.2.4 (2023-11-02) =
+* Fixed: RightPress Plugin Compatibility issue
+* Removed: Halloween Notice Banner
+
+= 6.2.3 (2023-10-31) =
+* Added: Certification [certification] attribute in Google Shopping
+
+= 6.2.2 (2023-10-26) =
+* Updated: Right side banner UI
+
+= 6.2.1 (2023-10-24) =
+* Fixed: File Type default XML selected issue
+
+= 6.2.0 (2023-10-24) =
+* Added: New UI/UX feature for Status Page
+* Updated: Halloween Notice Banner
+
+= 6.1.6 (2023-10-20) =
+* Added: Halloween Notice Banner
+* Updated: Code Refactoring
+
+= 6.1.5 (2023-10-19) =
+* Tweak: WordPress 6.3.2 compatibility checked
+* Updated: lifestyle_image_link attribute included on Google Shopping Template
+* Fixed: Redis cache on server for CTX feed
+
+= 6.1.4 (2023-10-16) =
+* Fixed: File upload issue to server via FTP
+* Fixed: Conflict with JWT Auth issue
+* Fixed: Dynamic Shipping Unit issue
+
+= 6.1.3 (2023-10-12) =
+* Fixed: Woo Discount Rules by Flycart plugin issue
+* Fixed: _sale_price suffix removal issue
+* Fixed: Clear cache button issue on Notice
 
 = 6.1.2 (2023-10-09) =
 * Fixed: The prefix and suffix issue for numeric value.

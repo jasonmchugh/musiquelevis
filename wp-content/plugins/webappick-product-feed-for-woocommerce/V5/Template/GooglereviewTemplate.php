@@ -1,37 +1,62 @@
 <?php
+/**
+ * Class Googlereview Template
+ *
+ * @package    CTXFeed
+ * @subpackage CTXFeed\V5\Template
+ * @category   MyCategory
+ */
+
 namespace CTXFeed\V5\Template;
-//TODO: Google Review Implementation
-use CTXFeed\V5\Utility\Config;
+
 use CTXFeed\V5\File\FileFactory;
 use CTXFeed\V5\Product\ProductFactory;
 
+/**
+ * Class Googlereview Template
+ *
+ * @package    CTXFeed
+ * @subpackage CTXFeed\V5\Template
+ * @category   MyCategory
+ */
 class GooglereviewTemplate implements TemplateInterface {
+
 	/**
-	 * @var Config $config Contain Feed Config.
-	 */
+     * @var \CTXFeed\V5\Utility\Config $config Contain Feed Config.
+     */
 	private $config;
+
 	/**
 	 * @var array $ids Contain Product Ids.
 	 */
 	private $ids;
+
 	/**
 	 * @var mixed
 	 */
 	private $structure;
 
-	public function __construct( $ids, $config ) {
-		$this->ids    = $ids;
-		$this->config = $config;
-		$this->structure = TemplateFactory::get_structure( $config, $this->ids);
+	/**
+	 * GooglereviewTemplate constructor.
+	 *
+	 * @param array                      $ids       Product Ids.
+	 * @param \CTXFeed\V5\Utility\Config $config    Feed Config.
+	 * @param array                      $structure Feed Structure.
+	 */
+	public function __construct( $ids, $config, $structure ) {
+		$this->ids       = $ids;
+		$this->config    = $config;
+		$this->structure = $structure;
 	}
 
 	/**
 	 * Get Feed Body.
 	 *
 	 * @return false|string
+	 * @throws \Exception Exception.
 	 */
 	public function get_feed() {
-		$feed = ProductFactory::get_content( $this->ids, $this->config,$this->structure );
+		$feed = ProductFactory::get_content( $this->ids, $this->config, $this->structure );
 
 		return $feed->make_body();
 	}
@@ -59,4 +84,5 @@ class GooglereviewTemplate implements TemplateInterface {
 
 		return $feed['footer'];
 	}
+
 }

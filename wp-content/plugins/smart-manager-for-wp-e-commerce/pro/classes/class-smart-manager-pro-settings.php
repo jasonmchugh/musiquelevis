@@ -39,6 +39,7 @@ if ( ! class_exists( 'Smart_Manager_Pro_Settings' ) ) {
 			}
 
 			$defaults['general']['image']['company_logo_for_print_invoice'] = 0;
+			$defaults['general']['toggle']['delete_media_when_permanently_deleting_post_type_records'] = 'no';
 
 			return $defaults;
 		}

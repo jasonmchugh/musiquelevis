@@ -19,7 +19,7 @@
 			<input type="hidden" name="post_type" value="product">
 			<button class="srch__btn" type="submit">
 				<svg class="srch__btn-icon" role="presentation">
-					<use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/dist/img/icons.svg#search"></use>
+					<use xlink:href="<?php echo get_template_directory_uri(); ?>/assets/img/icons.svg#search"></use>
 				</svg>
 			</button>
 		</form>

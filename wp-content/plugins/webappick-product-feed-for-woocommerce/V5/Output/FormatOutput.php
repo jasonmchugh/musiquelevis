@@ -2,6 +2,7 @@
 
 namespace CTXFeed\V5\Output;
 
+use CTXFeed\V5\Compatibility\WCMLCurrency;
 use CTXFeed\V5\Helper\CommonHelper;
 use CTXFeed\V5\Helper\ProductHelper;
 use CTXFeed\V5\Utility\Config;
@@ -218,14 +219,12 @@ class FormatOutput {
 	 */
 	private function get_parent_lang_child_is_empty( $output, $outputTypes ) {
 		$id = $this->product->get_id();
-
 		//check if the format type is `parent` or `parent_lang_if_empty`
-		if ( in_array( 23, $outputTypes, true ) ) {
+		if ( in_array( 23, $outputTypes) ) {
 			$force_parent = true;
-		} elseif ( in_array( 24, $outputTypes, true ) ) {
+		} elseif ( in_array( 24, $outputTypes ) ) {
 			$force_parent = empty( $output );
 		}
-
 		/**
 		 * when format type is `parent` then force getting parent value
 		 * when format type is `parent_lang_if_empty` then get the parent value on current empty value
@@ -233,8 +232,8 @@ class FormatOutput {
 		if ( isset($force_parent) ) {
 			//when wpml plugin is activated, get parent language post id
 			if ( class_exists( 'SitePress', false ) ) {
-				$parent_id = woo_feed_wpml_get_original_post_id( $id );
-
+				$wpml = new WCMLCurrency();
+				$parent_id =  $wpml->woo_feed_wpml_get_original_post_id( $id );
 				//remove wpml term filter
 				global $sitepress;
 				remove_filter( 'get_term', array( $sitepress, 'get_term_adjust_id' ), 1 );

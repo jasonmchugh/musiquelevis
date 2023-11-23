@@ -10,7 +10,7 @@ require_once('InstantComptantSyncManager.php');
 
 function buildSyncDefinesAndServerGlobalsForEnvironment($environment) //{dev|prod}
 {
-	$_SERVER['DOCUMENT_ROOT'] = str_replace("/wp-content/themes/bravad/sync", '', __DIR__);
+	$_SERVER['DOCUMENT_ROOT'] = str_replace("/wp-content/themes/musiquelevis/sync", '', __DIR__);
 	
 	if ($environment === 'dev')
 	{

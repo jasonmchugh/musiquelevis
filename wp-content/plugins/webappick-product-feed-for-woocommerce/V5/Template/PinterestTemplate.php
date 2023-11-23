@@ -1,33 +1,59 @@
 <?php
+/**
+ * Class Template Factory
+ *
+ * @package    CTXFeed
+ * @subpackage CTXFeed\V5\Template
+ * @category   MyCategory
+ */
+
 namespace CTXFeed\V5\Template;
-use CTXFeed\V5\Utility\Config;
+
 use CTXFeed\V5\File\FileFactory;
 use CTXFeed\V5\Product\ProductFactory;
 
+/**
+ * Class Template Factory
+ *
+ * @package    CTXFeed
+ * @subpackage CTXFeed\V5\Template
+ * @category   MyCategory
+ */
 class PinterestTemplate implements TemplateInterface {
+
 	/**
-	 * @var Config $config Contain Feed Config.
+	 * @var \CTXFeed\V5\Utility\Config $config Contain Feed Config.
 	 */
 	private $config;
+
 	/**
 	 * @var array $ids Contain Product Ids.
 	 */
 	private $ids;
+
 	/**
 	 * @var array $structure Contain Feed Structure.
 	 */
 	private $structure;
 
-	public function __construct( $ids, $config ) {
+	/**
+	 * GoogleTemplate constructor.
+	 *
+	 * @param array                      $ids       Contain Product Ids.
+	 * @param \CTXFeed\V5\Utility\Config $config    Contain Feed Config.
+	 * @param array                      $structure Contain Feed Structure.
+	 */
+	public function __construct( $ids, $config, $structure ) {
 		$this->ids       = $ids;
 		$this->config    = $config;
-		$this->structure = TemplateFactory::get_structure( $config );
+		$this->structure = $structure;
 	}
 
 	/**
 	 * Get Feed Body.
 	 *
 	 * @return false|string
+	 * @throws \Exception Exception.
 	 */
 	public function get_feed() {
 		$feed = ProductFactory::get_content( $this->ids, $this->config, $this->structure );
@@ -58,4 +84,5 @@ class PinterestTemplate implements TemplateInterface {
 
 		return $feed['footer'];
 	}
+
 }

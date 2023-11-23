@@ -81,7 +81,7 @@ class OutputCommands extends FormatOutput {
 	 */
 	public function format_number( $output, $command ) {
 		if ( ! empty( $output ) ) {
-			$args      = explode( ' ', $command, 3 );
+			$args      = explode( ' ', $command, 4 );
 			$arguments = array( 0 => '' );
 
 			if ( isset( $args[1] ) ) {

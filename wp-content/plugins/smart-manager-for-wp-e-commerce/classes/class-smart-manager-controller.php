@@ -218,7 +218,7 @@ if ( ! class_exists( 'Smart_Manager_Controller' ) ) {
 				}
 				$class_name = 'Smart_Manager_Task';
 			}
-			if ( ( ! empty( $_REQUEST['isTasks'] ) && ('undo' === $_REQUEST['cmd'] || 'delete' === $_REQUEST['cmd'] ) ) ) {
+			if ( ! empty( $_REQUEST['isTasks'] ) ) {
 				$class_name = 'Smart_Manager_Pro_Task';
 			} elseif ( 'product_stock_log' === $this->dashboard_key ) {
 				$class_name = 'Smart_Manager_Product_Stock_Log';

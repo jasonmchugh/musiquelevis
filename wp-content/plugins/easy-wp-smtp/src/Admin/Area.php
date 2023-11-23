@@ -1044,7 +1044,7 @@ class Area {
 			return $links;
 		}
 
-		$custom['pro'] = sprintf(
+		$custom['easy-wp-smtp-pro'] = sprintf(
 			'<a href="%1$s" aria-label="%2$s" target="_blank" rel="noopener noreferrer" 
 				style="color: #00a32a; font-weight: 700;" 
 				onmouseover="this.style.color=\'#008a20\';" 
@@ -1056,14 +1056,14 @@ class Area {
 			esc_html__( 'Get Easy WP SMTP Pro', 'easy-wp-smtp' )
 		);
 
-		$custom['settings'] = sprintf(
+		$custom['easy-wp-smtp-settings'] = sprintf(
 			'<a href="%s" aria-label="%s">%s</a>',
 			esc_url( $this->get_admin_page_url() ),
 			esc_attr__( 'Go to Easy WP SMTP Settings page', 'easy-wp-smtp' ),
 			esc_html__( 'Settings', 'easy-wp-smtp' )
 		);
 
-		$custom['docs'] = sprintf(
+		$custom['easy-wp-smtp-docs'] = sprintf(
 			'<a href="%1$s" target="_blank" aria-label="%2$s" rel="noopener noreferrer">%3$s</a>',
 			// phpcs:ignore WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
 			esc_url( easy_wp_smtp()->get_utm_url( 'https://easywpsmtp.com/docs/', [ 'medium' => 'all-plugins', 'content' => 'Documentation' ] ) ),

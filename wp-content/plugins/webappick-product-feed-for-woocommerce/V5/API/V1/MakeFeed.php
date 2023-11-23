@@ -153,6 +153,7 @@ class MakeFeed extends RestController {
 	 */
 	public function save_feed_config( $request ) {
 		$config_data      = json_decode( $request->get_body(), true );
+
 		$feed_option_name = null;
 		if ( ! empty( $config_data['feed_info']['option_name'] ) ) {
 			$feed_option_name = $config_data['feed_info']['option_name'];

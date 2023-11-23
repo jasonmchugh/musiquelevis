@@ -14,6 +14,8 @@ use CTXFeed\V5\API\V1\ProductCategories;
 use CTXFeed\V5\API\V1\Products;
 use CTXFeed\V5\API\V1\ProductTaxonomy;
 use CTXFeed\V5\API\V1\Settings;
+use CTXFeed\V5\API\V1\WooFeedDocs;
+use CTXFeed\V5\API\V1\WPStatus;
 use CTXFeed\V5\API\V1\WPOptions;
 use \WP_REST_Controller;
 use \WP_Error;
@@ -162,6 +164,9 @@ class RestController extends WP_REST_Controller {
 					Settings::instance(),
 					WPOptions::instance(),
 					MakeFeed::instance(),
+					WPStatus::instance(),
+					WooFeedDocs::instance(),
+
 				];
 				foreach ( $classes as $class ) {
 					$class->register_routes();
@@ -398,15 +403,16 @@ class RestController extends WP_REST_Controller {
 	public function get_feed_option_name( $request ) {
 		$args      = $request->get_params();
 		$feed_name = $args['name'];
+
 		$feed_name = str_replace( "plus", "+", $feed_name );
 		array_shift( $args );
 		$temp_arr = [ $feed_name ];
-		if ( count( array_keys( $args ) ) ) {
+		if ( count( array_keys( $args ) ) > 1 ) {
 			$temp_arr2 = implode( '&', array_keys( $args ) );
 			array_push( $temp_arr, $temp_arr2 );
+			$feed_name = implode( '&', $temp_arr );
 		}
 
-		$feed_name = implode( '&', $temp_arr );
 
 		return $feed_name;
 	}

@@ -76,14 +76,6 @@
 	}
 
 }
-.sos_head {
-	display: block;
-	.logo__wrap {
-		img {
-			max-width: 300px;
-		}
-	}
-}
 
 #head-wrap {
 	position: relative;
@@ -97,7 +89,7 @@
 }
 #head {
 	background: $white;
-	padding: 1.8rem 0;
+	padding: 1.5rem 0;
 	z-index: 3;
 	position: relative;
 

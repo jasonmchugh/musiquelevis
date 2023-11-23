@@ -117,14 +117,14 @@ function bravad_assets() {
 
 	// CSS
 	wp_enqueue_style( 'bravad', get_template_directory_uri() . '/style.css', '', $version );
-	wp_enqueue_style( 'bravad-style', get_template_directory_uri() . '/assets/dist/css/style.min.css', '', $version );
+	wp_enqueue_style( 'bravad-style', get_template_directory_uri() . '/assets/css/app.css', '', $version );
 
 	// JS
 	wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-latest.min.js', array(), $version, true);
 	wp_enqueue_script('jquery-ui', 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js', array('jquery'), $version, true);
 	wp_enqueue_script('bv-vendor', get_template_directory_uri() . '/assets/plugins/vendor.min.js', array(), $version, true);
 	wp_enqueue_script('bv-main', get_template_directory_uri() . '/assets/js/app.min.js', array('jquery', 'jquery-ui', 'bv-vendor'), $version, true);
-	wp_enqueue_script('modernizr', get_template_directory_uri() . '/assets/dist/js/modernizr.min.js#asyncload', array(), $version, true);
+	wp_enqueue_script('modernizr', get_template_directory_uri() . '/assets/plugins/modernizr.min.js#asyncload', array(), $version, true);
 
 }
 add_action('wp_enqueue_scripts', 'bravad_assets');
@@ -132,13 +132,13 @@ add_action('wp_enqueue_scripts', 'bravad_assets');
 //=============================================
 //  ADD CUSTOM CSS TO BACKEND
 //=============================================
-add_action( 'admin_enqueue_scripts', 'load_admin_style' );
+//add_action( 'admin_enqueue_scripts', 'load_admin_style' );
 function load_admin_style() {
 	wp_enqueue_style ('fancyboxStyle', get_template_directory_uri().'/assets/css/jquery.fancybox.min.css');
     wp_register_style( 'admin_css', get_template_directory_uri() . '/assets/css/app.css', false, '1.0.0' );
 	wp_enqueue_style( 'admin_css', get_template_directory_uri() . '/assets/css/app.css', false, '1.0.0' );
 
-// 	wp_enqueue_script( 'admin_js', get_template_directory_uri() . '/assets/dist/js/admin.js', array( 'jquery' ), '1.0.0', true );
+// 	wp_enqueue_script( 'admin_js', get_template_directory_uri() . '/assets/js/admin.js', array( 'jquery' ), '1.0.0', true );
 }
 
 //=============================================
@@ -183,7 +183,7 @@ add_filter('menu_order', 'custom_menu_order');
 //=============================================
 function svgicon( $icon, $render = true ) {
 	$html  = '<svg class="svg-icon" role="presentation">';
-	$html .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/dist/img/icons.svg#' . $icon . '"></use>';
+	$html .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/icons.svg#' . $icon . '"></use>';
 	$html .= '</svg>';
 
 	if( $render ) {
@@ -195,39 +195,6 @@ function svgicon( $icon, $render = true ) {
 }
 
 
-//=============================================
-//  CUSTOM WP LOGIN PAGE
-//=============================================
-function my_login_logo() { ?>
-    <style type="text/css">
-        .login h1 a {
-            background-image: none !important;
-            padding-bottom: 10px;
-            height: 0;
-            width: 0;
-            margin: 0;
-        }
-        .login h1 {
-	        background: url(/wp-content/themes/bravad/assets/dist/img/instant-comptant.svg) no-repeat scroll center center / auto 100%;
-			width: 100%;
-			height: 50px;
-        }
-        .login form {
-	        border-radius: 10px;
-	        -webkit-box-shadow: none !important;
-	        box-shadow: none !important;
-        }
-        #wp-submit {
-	        background: #2B2F39 !important;
-	        border: none;
-	        border-radius: 0;
-	        text-shadow: none;
-	        -webkit-box-shadow: none !important;
-	        box-shadow: none !important;
-        }
-    </style>
-<?php }
-add_action( 'login_enqueue_scripts', 'my_login_logo' );
 
 
 //=============================================

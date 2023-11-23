@@ -361,10 +361,6 @@ class Smart_Manager {
 				include_once $this->plugin_path . '/classes/class-smart-manager-admin-welcome.php';
 			}
 
-			if( file_exists( $this->plugin_path . '/classes/class-smart-manager-pricing.php' ) ) { 
-				include_once $this->plugin_path . '/classes/class-smart-manager-pricing.php';
-			}
-
 			if( file_exists( $this->plugin_path . '/classes/class-storeapps-marketplace.php' ) ) { 
 				include_once $this->plugin_path . '/classes/class-storeapps-marketplace.php';
 			}
@@ -500,10 +496,10 @@ class Smart_Manager {
 			$args = array(
 				'file'           => (dirname( SM_PLUGIN_FILE )) . '/classes/sa-includes/',
 				'prefix'         => 'sm',				// prefix/slug of your plugin
-				'option_name'    => 'sa_sm_offer_bfcm_2022',
-				'campaign'       => 'sa_bfcm_2022',
-				'start'          => '2022-11-22 06:31:00',
-				'end'            => '2022-12-01 07:30:00',
+				'option_name'    => 'sa_sm_offer_bfcm_2023',
+				'campaign'       => 'sa_bfcm_2023',
+				'start'          => '2023-11-21 07:00:00',
+				'end'            => '2023-12-01 06:00:00',
 				'is_plugin_page' => ( !empty($_GET['page']) && in_array( $_GET['page'], array( 'smart-manager', 'sm-storeapps-plugins' ) ) ) ? true : false,	// page where you want to show offer, do not send this if no plugin page is there and want to show offer on Products page
 			);
 			$sa_offer = SA_SM_In_App_Offer::get_instance( $args );
@@ -732,8 +728,8 @@ class Smart_Manager {
 			Smart_Manager_Pro_Access_Privilege::render_access_privilege_settings();
 		} else if( !empty( $_GET['page'] ) && 'smart-manager' === $_GET['page'] ) {
 			$this->show_console_beta();
-		} else if( ( !empty( $_GET['page'] ) && 'smart-manager-pricing' === $_GET['page'] ) && ( class_exists( 'Smart_Manager_Pricing' ) && is_callable( array('Smart_Manager_Pricing', 'sm_show_pricing') ) ) ) {
-			Smart_Manager_Pricing::sm_show_pricing();
+		} else if( ( !empty( $_GET['page'] ) && 'smart-manager-pricing' === $_GET['page'] ) ) {
+			wp_redirect( admin_url( 'admin.php?page=smart-manager&tab=upgrade#!/pricing' ) );
 		} else if( ( !empty( $_GET['page'] ) && 'sm-storeapps-plugins' === $_GET['page'] ) && ( class_exists( 'StoreApps_Marketplace' ) && is_callable( array('StoreApps_Marketplace', 'init') ) ) ) {
 			StoreApps_Marketplace::init();
 		} else {
@@ -951,8 +947,17 @@ class Smart_Manager {
 
 					<div class="sm_design_notice">
 						<div class="sm_container">
-							<div class="sm_main_headline"><span class="dashicons dashicons-awards"></span><span>'. sprintf( __( 'Hey %1s, you just unlocked %2s on Smart Manager Pro!', 'smart-manager-for-wp-e-commerce' ), $sm_current_user_display_name, '<span style="font-weight: bold;font-size: 2rem;color: rgb(20 184 166);color: #508991;color: rgb(55 65 81);">'. __( "25% off", "smart-manager-for-wp-e-commerce" ) .'</span>' ) .'</span></div>
-							<div class="sm_sub_headline">' . sprintf( __( '%s to check Smart Manager Pro features/benefits and claim your discount.', 'smart-manager-for-wp-e-commerce' ), '<a style="color: rgb(55 65 81);" href="'. admin_url( 'admin.php?page=smart-manager-pricing' ) .'" target="_blank">' . __( 'Click here', 'smart-manager-for-wp-e-commerce' ) . '</a>' ) .'</div>
+							<div class="sm_main_headline"><span class="dashicons dashicons-awards"></span><span>'. ( ( self::show_halloween_offer() ) ? sprintf( 
+								/* translators: %1$s: current user display name %2$s: HTML of Pro price discount */
+								__( 'Hey %1$s, grab your %2$s Halloween discount!', 'smart-manager-for-wp-e-commerce' ),
+								$sm_current_user_display_name,
+								'<span style="font-weight: bold;font-size: 2rem;color: rgb(20 184 166);color: #508991;color: rgb(55 65 81);">'. __( "25% off", "smart-manager-for-wp-e-commerce" ) .'</span>' ) : sprintf(
+								/* translators: %1$s: current user display name %2$s: HTML of Pro price discount */
+								 __( 'Hey %1$s, you just unlocked %2$s on Smart Manager Pro!', 'smart-manager-for-wp-e-commerce' ), $sm_current_user_display_name,
+								 '<span style="font-weight: bold;font-size: 2rem;color: rgb(20 184 166);color: #508991;color: rgb(55 65 81);">'. __( "25% off", "smart-manager-for-wp-e-commerce" ) .'</span>' ) ) .'</span></div>
+							<div class="sm_sub_headline">' . sprintf( 
+								/* translators: %s: pricing page link */
+								__( '%s to check Smart Manager Pro features/benefits and claim your discount.', 'smart-manager-for-wp-e-commerce' ), '<a style="color: rgb(55 65 81);" href="'. admin_url( 'admin.php?page=smart-manager-pricing' ) .'" target="_blank">' . __( 'Click here', 'smart-manager-for-wp-e-commerce' ) . '</a>' ) .'</div>
 						</div>
 					</div>';
 
@@ -1270,6 +1275,8 @@ class Smart_Manager {
 							'allSettings' => Smart_Manager_Settings::get(),
 							'useDatePickerForDateTimeOrDateCols' => ( 'no' === apply_filters( 'sm_use_date_picker_for_date_or_datetime_cols', Smart_Manager_Settings::get( 'use_date_picker_for_date_or_datetime_cols' ) ) ) ? 0 : 1,
 							'SM_IS_WOO79' => ( ! empty( self::$sm_is_woo79 ) ) ? 'true' : 'false',
+							'isSAOfferVisible' => SA_OFFER_VISIBLE,
+							'isSAOfferBannerVisible' => ( 'yes' === get_option( 'sa_sm_offer_bfcm_2023', 'yes' ) ) ? true : false
 						);
 
 		$active_plugins = (array) get_option( 'active_plugins', array() );
@@ -1403,6 +1410,10 @@ class Smart_Manager {
 					}
 				</style>
 			<?php
+		}
+		if( ! empty( $_GET['tab'] ) && 'upgrade' === $_GET['tab'] ){
+			global $submenu_file;
+			$submenu_file = 'smart-manager-pricing';
 		}
 	}
 
@@ -1563,34 +1574,36 @@ class Smart_Manager {
 
 		$latest_version = $this->get_latest_version();
 		$is_pro_updated = $this->is_pro_updated();
-
+		$is_pricing_page = ( ! empty( $_GET['tab'] ) && 'upgrade' === $_GET['tab'] ) ? true : false;
 		?>
 		<div id="sa_smart_manager_main"> </div>
 		<?php
 			wp_enqueue_script( 'sm_dashboard_js' );
 		?>
 		<div class="wrap" style="margin: 0!important;">
-			<style>
-				div#TB_window {
-					background: lightgrey;
-				}
-			</style>    
-			<?php if ( SMPRO === true && function_exists( 'smart_support_ticket_content' ) ) smart_support_ticket_content();  ?>    
-				
-			<div id="sm_nav_bar" style="margin-bottom:1em;">
-				<div class='sm_beta_left'>	
-					<span class="sm-h2">
-					<?php
-							echo 'Smart Manager';
-							echo ' <sup style="vertical-align: super;background-color: #EC8F1C;background-color:#508991;font-size: 0.7em !important;padding: 2px 3px;border-radius: 2px;font-weight: 600;letter-spacing:0.1em;"><span>'.((SMPRO === true) ? __('PRO', 'smart-manager-for-wp-e-commerce') : __('LITE', 'smart-manager-for-wp-e-commerce')).'</span></sup>';
-							$plug_page = '';
-							
-					?>
-					</span>
+			<?php if( ! $is_pricing_page ) { ?>
+				<style>
+					div#TB_window {
+						background: lightgrey;
+					}
+				</style>    
+				<?php if ( SMPRO === true && function_exists( 'smart_support_ticket_content' ) ) smart_support_ticket_content();  ?>    
+					
+				<div id="sm_nav_bar" style="margin-bottom:1em;">
+					<div class='sm_beta_left'>	
+						<span class="sm-h2">
+						<?php
+								echo 'Smart Manager';
+								echo ' <sup style="vertical-align: super;background-color: #EC8F1C;background-color:#508991;font-size: 0.7em !important;padding: 2px 3px;border-radius: 2px;font-weight: 600;letter-spacing:0.1em;"><span>'.((SMPRO === true) ? __('PRO', 'smart-manager-for-wp-e-commerce') : __('LITE', 'smart-manager-for-wp-e-commerce')).'</span></sup>';
+								$plug_page = '';
+								
+						?>
+						</span>
+					</div>
+					<span id="sm_nav_bar_right" style="float: right;"></span>
 				</div>
-				<span id="sm_nav_bar_right" style="float: right;"></span>
-			</div>
 		<?php
+			}
 			if (! $is_pro_updated) {
 				?> <?php
 				$admin_url = SM_ADMIN_URL . "plugins.php";
@@ -1602,29 +1615,26 @@ class Smart_Manager {
 			if( is_callable( array( $this, 'show_upgrade_notifications' ) ) ) {
 				$this->show_upgrade_notifications();
 			}
+			if( ! $is_pricing_page ) {
 		?>
-
-			<div id="sm_editor_grid" ></div>
-			
-			<div id="sm_pagging_bar"></div>
-				
-			<div id="sm_inline_dialog"></div>
-
-			<div class="sm-loader-container">
-				<div class="sm-loader">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
+				<div id="sm_editor_grid" ></div>		
+				<div id="sm_pagging_bar"></div>
+				<div id="sm_inline_dialog"></div>
+				<div class="sm-loader-container">
+					<div class="sm-loader">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
 				</div>
-			</div>
+			<?php } ?>
 		</div>
-			<?php
-		
+		<?php
 	}
 
 	/**
@@ -1862,10 +1872,23 @@ class Smart_Manager {
 			$plugin_meta[] = '<span class="sm_pricing_icon"> 🔥 </span> <a href="' . esc_url( admin_url( 'admin.php?page=smart-manager-pricing' ) ) . '" target="storeapps_go_pro" title="' . _x( 'Go Pro', 'go pro link title', 'smart-manager-for-wp-e-commerce' ) . '">' . _x( 'Go Pro', 'go pro link', 'smart-manager-for-wp-e-commerce' ) . '</a>';
 		}
 
-		$plugin_meta[] = sprintf( __( 'If you like <strong>Smart Manager</strong> please leave us a %1$s&#9733;&#9733;&#9733;&#9733;&#9733;%2$s rating. A huge thanks in advance!', 'smart-manager-for-wp-e-commerce' ), '<a href="https://wordpress.org/support/plugin/smart-manager-for-wp-e-commerce/reviews/?filter=5#new-post" target="storeapps_5_star" title="' . _x( '5-star review', '5-star link title', 'smart-manager-for-wp-e-commerce' ) . '">', '</a>' );
+		$plugin_meta[] = sprintf(
+			/* translators: %1\$: 5-star link %2s: 5-star link */
+			__( "Boost us with %1\$s&#11088;&#11088;&#11088;&#11088;&#11088; &#128640;%2\$s", 'smart-manager-for-wp-e-commerce' ),
+			'<a href="https://wordpress.org/support/plugin/smart-manager-for-wp-e-commerce/reviews/?filter=5#new-post" target="storeapps_5_star" title="' . _x( '5-star review', '5-star link title', 'smart-manager-for-wp-e-commerce' ) . '">', '</a>' );
 
 		return $plugin_meta;
 	}
+
+	/**
+	 * Function to determine if Halloween specific offer is to be shown or not
+	 *
+	 * @return boolean Flag to determine whether Halloween specific offer is to be shown or not
+	 */
+	public static function show_halloween_offer(){
+		return ( ( time() >= strtotime( '2023-10-26 11:30:00' ) ) && ( time() <= strtotime( '2023-11-02 07:00:00' ) ) ) ? true : false;
+	}
+	
 
 }
 

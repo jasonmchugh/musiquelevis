@@ -53,8 +53,10 @@ EasyWPSMTP.Admin.Settings = EasyWPSMTP.Admin.Settings || ( function( document, w
 			app.settingsForm = $( '.easy-wp-smtp-connection-settings-form' );
 
 			// If there are screen options we have to move them.
-			$( '#screen-meta-links, #screen-meta' ).prependTo( '#easy-wp-smtp-header-temp' );
-			$( '#screen-meta-links' ).show();
+			if( $( '#screen-meta-links' ).length > 0 ) {
+				$( '#screen-meta-links, #screen-meta' ).prependTo( '#easy-wp-smtp-header-temp' );
+				$( '#screen-meta-links' ).show();
+			}
 
 			app.bindActions();
 
@@ -135,33 +137,19 @@ EasyWPSMTP.Admin.Settings = EasyWPSMTP.Admin.Settings || ( function( document, w
 				$( this ).closest( '.easy-wp-smtp-meta-box' ).toggleClass( 'easy-wp-smtp-meta-box--closed' );
 			} );
 
-			// Mailer selection.
-			$( '.easy-wp-smtp-mailers-picker__mailer', app.settingsForm ).on( 'click', function() {
-				$( this ).find( '.easy-wp-smtp-mailers-picker__input' ).prop( 'checked', true ).change();
-			} );
-
+			// Hide all mailers options and display for a currently clicked one.
 			$( '.easy-wp-smtp-mailers-picker__input', app.settingsForm ).on( 'change', function() {
-				var $input = $( this );
-
-				if ( $input.prop( 'disabled' ) ) {
-
-					// Educational Popup.
-					if ( $input.hasClass( 'easy-wp-smtp-educate' ) ) {
-						app.education.upgradeMailer( $input );
-					}
-
-					return false;
-				}
-
-				// Deselect the current mailer.
-				$( '.easy-wp-smtp-mailers-picker__mailer', app.settingsForm ).removeClass( 'easy-wp-smtp-mailers-picker__mailer--active' );
-
-				// Select the correct one.
-				$( this ).parents( '.easy-wp-smtp-mailers-picker__mailer' ).addClass( 'easy-wp-smtp-mailers-picker__mailer--active' );
-
-				// Hide all mailers options and display for a currently clicked one.
 				$( '.easy-wp-smtp-mailer-options', app.settingsForm ).removeClass( 'easy-wp-smtp-mailer-options--active' );
 				$( '.easy-wp-smtp-mailer-options[data-mailer="' + $( this ).val() + '"]', app.settingsForm ).addClass( 'easy-wp-smtp-mailer-options--active' );
+			} );
+
+			// Display education modal for mailer if it's disabled.
+			$( '.easy-wp-smtp-mailers-picker__mailer--disabled', app.settingsForm ).on( 'click', function() {
+				var $input = $( this ).prev( '.easy-wp-smtp-mailers-picker__input' );
+
+				if ( $input.hasClass( 'easy-wp-smtp-educate' ) ) {
+					app.education.upgradeMailer( $input );
+				}
 			} );
 
 			// Register change event to show/hide plugin supported settings for currently selected mailer.

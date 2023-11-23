@@ -142,6 +142,8 @@ class Woo_Feed_Admin {
 			  'webappick-manage-attributes-mapping' === $_GET['page'] ||
 			  'webappick-manage-feeds' === $_GET['page'] ||
 			  'webappick-manage-category-mapping' === $_GET['page'] ||
+			  'webappick-wp-status' === $_GET['page'] ||
+			  'webappick-feed-docs' === $_GET['page'] ||
 			  'webappick-new-feed' === $_GET['page'] )
 		) {
 			wp_enqueue_style( 'woo-feed-react' );
@@ -472,6 +474,8 @@ class Woo_Feed_Admin {
 				  'webappick-manage-dynamic-attribute' !== $_GET['page'] ||
 				  'webappick-manage-attributes-mapping' !== $_GET['page'] ||
 				  'webappick-manage-category-mapping' !== $_GET['page'] ||
+				  'webappick-wp-status' === $_GET['page'] ||
+				  'webappick-feed-docs' === $_GET['page'] ||
 				  'webappick-new-feed' === $_GET['page'] )
 			) {
 				wp_enqueue_script( $this->woo_feed );
@@ -533,6 +537,8 @@ class Woo_Feed_Admin {
 				  'webappick-manage-attributes-mapping' === $_GET['page'] ||
 				  'webappick-manage-feeds' === $_GET['page'] ||
 				  'webappick-manage-category-mapping' === $_GET['page'] ||
+				  'webappick-wp-status' === $_GET['page'] ||
+				  'webappick-feed-docs' === $_GET['page'] ||
 				  'webappick-new-feed' === $_GET['page'] )
 			) {
 				wp_enqueue_script( 'woo-feed-react' );
@@ -655,15 +661,32 @@ class Woo_Feed_Admin {
 				'webappick-manage-settings',
 				array( $this, 'woo_feed_manage_feed_react' )
 			);
-
+//			add_submenu_page(
+//				'webappick-manage-feeds',
+//				__( 'Status', 'woo-feed' ),
+//				__( 'Status', 'woo-feed' ),
+//				'manage_woocommerce',
+//				'webappick-wp-status',
+//				'woo_feed_system_status'
+//			);
 			add_submenu_page(
 				'webappick-manage-feeds',
 				__( 'Status', 'woo-feed' ),
 				__( 'Status', 'woo-feed' ),
 				'manage_woocommerce',
 				'webappick-wp-status',
-				'woo_feed_system_status'
+				array( $this, 'woo_feed_manage_feed_react' )
 			);
+//			add_submenu_page(
+//				'webappick-manage-feeds',
+//				__( 'Documentation', 'woo-feed' ),
+//				'<span class="woo-feed-docs">' .
+//				__( 'Docs', 'woo-feed' ) .
+//				'</span>',
+//				'manage_woocommerce',
+//				'webappick-feed-docs',
+//				array( WooFeedDocs::getInstance(), 'woo_feed_docs' )
+//			);
 			add_submenu_page(
 				'webappick-manage-feeds',
 				__( 'Documentation', 'woo-feed' ),
@@ -672,7 +695,7 @@ class Woo_Feed_Admin {
 				'</span>',
 				'manage_woocommerce',
 				'webappick-feed-docs',
-				array( WooFeedDocs::getInstance(), 'woo_feed_docs' )
+				array( $this, 'woo_feed_manage_feed_react' )
 			);
 		}
 	}

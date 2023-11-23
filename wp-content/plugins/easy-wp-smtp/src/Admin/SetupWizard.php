@@ -4,6 +4,7 @@ namespace EasyWPSMTP\Admin;
 
 use EasyWPSMTP\Admin\Pages\TestTab;
 use EasyWPSMTP\Connect;
+use EasyWPSMTP\Helpers\Helpers;
 use EasyWPSMTP\Options;
 use EasyWPSMTP\UsageTracking\UsageTracking;
 use EasyWPSMTP\WP;
@@ -669,7 +670,7 @@ class SetupWizard {
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$settings = isset( $_POST['settings'] ) ? wp_slash( json_decode( wp_unslash( $_POST['settings'] ), true ) ) : [];
 
-		if ( empty( $mailer ) || empty( $settings ) ) {
+		if ( empty( $mailer ) ) {
 			wp_send_json_error();
 		}
 
@@ -740,6 +741,10 @@ class SetupWizard {
 
 		if ( empty( $slug ) ) {
 			wp_send_json_error( esc_html__( 'Could not install the plugin. Plugin slug is missing.', 'easy-wp-smtp' ) );
+		}
+
+		if ( ! in_array( $slug, [ 'wpforms-lite', 'all-in-one-seo-pack' ], true ) ) {
+			wp_send_json_error( esc_html__( 'Could not install the plugin. Plugin is not whitelisted.', 'easy-wp-smtp' ) );
 		}
 
 		$url   = esc_url_raw( WP::admin_url( 'admin.php?page=' . Area::SLUG . '-setup-wizard' ) );
@@ -813,21 +818,6 @@ class SetupWizard {
 			// Activate the plugin silently.
 			$activated = activate_plugin( $plugin_basename );
 
-			// Disable the RafflePress redirect after plugin activation.
-			if ( $slug === 'rafflepress' ) {
-				delete_transient( '_rafflepress_welcome_screen_activation_redirect' );
-			}
-
-			// Disable the MonsterInsights redirect after plugin activation.
-			if ( $slug === 'google-analytics-for-wordpress' ) {
-				delete_transient( '_monsterinsights_activation_redirect' );
-			}
-
-			// Disable the SeedProd redirect after the plugin activation.
-			if ( $slug === 'coming-soon' ) {
-				delete_transient( '_seedprod_welcome_screen_activation_redirect' );
-			}
-
 			if ( ! is_wp_error( $activated ) ) {
 				wp_send_json_success(
 					[
@@ -854,12 +844,14 @@ class SetupWizard {
 	 * AJAX callback for getting all partner's plugin information.
 	 *
 	 * @since 2.1.0
+	 * @since 2.2.0 Check if a SEO toolkit plugin is installed.
 	 */
 	public function get_partner_plugins_info() {
 
 		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
 
 		$contact_form_plugin_already_installed = false;
+		$seo_toolkit_plugin_already_installed  = false;
 
 		$contact_form_basenames = [
 			'wpforms-lite/wpforms.php',
@@ -870,13 +862,22 @@ class SetupWizard {
 			'ninja-forms/ninja-forms.php',
 		];
 
+		$seo_toolkit_basenames = [
+			'all-in-one-seo-pack/all_in_one_seo_pack.php',
+			'all-in-one-seo-pack-pro/all_in_one_seo_pack.php',
+			'seo-by-rank-math/rank-math.php',
+			'seo-by-rank-math-pro/rank-math-pro.php',
+			'wordpress-seo/wp-seo.php',
+			'wordpress-seo-premium/wp-seo-premium.php',
+		];
+
 		$installed_plugins = get_plugins();
 
 		foreach ( $installed_plugins as $basename => $plugin_info ) {
 			if ( in_array( $basename, $contact_form_basenames, true ) ) {
 				$contact_form_plugin_already_installed = true;
-
-				break;
+			} elseif ( in_array( $basename, $seo_toolkit_basenames, true ) ) {
+				$seo_toolkit_plugin_already_installed = true;
 			}
 		}
 
@@ -888,6 +889,7 @@ class SetupWizard {
 		$data = [
 			'plugins'                               => [],
 			'contact_form_plugin_already_installed' => $contact_form_plugin_already_installed,
+			'seo_toolkit_plugin_already_installed'  => $seo_toolkit_plugin_already_installed,
 		];
 
 		wp_send_json_success( $data );
@@ -921,7 +923,8 @@ class SetupWizard {
 		wp_remote_post(
 			'https://connect.easywpsmtp.com/subscribe/drip/',
 			[
-				'body' => $body,
+				'user-agent' => Helpers::get_default_user_agent(),
+				'body'       => $body,
 			]
 		);
 
@@ -931,7 +934,7 @@ class SetupWizard {
 	/**
 	 * Get the WPForms version type if it's installed.
 	 *
-	 * @since {VERSION}
+	 * @since 2.2.0
 	 *
 	 * @return false|string Return `false` if WPForms is not installed, otherwise return either `lite` or `pro`.
 	 */
@@ -1021,7 +1024,7 @@ class SetupWizard {
 		}
 
 		// Add the optional sending domain parameter.
-		if ( in_array( $mailer, [ 'mailgun', 'sendinblue' ], true ) ) {
+		if ( in_array( $mailer, [ 'mailgun', 'sendinblue', 'sendgrid' ], true ) ) {
 			$domain = $options->get( $mailer, 'domain' );
 		}
 
@@ -1059,7 +1062,8 @@ class SetupWizard {
 		wp_remote_post(
 			'https://easywpsmtp.com/wizard-feedback/',
 			[
-				'body' => [
+				'user-agent' => Helpers::get_default_user_agent(),
+				'body'       => [
 					'wpforms' => [
 						'id'     => 2271,
 						'fields' => [
@@ -1211,6 +1215,8 @@ class SetupWizard {
 			'EasyWPSMTP_MAILGUN_REGION'                => [ 'mailgun', 'region' ],
 			'EasyWPSMTP_OUTLOOK_CLIENT_ID'             => [ 'outlook', 'client_id' ],
 			'EasyWPSMTP_OUTLOOK_CLIENT_SECRET'         => [ 'outlook', 'client_secret' ],
+			'EasyWPSMTP_SENDGRID_API_KEY'              => [ 'sendgrid', 'api_key' ],
+			'EasyWPSMTP_SENDGRID_DOMAIN'               => [ 'sendgrid', 'domain' ],
 			'EasyWPSMTP_SMTP_HOST'                     => [ 'smtp', 'host' ],
 			'EasyWPSMTP_SMTP_PORT'                     => [ 'smtp', 'port' ],
 			'EasyWPSMTP_SSL'                           => [ 'smtp', 'encryption' ],

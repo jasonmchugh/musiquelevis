@@ -6,6 +6,8 @@
 
 namespace WebAppick\Attributes;
 
+use CTXFeed\V5\Compatibility\WCMLCurrency;
+
 class AvailabilityDate implements AttributeInterface {
 
     /**
@@ -38,7 +40,11 @@ class AvailabilityDate implements AttributeInterface {
         global $woocommerce, $post;
 
         $availability_date = get_post_meta( $post->ID, 'woo_feed_availability_date', true );
-
+		if( empty( $availability_date ) && is_plugin_active( 'woocommerce-multilingual/wpml-woocommerce.php' )){
+			$wcmlCurrency  = new WCMLCurrency();
+			$originalId = $wcmlCurrency->woo_feed_wpml_get_original_post_id( $post->ID );
+			$availability_date = get_post_meta( $originalId, 'woo_feed_availability_date', true );
+		}
         // Add Availability Date Field
         $field_data = array(
             'id' => "woo_feed_availability_date",

@@ -45,12 +45,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 				<div class="_row copyrights">
 					<div class="_col _col--xl-4 _col--md-4 _col--sm-12">
-						<?php echo date('Y'); ?> © Instant Comptant <i>-</i> <span><?php _e( 'Tous droits réservés.', 'bravad' ); ?></span>
+						<?php echo date('Y'); ?> © Musique Lévis <i>-</i> <span><?php _e( 'Tous droits réservés.', 'bravad' ); ?></span>
 					</div>
 					<div class="_col _col--xl-8 _col--md-8 _col--sm-12 right">
 						<?php /*<a class="logo__wrap" href="<?php echo get_home_url(); ?>">
 							<?php
-								echo file_get_contents(str_replace('/index.php', '', $_SERVER['SCRIPT_FILENAME']) . '/wp-content/themes/bravad/assets/dist/img/instant-comptant.svg');
+								echo file_get_contents(str_replace('/index.php', '', $_SERVER['SCRIPT_FILENAME']) . '/wp-content/themes/musiquelevis/assets/img/instant-comptant.svg');
 							?>
 						</a>*/ ?>
 						<?php dynamic_sidebar( 'footer4' ); ?><a href="javascript:Didomi.preferences.show()" class="consent">Consentement</a>

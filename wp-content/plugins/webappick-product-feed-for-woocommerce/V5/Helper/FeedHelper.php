@@ -3,6 +3,7 @@
 namespace CTXFeed\V5\Helper;
 
 use CTXFeed\V5\Common\Helper;
+use CTXFeed\V5\FTP\FtpClient;
 use CTXFeed\V5\Product\AttributeValueByType;
 use CTXFeed\V5\Query\QueryFactory;
 use CTXFeed\V5\Template\TemplateFactory;
@@ -65,7 +66,7 @@ class FeedHelper {
 	 *
 	 * @param string $slug slug for checking uniqueness.
 	 * @param string $prefix prefix to check with. Optional.
-	 * @param int $option_id option id. Optional option id to exclude specific option.
+	 * @param int $option_id option id. Optional option id to exclude a specific option.
 	 *
 	 * @return string
 	 * @see wp_unique_post_slug()
@@ -87,7 +88,6 @@ class FeedHelper {
 	 * @return bool|string          return false if failed to update. return filename if success
 	 */
 	public static function save_feed_config_data( $feedrules, $feed_option_name = null, $configOnly = true ) {
-
 
 		$prepared_feed_rules = self::prepare_feed_rules_to_save( $feedrules, $feed_option_name );
 		$feed_option_name    = $prepared_feed_rules['feed_option_name'];
@@ -113,6 +113,7 @@ class FeedHelper {
 	 * @return array|false
 	 */
 	public static function prepare_feed_rules_to_save( $feedrules, $feed_option_name ) {
+
 		if ( ! is_array( $feedrules ) ) {
 			return false;
 		}
@@ -133,13 +134,15 @@ class FeedHelper {
 		$feedrules = FeedHelper::sanitize_form_fields( $feedrules );
 		$update    = false;
 		$old_feed  = [];
+		$status=1;
 		// Get new feed file name if new feed.
 		if ( empty( $feed_option_name ) ) {
 			$feed_option_name = FeedHelper::generate_unique_feed_file_name( $feedrules['filename'], $feedrules['feedType'], $feedrules['provider'] );
 			$feed_option_name = AttributeValueByType::FEED_RULES_OPTION_PREFIX . $feed_option_name;
 		} else {
-			$old_feed = get_option( $feed_option_name, array() );
+			$old_feed = maybe_unserialize(get_option( $feed_option_name, array() ));
 			$update   = true;
+			$status=isset( $old_feed['status'] ) && 1 === (int) $old_feed['status'] ? 1 : 0;
 		}
 
 
@@ -156,12 +159,11 @@ class FeedHelper {
 		 *
 		 */
 		$feedrules = apply_filters( 'woo_feed_insert_feed_data', $feedrules, $old_feed, $feed_option_name );
-
 		// Save Info into database
 		$feedrules_to_save['feedrules']    = $feedrules;
 		$feedrules_to_save['url']          = $feed_URL;
 		$feedrules_to_save['last_updated'] = date( 'Y-m-d H:i:s', strtotime( current_time( 'mysql' ) ) );
-		$feedrules_to_save['status']       = isset( $old_feed['status'] ) && 1 === (int) $old_feed['status'] ? 1 : 1;
+		$feedrules_to_save['status']       = $status;
 
 		return [
 			'feedrules_to_save' => $feedrules_to_save,
@@ -758,7 +760,7 @@ class FeedHelper {
 			$config        = new Config( $feed_info );
 			$provider      = $config->get_feed_template();
 			$file_ext_type = $config->get_feed_file_type();
-			$feed_template = TemplateFactory::MakeFeed( $product_ids, $config );
+			$feed_template = TemplateFactory::make_feed( $product_ids, $config );
 			//Generate Header footer
 			// TODO: call this function only when offset is 0. But when creating the new feed 0 is calling 2 times. and not generating the header footer.
 			self::generate_header_footer( $feed_template, $file_ext_type, $feedName, $feedrules, $provider, $offset );
@@ -882,6 +884,10 @@ class FeedHelper {
 			$status = FileSystem::WriteFile( $contents, $path, $file_name );
 		}
 
+		// Upload ftp/sftp if enabled.
+		self::upload_feed_file_to_ftp_server( $feed_info, $path, $file_name );
+
+
 		// Remove temporary files.
 		self::unlink_tempFiles( $feed_info['option_value']['feedrules'], $option_name );
 
@@ -903,6 +909,30 @@ class FeedHelper {
 			'status'   => $status,
 			'feed_url' => $feed_url,
 		];
+
+	}
+
+	/**
+	 * @param $feed_info
+	 * @param $path
+	 * @param $file_name
+	 *
+	 * @return void
+	 * @throws \CTXFeed\V5\FTP\FtpException
+	 */
+	private static function upload_feed_file_to_ftp_server( $feed_info, $path, $file_name ) {
+		if ( isset( $feed_info['option_value']['feedrules']['ftpenabled'] ) && $feed_info['option_value']['feedrules']['ftpenabled'] ) {
+			$config          = new Config( $feed_info );
+			$config_ftp_data = $config->get_ftp_config();
+			$ftp             = new FtpClient();
+			$is_ssl          = $config_ftp_data['type'] === 'ftp' ? false : true; // ftp/sftp
+			$ftp_connect     = $ftp->connect( $config_ftp_data['host'], $is_ssl, $config_ftp_data['port'] ); // connect to ftp/sftp server
+			$ftp_connect     = $ftp_connect->login( $config_ftp_data['username'], $config_ftp_data['password'] ); // login to server
+
+			$path = $path . '/' . $file_name; // locale file path to upload.
+
+			$ftp_connect->putFromPath( $path );
+		}
 
 	}
 

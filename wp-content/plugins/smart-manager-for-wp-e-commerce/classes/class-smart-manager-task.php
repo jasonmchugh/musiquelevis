@@ -44,6 +44,12 @@ if ( ! class_exists( 'Smart_Manager_Task' ) ) {
 		 */
 		public $key_mod_fields = array();
 		/**
+		 * Smart_Manager_Pro_Base object
+		 *
+		 * @var object
+		 */
+		public $pro_base = null;
+		/**
 		 * Instance of the class
 		 *
 		 * @param string $dashboard_key Current dashboard name.
@@ -73,7 +79,13 @@ if ( ! class_exists( 'Smart_Manager_Task' ) ) {
 			); // should be kept before calling the parent class constructor.
 			parent::__construct( $dashboard_key );
 			$this->dashboard_key = $dashboard_key;
-			global $current_user;
+			
+			if ( file_exists(SM_PLUGIN_DIR_PATH . '/pro/classes/class-smart-manager-pro-base.php') ) {
+				include_once SM_PLUGIN_DIR_PATH . '/pro/classes/class-smart-manager-pro-base.php';
+				$this->pro_base = new Smart_Manager_Pro_Base( $dashboard_key );
+				$this->advance_search_operators = ( ! empty( $this->pro_base->advance_search_operators ) ) ? $this->pro_base->advance_search_operators : $this->advance_search_operators;
+			}
+			
 			$this->store_col_model_transient_option_nm = 'sa_sm_' . $this->dashboard_key . '_tasks';
 			add_filter( 'sm_default_dashboard_model', array( &$this, 'generate_dashboard_model' ) );
 			add_filter( 'sm_data_model', array( &$this, 'generate_data_model' ), 10, 2 );
@@ -98,7 +110,7 @@ if ( ! class_exists( 'Smart_Manager_Task' ) ) {
 		 * @return array $dashboard_model returns dashboard_model data
 		 */
 		public function generate_dashboard_model( $dashboard_model = array() ) {
-			global $wpdb, $current_user;
+			global $wpdb;
 			$col_model = array();
 			$results   = $wpdb->get_results( "SHOW COLUMNS FROM {$wpdb->prefix}sm_tasks", 'ARRAY_A' );
 			$num_rows  = $wpdb->num_rows;
@@ -164,7 +176,7 @@ if ( ! class_exists( 'Smart_Manager_Task' ) ) {
 			$current_user_id     = get_current_user_id();
 			$items               = array();
 			$index               = 0;
-			$post_type  = '';
+			$post_type           = array( $this->dashboard_key );
 			$where               = apply_filters( 'sm_where_tasks_cond', ' AND '. $wpdb->prefix . 'sm_tasks.post_type = %s AND author = %d' );
 			$order_by            = apply_filters( 'sm_orderby_tasks_cond', $wpdb->prefix . 'sm_tasks.id DESC ' );
 			$group_by            = apply_filters( 'sm_groupby_tasks_cond', ' ' . $wpdb->prefix . 'sm_tasks.id ' );
@@ -217,6 +229,7 @@ if ( ! class_exists( 'Smart_Manager_Task' ) ) {
 			if ( ! empty( $this->req_params['advanced_search_query'] ) && ( '[]' !== $this->req_params['advanced_search_query'] ) ) {
 				$this->req_params['advanced_search_query'] = json_decode( stripslashes( $this->req_params['advanced_search_query'] ), true );
 				if ( ! empty( $this->req_params['advanced_search_query'] ) ) {
+					$this->advance_search_operators = ( ! empty( $data_col_params['advance_search_operators'] ) ) ? $data_col_params['advance_search_operators'] : $this->advance_search_operators;
 					if ( ! empty( $this->req_params['table_model']['posts']['where']['post_type'] ) ) {
 						$post_type = ( is_array( $this->req_params['table_model']['posts']['where']['post_type'] ) ) ? $this->req_params['table_model']['posts']['where']['post_type'] : array( $this->req_params['table_model']['posts']['where']['post_type'] );
 					}
@@ -234,13 +247,29 @@ if ( ! class_exists( 'Smart_Manager_Task' ) ) {
 								ON ({$wpdb->base_prefix}sm_advanced_search_temp.product_id = {$wpdb->prefix}sm_tasks.id)";
 				$where .= " AND {$wpdb->base_prefix}sm_advanced_search_temp.flag > 0";
 			}
-			// Code for sorting tas records.
+			// Code for sorting task records.
 			if ( ! empty( $this->req_params['sort_params'] ) ) {
 				if ( ! empty( $this->req_params['sort_params']['column'] ) && ! empty( $this->req_params['sort_params']['sortOrder'] ) ) {
 					if ( false !== strpos( $this->req_params['sort_params']['column'], '/' ) ) {
 						$col_exploded = explode( '/', $this->req_params['sort_params']['column'] );
-						if ( ( ! empty( $col_exploded[1] ) ) && ( false === in_array( $col_exploded[1], apply_filters( 'sm_non_sortable_cols', array() ) ) ) ) {
-							$order_by                                     = $wpdb->prefix . $col_exploded[0] . '.' . $col_exploded[1] . ' ' . strtoupper( $this->req_params['sort_params']['sortOrder'] ) . ' ';
+		        		$col_meta = ( ! empty( $col_exploded[1] ) ) ? explode( "=", $col_exploded[1] ) : array();
+						$col_nm = ( ! empty( $col_meta ) && is_array( $col_meta ) ) ? $col_meta[0] : $col_exploded[1];
+						$this->req_params['sort_params']['column_nm'] = ( 'meta_key' === $col_nm ) ? 'meta_value' : $col_exploded[1];
+						$table_nm = $col_exploded[0];
+						if ( ( ! empty( $table_nm ) ) ) {
+							$order_by                                     = $wpdb->prefix . $table_nm . '.' . $this->req_params['sort_params']['column_nm'] . ' ' . strtoupper( $this->req_params['sort_params']['sortOrder'] ) . ' ';
+							if ( 'terms' === $table_nm ) {
+								$join = $this->terms_table_column_sort_query( 
+									array(
+										'col_name'     => $col_exploded[1],
+										'id'           => $wpdb->prefix . 'posts.ID',
+										'sort_order'   => $this->req_params['sort_params']['sortOrder'],
+										'join'         => $join,
+										'wp_query_obj' => '',
+									)
+								);
+								$order_by = 'taxonomy_sort.term_name ' . strtoupper( $this->req_params['sort_params']['sortOrder'] ) . ' ';
+							}
 						}
 					}
 				}

@@ -4,7 +4,6 @@ namespace CTXFeed\V5\Product;
 
 use CTXFeed\V5\Utility\Cache;
 use Woo_Feed_Custom_Identifier_Filter;
-use Woo_Feed_Products_v3;
 
 /**
  * The file that defines the merchants attributes
@@ -299,6 +298,7 @@ class ProductAttributeFactory {
 					'yoast_wpseo_title'    => esc_html__( 'Title [Yoast SEO]', 'woo-feed' ),
 					'yoast_wpseo_metadesc' => esc_html__( 'Description [Yoast SEO]', 'woo-feed' ),
 					'yoast_canonical_url'  => esc_html__( 'Canonical URL [Yoast SEO]', 'woo-feed' ),
+					'yoast_primary_category'  => esc_html__( 'Primary Category [Yoast SEO]', 'woo-feed' ),
 				],
 			];
 
@@ -360,7 +360,7 @@ class ProductAttributeFactory {
 			$globalAttributes = wc_get_attribute_taxonomy_labels();
 			if ( count( $globalAttributes ) ) {
 				foreach ( $globalAttributes as $key => $value ) {
-					$taxonomies[ Woo_Feed_Products_v3::PRODUCT_ATTRIBUTE_PREFIX . 'pa_' . $key ] = $value;
+					$taxonomies[ AttributeValueByType::PRODUCT_ATTRIBUTE_PREFIX . 'pa_' . $key ] = $value;
 				}
 			}
 			Cache::set( 'getAttributeTaxonomies', $taxonomies );
@@ -479,7 +479,7 @@ class ProductAttributeFactory {
 					continue;
 				}
 				$label                                                          = isset( $wp_taxonomies[ $value ] ) ? $wp_taxonomies[ $value ]->label . " [$value]" : $value;
-				$info[ Woo_Feed_Products_v3::PRODUCT_TAXONOMY_PREFIX . $value ] = $label;
+				$info[ AttributeValueByType::PRODUCT_TAXONOMY_PREFIX . $value ] = $label;
 			}
 
 			Cache::set( 'woo_feed_dropdown_product_taxonomy', $info );
@@ -517,7 +517,7 @@ class ProductAttributeFactory {
 		// Load Custom Category Mapped Attributes
 		$info = array();
 		// query cached and escaped
-		$data = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->options WHERE option_name LIKE %s;", Woo_Feed_Products_v3::PRODUCT_CATEGORY_MAPPING_PREFIX . '%' ) );  // phpcs:ignore
+		$data = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->options WHERE option_name LIKE %s;", AttributeValueByType::PRODUCT_CATEGORY_MAPPING_PREFIX . '%' ) );  // phpcs:ignore
 		if ( count( $data ) ) {
 			foreach ( $data as $value ) {
 				$opts                        = maybe_unserialize( $value->option_value );

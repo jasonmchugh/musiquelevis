@@ -2,6 +2,7 @@
 
 namespace CTXFeed\V5\Product;
 
+use CTXFeed\V5\Compatibility\WCMLCurrency;
 use CTXFeed\V5\Helper\CommonHelper;
 use CTXFeed\V5\Helper\ProductHelper;
 use CTXFeed\V5\Price\PriceFactory;
@@ -16,6 +17,7 @@ use WC_Product_Grouped;
 use WC_Product_Variable;
 use WC_Product_Variation;
 use WPSEO_Meta;
+use WPSEO_Primary_Term;
 
 class ProductInfo {
 	/**
@@ -58,20 +60,9 @@ class ProductInfo {
 	 */
 	public function parent_id() {
 		if( is_plugin_active( 'woocommerce-multilingual/wpml-woocommerce.php' ) ){
-//			return apply_filters( 'wpml_element_trid', NULL, $this->product->get_id(), 'post_product' );
-			$wpml_product_id = $this->product->get_id();
-			$wpml_settings = get_option( 'icl_sitepress_settings' );
-			$wpml_default_language = $wpml_settings['default_language'];
-			global $wpdb;
-			$wpml_table_name = $wpdb->prefix . 'icl_translations';
-			$sql = $wpdb->prepare("SELECT `trid` FROM $wpml_table_name  WHERE `element_id` = %d",  $wpml_product_id );
-			$result = $wpdb->get_results( $sql );
-			$wpml_trid = $result[0]->trid;
-			$sql = $wpdb->prepare("SELECT `element_id` FROM $wpml_table_name  WHERE `trid` = %d AND `language_code` = %s",  $wpml_trid, $wpml_default_language );
-			$result = $wpdb->get_results( $sql );
-			$original_id = $result[0]->element_id;
+			$wcmlCurrency  = new WCMLCurrency();
 
-			return $original_id;
+			return $wcmlCurrency->woo_feed_wpml_get_original_post_id( $this->product->get_id() );
 		} else {
 
 			return apply_filters( 'woo_feed_filter_product_id', $this->product->get_id(), $this->product, $this->config );
@@ -850,8 +841,9 @@ class ProductInfo {
 	 * @return mixed|void
 	 */
 	public function width() {
+		$dimension_unit = get_option( 'woocommerce_dimension_unit' );
 		if( $this->product->get_width() ){
-			$width = $this->product->get_width()." cm";
+			$width = $this->product->get_width()." $dimension_unit";
 		}else{
 			$width = "";
 		}
@@ -865,7 +857,8 @@ class ProductInfo {
 	 */
 	public function height() {
 		if( $this->product->get_height() ){
-			$height = $this->product->get_height()." cm";
+			$dimension_unit = get_option( 'woocommerce_dimension_unit' );
+			$height = $this->product->get_height()." $dimension_unit";
 		}else{
 			$height = "";
 		}
@@ -878,8 +871,9 @@ class ProductInfo {
 	 * @return mixed|void
 	 */
 	public function length() {
+		$dimension_unit = get_option( 'woocommerce_dimension_unit' );
 		if( $this->product->get_length() ){
-			$length = $this->product->get_length()." cm";
+			$length = $this->product->get_length()." $dimension_unit";
 		}else{
 			$length = "";
 		}
@@ -1099,6 +1093,18 @@ class ProductInfo {
 	}
 
 	# SEO Plugins
+
+	public function yoast_primary_category() {
+		$primary_category = '';
+		$product_id  = CommonHelper::woo_feed_parent_product_id( $this->product );
+		$primary_term_id = yoast_get_primary_term_id( 'product_cat', $product_id );
+		$term = get_term( $primary_term_id );
+		if ( ! is_wp_error( $term ) && ! empty( $term ) ) {
+			$primary_category = $term->name;
+		}
+
+		return apply_filters( 'woo_feed_filter_product_yoast_primary_category', $primary_category, $this->product, $this->config );
+	}
 
 	public function yoast_wpseo_title() {
 		$product_id  = woo_feed_parent_product_id( $this->product );

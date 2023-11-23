@@ -48,7 +48,8 @@ class Feed {
 			$feed_slug = str_replace( 'wf_feed_', 'wf_config', $feedName );
 			if ( 1 === $feedInfo['status'] ) {
 				if ( ! wp_next_scheduled( 'woo_feed_update_single_feed', array( $feed_slug ) ) ) {
-					wp_schedule_event( time(), 'woo_feed_corn', 'woo_feed_update_single_feed', array( $feed_slug ) );
+					$interval = absint( get_option( 'wf_schedule' ) );
+					wp_schedule_event( (time() + $interval), 'woo_feed_corn', 'woo_feed_update_single_feed', array( $feed_slug ) );
 				}
 			} else {
 				wp_clear_scheduled_hook( 'woo_feed_update_single_feed', array( $feed_slug ) );

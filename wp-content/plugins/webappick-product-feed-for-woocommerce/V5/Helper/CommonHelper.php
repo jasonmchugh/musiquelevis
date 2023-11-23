@@ -187,4 +187,19 @@ class CommonHelper {
 		return $ret;
 	}
 
+	/**
+	 * Return variable product id for variation else main product id.
+	 *
+	 * @param $product
+	 *
+	 * @return int
+	 */
+	public static function woo_feed_parent_product_id( $product ) {
+		if ( $product->is_type( 'variation' ) ) {
+			return $product->get_parent_id();
+		}
+
+		return $product->get_id();
+	}
+
 }

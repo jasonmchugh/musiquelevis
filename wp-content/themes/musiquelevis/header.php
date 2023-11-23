@@ -52,13 +52,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<!-- MatchMedia polyfill (for enquire.js under IE9) -->
 	<!--[if lte IE 9]>
-		<script src="<?php echo get_template_directory_uri(); ?>/assets/dist/js/media.match.min.js"></script>
+		<script src="<?php echo get_template_directory_uri(); ?>/assets/js/media.match.min.js"></script>
 	<![endif]-->
 
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 	<header id="header">
-		<?php get_template_part( 'views/blocs/header' ); ?>
 		<?php get_template_part( 'views/blocs/main-navigation' ); ?>
+		<?php get_template_part( 'views/blocs/header' ); ?>
 	</header>

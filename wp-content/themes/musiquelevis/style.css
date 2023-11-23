@@ -9,13 +9,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: comrad
 */
 
-.sos_head .logo__wrap img {
-  max-width: 300px;
-}
-.sos_head .main-nav .menu-main-nav-container .logo-small {
-  display: none;
-  opacity: 0;
-}
 .page-numbers.current{
 	background: #fff;
     color: #000;
@@ -55,7 +48,7 @@ body.postid-135 #street-view {
     font-size: 1em !important;
 }
 .product_type_simple:hover, .button_style:active, .button_style:focus {
-    background: #003876 !important;
+    background: #054597 !important;
     color: #fff !important;
 }
 /**

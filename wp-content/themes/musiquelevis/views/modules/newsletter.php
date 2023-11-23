@@ -93,7 +93,6 @@
 	</div>
 
 	<div class="_row">
-		<?php echo do_shortcode('[formtastic id="282"]'); ?>
 	</div>
 
 </div>

@@ -534,6 +534,7 @@ class WP {
 		}
 
 		if ( empty( $initiator ) ) {
+			$initiator         = [];
 			$initiator['name'] = esc_html__( 'N/A', 'easy-wp-smtp' );
 			$initiator['slug'] = '';
 			$initiator['type'] = 'unknown';

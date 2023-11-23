@@ -568,7 +568,7 @@ class ICSyncManager
 			$this->_echoLog($logLevel=1, 'updateAllProductsSummaryInfos', 'Done rebuilding all products summary infos');
     	}
     
-    	//Data coming from /wp-content/themes/bravad/templates/nombre.php, callable to https://kijiji.instantcomptant.ca/bravad-nombre-images/
+    	//Data coming from /wp-content/themes/musiquelevis/templates/nombre.php, callable to https://kijiji.instantcomptant.ca/bravad-nombre-images/
     	public function update_LiveNbOfImagesInWP()
     	{
     		$this->_echoLog($logLevel=1, 'update_LiveNbOfImagesInWP', 'Start');

@@ -6,6 +6,7 @@ use EasyWPSMTP\Admin\DomainChecker;
 use EasyWPSMTP\Admin\SetupWizard;
 use EasyWPSMTP\Conflicts;
 use EasyWPSMTP\Debug;
+use EasyWPSMTP\Helpers\Helpers;
 use EasyWPSMTP\Options;
 
 /**
@@ -90,7 +91,7 @@ class UsageTracking {
 	 */
 	public function get_user_agent() {
 
-		return 'EasyWPSMTP/' . EasyWPSMTP_PLUGIN_VERSION . '; ' . get_bloginfo( 'url' );
+		return Helpers::get_default_user_agent();
 	}
 
 	/**

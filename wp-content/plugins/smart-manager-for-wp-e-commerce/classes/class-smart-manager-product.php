@@ -66,6 +66,7 @@ if ( ! class_exists( 'Smart_Manager_Product' ) ) {
 			add_filter( 'sm_generate_column_state', array( &$this, 'product_generate_column_state' ), 10, 2 );
 			add_filter( 'sm_map_column_state_to_store_model', array( &$this, 'product_map_column_state_to_store_model' ), 10, 2 );
 			add_filter( 'sm_filter_updated_edited_data', array( &$this, 'filter_updated_edited_data' ) );
+			add_filter( 'sm_col_model_for_export', array( &$this, 'col_model_for_export' ), 12, 2 );
 		}
 
 		//Function for map the column state to include 'treegrid' for 'show_variations'
@@ -2197,5 +2198,44 @@ if ( ! class_exists( 'Smart_Manager_Product' ) ) {
 			$this->req_params['title'] = _x( 'Edited Stock', 'Title for task', 'smart-manager-for-wp-e-commerce' );
 			return $updated_edited_data;
 		}
+
+		/**
+	     * Function to filter the column model for export CSV.
+		 * @param  array $col_model column model data.
+		 * @param  array $params request params array.
+		 * @return array $col_model array of updated column model data.
+		 */
+		public function col_model_for_export( $col_model = array(), $params = array() ) {
+			if ( empty( $col_model ) || ! is_array( $col_model ) || empty( $params ) || ! is_array( $params ) || ( ! empty( $params['storewide_option'] ) && 'entire_store' === $params['storewide_option'] ) || ( ! empty( $params['columnsToBeExported'] ) && 'visible' === $params['columnsToBeExported'] ) ) {
+				return $col_model;
+			}
+			$stock_cols = array( 'ID', '_sku', 'post_title', '_manage_stock', '_stock_status', '_backorders', '_stock', 'product_type', 'post_parent' );
+			foreach ( $col_model as $key => &$column ) {
+				if ( empty( $column['src'] ) ) continue;
+				$src_exploded = explode( "/", $column['src'] );
+				if ( empty( $src_exploded ) ) {
+					$src = $column['src'];
+				}
+				$src = $src_exploded[1];
+				$col_table = $src_exploded[0];
+				if ( sizeof( $src_exploded ) > 2 ) {
+					$col_table = $src_exploded[0];
+					$cond = explode( "=", $src_exploded[1] );
+					if ( 2 === sizeof( $cond ) ) {
+						$src = $cond[1];
+					}
+				}
+				if ( empty( $src ) ) {
+					continue;
+				}
+				if ( false === in_array( $src, $stock_cols ) ) {
+					unset( $col_model[ $key ] );
+					continue;
+				}
+				$column['hidden'] = false;
+			}
+			return $col_model;
+		}
+		
 	} //End of Class
 }

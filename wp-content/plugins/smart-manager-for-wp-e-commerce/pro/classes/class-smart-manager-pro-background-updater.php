@@ -196,7 +196,7 @@ if ( ! class_exists( 'Smart_Manager_Pro_Background_Updater' ) ) {
 													let noOfRecords = ('undefined' !== typeof( window.smart_manager.selectedRows ) && window.smart_manager.selectedRows && window.smart_manager.selectedRows.length > 0) ? window.smart_manager.selectedRows.length : (window.smart_manager.selectAll ? _x('All', 'all records', 'smart-manager-for-wp-e-commerce') : 0);
 													setTimeout( function() {
 														jQuery('#sa_sm_background_process_complete').fadeOut();
-														window.smart_manager.notification = {status:'success', message: _x(processName+_x(' for ', 'success message', 'smart-manager-for-wp-e-commerce')+noOfRecords+ ' ' +_x(window.smart_manager.dashboardDisplayName || 'records', 'success notification', 'smart-manager-for-wp-e-commerce')+_x(' completed successfully!', 'success message', 'smart-manager-for-wp-e-commerce'), 'success notification', 'smart-manager-for-wp-e-commerce')}
+														window.smart_manager.notification = {status:'success', message: _x(`${processName} ${_x('for', 'success message', 'smart-manager-for-wp-e-commerce')} ${noOfRecords} ${_x(`${noOfRecords == 1 ? 'record' : 'records'}`, 'success notification', 'smart-manager-for-wp-e-commerce')} ${_x(' completed successfully!', 'success message', 'smart-manager-for-wp-e-commerce')}`, 'success notification', 'smart-manager-for-wp-e-commerce')}
 														window.smart_manager.showNotification()
 														if(process == 'bulk_edit'){ //code to refresh all the pages for BE
 															let p = 1;
@@ -395,7 +395,9 @@ if ( ! class_exists( 'Smart_Manager_Pro_Background_Updater' ) ) {
 							<?php /* translators: 1. The bulk process */ ?>
 							let admin_ajax_url = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
 							admin_ajax_url = (admin_ajax_url.indexOf('?') !== -1) ? admin_ajax_url + '&action=sm_beta_include_file' : admin_ajax_url + '?action=sm_beta_include_file';
-							let result = window.confirm('<?php echo sprintf( esc_html__( 'Are you sure you want to stop the %s process? Click OK to stop.', 'smart-manager-for-wp-e-commerce' ), esc_html( $process_name ) ); ?>');
+							let result = window.confirm('<?php echo sprintf(
+								/* translators: %s: process name */
+								esc_html__( 'Are you sure you want to stop the %s process? Click OK to stop.', 'smart-manager-for-wp-e-commerce' ), esc_html( $process_name ) ); ?>');
 							if (result) {
 								jQuery.ajax({
 									url     : admin_ajax_url,

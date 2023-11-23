@@ -1,38 +1,59 @@
 <?php
+/**
+ * Class Google Template
+ *
+ * @package    CTXFeed
+ * @subpackage CTXFeed\V5\Template
+ * @category   MyCategory
+ */
 
 namespace CTXFeed\V5\Template;
 
 use CTXFeed\V5\File\FileFactory;
-use CTXFeed\V5\Filter\ValidateProduct;
-use CTXFeed\V5\Helper\ProductHelper;
 use CTXFeed\V5\Product\ProductFactory;
-use CTXFeed\V5\Utility\Config;
-use CTXFeed\V5\Utility\Logs;
 
+/**
+ * Class Google Template
+ *
+ * @package    CTXFeed
+ * @subpackage CTXFeed\V5\Template
+ * @category   MyCategory
+ */
 class GoogleTemplate implements TemplateInterface {
+
 	/**
-	 * @var Config $config Contain Feed Config.
+	 * @var \CTXFeed\V5\Utility\Config $config Contain Feed Config.
 	 */
 	private $config;
+
 	/**
 	 * @var array $ids Contain Product Ids.
 	 */
 	private $ids;
+
 	/**
 	 * @var array $structure Contain Feed Structure.
 	 */
 	private $structure;
 
-	public function __construct( $ids, $config ) {
+	/**
+	 * GoogleTemplate constructor.
+	 *
+	 * @param array                      $ids       Contain Product Ids.
+	 * @param \CTXFeed\V5\Utility\Config $config    Contain Feed Config.
+	 * @param array                      $structure Contain Feed Structure.
+	 */
+	public function __construct( $ids, $config, $structure ) {
 		$this->ids       = $ids;
 		$this->config    = $config;
-		$this->structure = TemplateFactory::get_structure( $config );
+		$this->structure = $structure;
 	}
 
 	/**
 	 * Get Feed Body.
 	 *
 	 * @return false|string
+	 * @throws \Exception Exception.
 	 */
 	public function get_feed() {
 		$feed = ProductFactory::get_content( $this->ids, $this->config, $this->structure );
@@ -64,58 +85,4 @@ class GoogleTemplate implements TemplateInterface {
 		return $feed['footer'];
 	}
 
-	/**
-	 * @param $ids
-	 * @param $config
-	 * @param $structure
-	 *
-	 * @return \CTXFeed\V5\File\FileInfo
-	 */
-//	private function get_content( $ids, $config, $structure ) {
-//		$info = [];
-//		Logs::write_log( $config->filename, 'Getting Products Information.' );
-//		Logs::write_log( $config->filename, 'Validating Product' );
-//
-//		foreach ( $ids as $id ) {
-//			$product = wc_get_product( $id );
-//
-//			// Validate Product and add for feed.
-//			if ( ValidateProduct::is_valid( $product, $config, $id ) ) {
-//				$info1   = [];
-//				$info [] = $this->get_product_info( $product, $structure, $config, $info1 );
-//			}
-//		}
-//
-//		return FileFactory::GetData( $info, $config );
-//	}
-
-	/**
-	 * @param $product
-	 * @param $structure
-	 * @param $config
-	 * @param $info
-	 *
-	 * @return array
-	 */
-//	private function get_product_info( $product, $structure, $config, $info ) {
-//		if ( is_array( $structure ) ) {
-//			foreach ( $structure as $key => $attribute ) {
-//				if ( is_array( $attribute ) ) {
-//					$value[ $key ] = $this->get_product_info( $product, $attribute, $config, $info );
-//				} else {
-//					$getValue ="";
-////					if(strpos($attribute,':')){
-////
-////					}else{
-////
-////					}
-//					$value[ $key ] = ProductHelper::getAttributeValueByType( $attribute, $product, $config );
-//				}
-//			}
-//		} else {
-//			return $info;
-//		}
-//
-//		return $value;
-//	}
 }

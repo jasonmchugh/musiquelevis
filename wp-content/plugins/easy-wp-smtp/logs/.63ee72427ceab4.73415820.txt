@@ -1,15 +1,28 @@
-[10/07/2023 2:04:05 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] Problems found on dev.musiquelevis.ca
-[10/08/2023 6:18:29 PM] - Headers: , To: sebastienrouleau@hotmail.com, Subject: [Instant comptant] Delete All Records process completed!
-[10/09/2023 12:17:57 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] Problems found on dev.musiquelevis.ca
-[10/09/2023 5:19:30 PM] - Headers: , To: jmchugh@comrad.ca, Subject: Login Verification Required
-[10/09/2023 5:20:29 PM] - Headers: , To: jmchugh@comrad.ca, Subject: Login Verification Required
-[10/09/2023 5:20:51 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] dev.musiquelevis.ca Admin Login
-[10/09/2023 5:20:55 PM] - Headers: , To: sebastienrouleau@hotmail.com, Subject: [Instant comptant] Votre site connaît un problème technique
-[10/09/2023 8:00:05 PM] - Headers: , To: alertes@difusion.ca, Subject: Wordfence activity for 9 octobre 2023 on dev.musiquelevis.ca
-[10/10/2023 10:12:17 PM] - Headers: , To: sebastienrouleau@hotmail.com, Subject: [Instant comptant] Votre site connaît un problème technique
-[10/12/2023 5:38:58 AM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] Problems found on dev.musiquelevis.ca
-[10/12/2023 5:06:58 PM] - Headers: , To: jmchugh@comrad.ca, Subject: Login Verification Required
-[10/12/2023 5:07:22 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] dev.musiquelevis.ca Admin Login
-[10/13/2023 12:56:12 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] Problems found on dev.musiquelevis.ca
-[10/16/2023 12:56:48 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] Problems found on dev.musiquelevis.ca
-[10/16/2023 11:47:56 PM] - Headers: , To: alertes@difusion.ca, Subject: Wordfence activity for 16 octobre 2023 on dev.musiquelevis.ca
+[11/17/2023 9:18:21 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] Problems found on musiquelevis
+[11/17/2023 9:18:28 PM] - *** The following From address failed: info@instantcomptant.ca : MAIL FROM command failed,Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+,550,SMTP server error: MAIL FROM command failed Detail: Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+ SMTP code: 550 ***
+[11/17/2023 9:28:42 PM] - Headers: , To: sebastienrouleau@hotmail.com, Subject: [Musique Lévis] Votre site connaît un problème technique
+[11/17/2023 9:28:54 PM] - *** The following From address failed: info@instantcomptant.ca : MAIL FROM command failed,Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+,550,SMTP server error: MAIL FROM command failed Detail: Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+ SMTP code: 550 ***
+[11/18/2023 7:48:24 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] Problems found on musiquelevis
+[11/18/2023 7:48:44 PM] - *** The following From address failed: info@instantcomptant.ca : MAIL FROM command failed,Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+,550,SMTP server error: MAIL FROM command failed Detail: Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+ SMTP code: 550 ***
+[11/20/2023 2:45:45 PM] - Headers: , To: jmchugh@comrad.ca, Subject: Login Verification Required
+[11/20/2023 2:45:51 PM] - *** The following From address failed: info@instantcomptant.ca : MAIL FROM command failed,Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+,550,SMTP server error: MAIL FROM command failed Detail: Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+ SMTP code: 550 ***
+[11/20/2023 9:00:23 PM] - Headers: , To: alertes@difusion.ca, Subject: Wordfence activity for 20 novembre 2023 on musiquelevis
+[11/20/2023 9:00:23 PM] - *** The following From address failed: info@instantcomptant.ca : MAIL FROM command failed,Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+,550,SMTP server error: MAIL FROM command failed Detail: Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+ SMTP code: 550 ***
+[11/23/2023 2:12:20 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] Problems found on musiquelevis
+[11/23/2023 2:12:34 PM] - *** The following From address failed: info@instantcomptant.ca : MAIL FROM command failed,Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+,550,SMTP server error: MAIL FROM command failed Detail: Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+ SMTP code: 550 ***
+[11/23/2023 2:13:04 PM] - Headers: , To: jmchugh@comrad.ca, Subject: Login Verification Required
+[11/23/2023 2:13:08 PM] - *** The following From address failed: info@instantcomptant.ca : MAIL FROM command failed,Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+,550,SMTP server error: MAIL FROM command failed Detail: Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
+ SMTP code: 550 ***

@@ -12,6 +12,8 @@ if ( ! class_exists( 'Smart_Manager_Pro_Base' ) ) {
 
 		function __construct($dashboard_key) {
 			$this->dashboard_key = $dashboard_key;
+			parent::__construct($dashboard_key);
+			self::$sm_beta_background_updater = Smart_Manager_Pro_Background_Updater::instance();
 			$this->advance_search_operators = array_merge( $this->advance_search_operators, array( 
 				'startsWith' => 'like',
 				'endsWith' => 'like',
@@ -21,19 +23,10 @@ if ( ! class_exists( 'Smart_Manager_Pro_Base' ) ) {
 				'notAnyOf' => 'not like'
 			 ) );
 
-			parent::__construct($dashboard_key);
-			self::$sm_beta_background_updater = Smart_Manager_Pro_Background_Updater::instance();
-
 			add_filter( 'sm_dashboard_model', array( &$this, 'pro_dashboard_model' ), 11, 2 );
 			add_filter( 'sm_data_model', array( &$this, 'pro_data_model' ), 11, 2);
 			add_filter( 'sm_inline_update_pre', array( &$this, 'pro_inline_update_pre' ), 11, 1);
 			add_filter( 'sm_default_dashboard_model_postmeta_cols', array( &$this, 'pro_custom_postmeta_cols' ), 11, 1 );
-			add_filter(
-				'sm_task_update_action_name',
-				function() {
-					return 'set_to';
-				}
-			);
 
 			// Code for handling of `starts with/ends with` advanced search operators
 			$advanced_search_filter_tables = array( 'posts', 'postmeta', 'terms' );
@@ -65,6 +58,9 @@ if ( ! class_exists( 'Smart_Manager_Pro_Base' ) ) {
 					);
 				}
 			);
+			if ( 'yes' === Smart_Manager_Settings::get( 'delete_media_when_permanently_deleting_post_type_records' ) ) {
+				add_action( 'before_delete_post', array( &$this, 'delete_attached_media' ), 11, 2 );
+			}
 		}
 
 		public function get_yoast_meta_robots_values() {
@@ -174,7 +170,9 @@ if ( ! class_exists( 'Smart_Manager_Pro_Base' ) ) {
 
 				switch( $col_nm ) {
 					case '_yoast_wpseo_meta-robots-noindex':
-						$column['key'] = $column['name'] = sprintf( __( 'Allow search engines to show this %1$s in search results?', 'smart-manager-for-wp-e-commerce' ), rtrim( $this->dashboard_title, 's' ) );
+						$column['key'] = $column['name'] = sprintf( 
+							/* translators: %1$s: dashboard title */
+							__( 'Allow search engines to show this %1$s in search results?', 'smart-manager-for-wp-e-commerce' ), rtrim( $this->dashboard_title, 's' ) );
 						$yoast_noindex = array( '0' => __( 'Default', 'smart-manager-for-wp-e-commerce'),
 														'2' => __( 'Yes', 'smart-manager-for-wp-e-commerce' ),
 														'1' => __( 'No', 'smart-manager-for-wp-e-commerce' ) );
@@ -183,7 +181,9 @@ if ( ! class_exists( 'Smart_Manager_Pro_Base' ) ) {
 						break;
 
 					case '_yoast_wpseo_meta-robots-nofollow':
-						$column['key'] = $column['name'] = sprintf( __( 'Should search engines follow links on this %1$s?', 'smart-manager-for-wp-e-commerce' ), rtrim( $this->dashboard_title, 's' ) );
+						$column['key'] = $column['name'] = sprintf(
+							/* translators: %1$s: dashboard title */
+							__( 'Should search engines follow links on this %1$s?', 'smart-manager-for-wp-e-commerce' ), rtrim( $this->dashboard_title, 's' ) );
 						$yoast_nofollow = array('0' => __( 'Yes', 'smart-manager-for-wp-e-commerce' ),
 												'1' => __( 'No', 'smart-manager-for-wp-e-commerce' ) );
 
@@ -779,6 +779,9 @@ if ( ! class_exists( 'Smart_Manager_Pro_Base' ) ) {
 						$term_ids = wp_get_object_terms( $args['selected_value'], $args['selected_column_name'], array( 'orderby' => 'term_id', 'order' => 'ASC', 'fields' => 'ids' ) );
 						$new_val = ( ! is_wp_error( $term_ids ) && ! empty( $term_ids ) ) ? $term_ids : array();
 						break;
+					case 'custom':
+						$new_val = apply_filters( 'sm_get_value_for_copy_from_operator', $new_val, $args );
+						break;
 					default:
 						$new_val = $value1;
 						break;
@@ -835,7 +838,9 @@ if ( ! class_exists( 'Smart_Manager_Pro_Base' ) ) {
 					case 'terms':
 						self::batch_update_terms_table_data( $args );
 						break;
-					
+					case ( 'custom' === $args['table_nm'] && 'copy_from' === $args['operator'] ):
+						$update = apply_filters( 'sm_update_value_for_copy_from_operator', $args );
+						break;
 					default:
 						$update = wp_update_post( array( 'ID' => $args['id'], $args['col_nm'] => $args['value'] ) );
 						$value = $args['value'];
@@ -846,7 +851,10 @@ if ( ! class_exists( 'Smart_Manager_Pro_Base' ) ) {
 			if ( is_wp_error( $update ) ) {
 				return false;
 			} elseif ( ! empty( $args['task_id'] ) && ( ! empty( property_exists( 'Smart_Manager_Base', 'update_task_details_params' ) ) ) ) {
-				$action = apply_filters( 'sm_task_update_action_name', $args['operator'], $args['type'] );
+				$action = 'set_to';
+				if ( in_array( $args['operator'], array( 'add_to', 'remove_from' ) ) ) {
+					$action = apply_filters( 'sm_task_update_action', $args['operator'], $args );
+				}
 				Smart_Manager_Base::$update_task_details_params[] = array(
 					'task_id' => $args['task_id'],
 						    'action' => $action,
@@ -861,8 +869,9 @@ if ( ! class_exists( 'Smart_Manager_Pro_Base' ) ) {
 											)
 										) : $args['prev_val'],
 						    'updated_val' => $args['value'],
+						    'operator' => $args['operator'],
 				);
-			       	apply_filters( 'sm_task_details_update_by_prev_val', Smart_Manager_Base::$update_task_details_params );
+			    apply_filters( 'sm_task_details_update_by_prev_val', Smart_Manager_Base::$update_task_details_params );
 			    // For updating task details table
 				if ( ( ! empty( Smart_Manager_Base::$update_task_details_params ) ) && is_callable( array( 'Smart_Manager_Task', 'task_details_update' ) ) ) {
 					return Smart_Manager_Task::task_details_update();
@@ -924,138 +933,6 @@ if ( ! class_exists( 'Smart_Manager_Pro_Base' ) ) {
 				wp_mail( $email, $subject, $message );
 			}
 
-		}
-
-		// Function to generate and export the CSV data
-		public function get_export_csv() {
-
-			global $current_user;
-
-			ini_set('memory_limit','-1');
-			set_time_limit(0);
-
-			$this->req_params['sort_params'] = json_decode( stripslashes( $this->req_params['sort_params'] ), true );
-			$this->req_params['table_model'] = json_decode( stripslashes( $this->req_params['table_model'] ), true );
-
-			$current_store_model = get_transient( 'sa_sm_'.$this->dashboard_key );
-			if( ! empty( $current_store_model ) && !is_array( $current_store_model ) ) {
-				$current_store_model = json_decode( $current_store_model, true );
-			}
-			$column_model_transient = get_user_meta(get_current_user_id(), 'sa_sm_'.$this->dashboard_key, true);
-
-			// Code for handling views
-			if( ( defined('SMPRO') && true === SMPRO ) && ! empty( $this->req_params['is_view'] ) && ! empty( $this->req_params['active_view'] ) ) {
-				if( class_exists( 'Smart_Manager_Pro_Views' ) ) {
-					$view_obj = Smart_Manager_Pro_Views::get_instance();
-					if( is_callable( array( $view_obj, 'get' ) ) ){
-						$view_slug = $this->req_params['active_view'];
-						$view_data = $view_obj->get($view_slug);
-						if( ! empty( $view_data ) ) {
-							$this->dashboard_key = $view_data['post_type'];
-							$column_model_transient = get_user_meta(get_current_user_id(), 'sa_sm_'.$view_slug, true);
-							$column_model_transient = json_decode( $view_data['params'], true );
-							if( !empty( $column_model_transient['search_params'] ) ) {
-								if( ! empty( $column_model_transient['search_params']['isAdvanceSearch'] ) ) { // For advanced search
-									if( ! empty( $column_model_transient['search_params']['params'] ) && is_array( $column_model_transient['search_params']['params'] ) ) {
-										array_walk(
-											$column_model_transient['search_params']['params'],
-											function ( &$value ) {
-												$value = ( ! empty( $value ) ) ? ( json_encode( $value ) ) : '';
-											}
-										);
-									}
-								}
-								$search_params = $column_model_transient['search_params'];
-							}
-						}
-					}
-				}
-			}
-
-			if( !empty( $column_model_transient ) && !empty( $current_store_model ) ) {
-				$current_store_model = $this->map_column_to_store_model( $current_store_model, $column_model_transient );
-			}
-
-			$col_model = (!empty($current_store_model['columns'])) ? $current_store_model['columns'] : array();
-
-			$data = $this->get_data_model();
-
-			$columns_header = $select_cols = $numeric_cols = array();
-
-			$getfield = '';
-
-			foreach( $col_model as $col ) {
-				if( empty( $col['exportable'] ) || !empty( $col['hidden'] ) ) {
-					continue;
-				}
-
-				$columns_header[ $col['data'] ] = $col['key'];
-
-				$getfield .= $col['key'] . ',';
-
-				if( ! empty( $col['values'] ) ) {
-					$select_cols[ $col['data'] ] = $col['values'];
-				}
-
-				if( ( ( ! empty( $col['type'] ) && 'numeric' === $col['type'] ) ) || ( ( ! empty( $col['validator'] ) && 'customNumericTextEditor' === $col['validator'] ) ) ){
-					$numeric_cols[] = $col['data'];
-				}
-			}
-
-			$fields = substr_replace($getfield, '', -1);
-			$each_field = array_keys( $columns_header );
-
-			$view_name = ( ! empty( $this->req_params['active_view'] ) ) ? $this->req_params['active_view'] . '-view_' : '';
-			$csv_file_name = sanitize_title(get_bloginfo( 'name' )) . '_' . $this->dashboard_key . '_' . $view_name . gmdate('d-M-Y_H:i:s');
-			$csv_file_name = ( ! empty( $this->req_params[ 'storewide_option' ] ) ) ? $csv_file_name . ".csv" : $csv_file_name . '_selected_records' . ".csv";
-
-			foreach( (array) $data['items'] as $row ){
-
-				for($i = 0; $i < count ( $columns_header ); $i++){
-
-					if( $i == 0 ){
-						$fields .= "\n";	
-					}
-
-					if( !empty( $select_cols[ $each_field[$i] ] ) && !empty( $row[$each_field[$i]] ) ) {
-						$row_each_field = !empty( $select_cols[ $each_field[$i] ][ $row[$each_field[$i]] ] ) ? $select_cols[ $each_field[$i] ][ $row[$each_field[$i]] ] : $row[$each_field[$i]];
-					} else {
-						$row_each_field = !empty($row[$each_field[$i]]) ? $row[$each_field[$i]] : '';
-					}
-					$array_temp = str_replace(array("\n", "\n\r", "\r\n", "\r"), "\t", $row_each_field);
-					$array = str_replace("<br>", "\n", $array_temp);
-					$array = str_replace('"', '""', $array);
-					if( ! empty( $numeric_cols ) && in_array( $each_field[$i], $numeric_cols ) ){
-						$str = $array;
-					} else{
-						$array = ( ! is_array( $array ) ) ? str_getcsv ( $array , ",", "\"" , "\\") : $array;
-						$str = ( $array && is_array( $array ) ) ? implode( ', ', $array ) : '';
-					}
-					$fields .= '"'. $str . '",'; 
-
-				}	
-				$fields = substr_replace($fields, '', -1); 
-			}
-
-			$upload_dir = wp_upload_dir();
-			$file_data = array();
-			$file_data['wp_upload_dir'] = $upload_dir['path'] . '/';
-			$file_data['file_name'] = $csv_file_name;
-			$file_data['file_content'] = $fields;
-
-			header("Content-type: text/x-csv; charset=UTF-8"); 
-			header("Content-Transfer-Encoding: binary");
-			header("Content-Disposition: attachment; filename=".$file_data['file_name']); 
-			header("Pragma: no-cache");
-			header("Expires: 0");
-
-			while(ob_get_contents()) {
-				ob_clean();
-			}
-
-			echo $file_data['file_content'];
-			
-			exit;
 		}
 
 		//Function to generate the data for print_invoice
@@ -1440,6 +1317,52 @@ if ( ! class_exists( 'Smart_Manager_Pro_Base' ) ) {
 			} else {
 				$append = ( 'add_to' === $args['operator'] ) ? true : false;
 				return wp_set_object_terms( $args['id'], $value, $args['col_nm'], $append );
+			}
+		}
+
+		/**
+		 * Before deleting a post, do some cleanup like removing attached media.
+		 *
+		 * @param int $order_id Order ID.
+		 * @param WP_Post $post Post data.
+		 */
+		public function delete_attached_media( $post_id = 0, $post = null ) {
+			if ( empty( intval( $post_id ) ) ) {
+				return;
+			}
+			global $wpdb;
+			$attachments = get_children( array(
+				'post_parent' => $post_id,
+				'post_type'   => 'attachment', 
+				'numberposts' => -1,
+				'post_status' => 'any' 
+		  	) );
+			if ( empty( $attachments ) || ! is_array( $attachments ) ) {
+				return;
+			}
+			$attached_media_post_ids = array();
+			$post_ids = array();
+			foreach ( $attachments as $attachment ) {
+				$attachment_id = $attachment->ID;
+				if ( empty( intval( $attachment_id ) ) ) {
+					continue;
+				}
+				$attached_media_post_ids = $wpdb->get_col(
+											$wpdb->prepare( "SELECT DISTINCT post_id 
+											FROM {$wpdb->prefix}postmeta WHERE post_id <> %d AND meta_key = %s AND meta_value = %s", $post_id, '_thumbnail_id', $attachment_id )
+										); 
+				$attached_media_post_ids = apply_filters( 'sm_delete_attachment_get_matching_gallery_images_post_ids', $attached_media_post_ids, array(
+					'post_id' => $post_id,
+					'attachment_id' => $attachment_id
+				) );
+				$post_ids = $wpdb->get_col(
+									$wpdb->prepare( "SELECT DISTINCT ID 
+									FROM {$wpdb->prefix}posts WHERE ID <> %d AND post_content LIKE '%wp-image-" . $attachment_id . "%' OR post_excerpt LIKE '%wp-image-" . $attachment_id . "%' OR post_content LIKE '%wp:image {\"id\":$attachment_id%' OR post_excerpt LIKE '%wp:image {\"id\":$attachment_id%'", $post_id )
+									);
+			}
+			if ( empty( ( is_array( $attached_media_post_ids ) && is_array( $post_ids ) ) && array_merge( $attached_media_post_ids, $post_ids ) ) ) {
+				wp_delete_attachment( $attachment_id, true );
+				wp_delete_post( $attachment_id, true );
 			}
 		}
 	}

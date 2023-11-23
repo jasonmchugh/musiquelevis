@@ -10,7 +10,7 @@
  * Plugin Name:       CTX Feed
  * Plugin URI:        https://webappick.com/
  * Description:       Easily generate woocommerce product feed for any marketing channel like Google Shopping(Merchant), Facebook Remarketing, Bing, eBay & more. Support 100+ Merchants.
- * Version:           6.1.2
+ * Version:           6.3.2
  * Author:            WebAppick
  * Author URI:        https://webappick.com/
  * License:           GPL v2
@@ -20,12 +20,12 @@
  *
  * WP Requirement & Test
  * Requires at least: 4.4
- * Tested up to: 6.3
+ * Tested up to: 6.4
  * Requires PHP: 5.6
  *
  * WC Requirement & Test
  * WC requires at least: 3.3
- * WC tested up to: 8.0.3
+ * WC tested up to: 8.2.1
  */
 
 use CTXFeed\V5\API\RestController;
@@ -133,9 +133,8 @@ require_once WOO_FEED_FREE_PATH . 'V5/autoload.php';
 // Attributes executable file [Manages newly added attributes]
 // @TODO Refactor all the attributes to a single file.
 require_once __DIR__ . DIRECTORY_SEPARATOR
-			 . 'libs' . DIRECTORY_SEPARATOR
-			 . 'WebAppick' . DIRECTORY_SEPARATOR
-			 . 'Attributes' . DIRECTORY_SEPARATOR
+			 . 'V5' . DIRECTORY_SEPARATOR
+			 . 'CustomFields' . DIRECTORY_SEPARATOR
 			 . 'Attributes.php';
 
 if ( ! function_exists( 'is_plugin_active' ) ) {
@@ -197,6 +196,10 @@ if ( ! function_exists( 'run_woo_feed' ) ) {
 		 */
 		add_action( 'plugins_loaded', array( $plugin, 'run' ), PHP_INT_MAX );
 		add_action( 'admin_notices', 'wooFeed_Admin_Notices' );
+
+		if( isset($_GET['page'] )  && preg_match( '/^webappick\W+/', $_GET['page'] )  ) {
+			add_action( 'admin_notices', 'woo_feed_black_friday_notice' );
+		}
 
         //HPOS compatibility
         if( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {

@@ -79,7 +79,7 @@ class ConnectionSettings {
 								<?php
 								printf(
 									wp_kses( /* translators: %s - URL to Setup Wizard. */
-										__( 'If you’d like a guided set up, run through our <a href="%s">Setup Wizard</a>.', 'easy-wp-smtp' ),
+										__( 'If you’d like a guided setup, run through our <a href="%s">Setup Wizard</a>.', 'easy-wp-smtp' ),
 										[
 											'a' => [
 												'href'   => [],
@@ -93,60 +93,53 @@ class ConnectionSettings {
 								?>
 							<?php endif; ?>
 						</p>
-
-						<p>
-							<?php
-							printf(
-								wp_kses( /* translators: %s - URL to suggest a mailer form. */
-									__( 'Don\'t see what you\'re looking for? <a href="%s" target="_blank" rel="noopener noreferrer">Suggest a mailer</a>.', 'easy-wp-smtp' ),
-									[
-										'a' => [
-											'href'   => [],
-											'rel'    => [],
-											'target' => [],
-										],
-									]
-								),
-								esc_url( easy_wp_smtp()->get_utm_url( 'https://easywpsmtp.com/suggest-a-mailer/', 'Suggest a Mailer' ) )
-							);
-							?>
-						</p>
 					</div>
 					<div class="easy-wp-smtp-mailers-picker">
 						<?php foreach ( easy_wp_smtp()->get_providers()->get_options_all( $this->connection ) as $provider ) : ?>
 
 							<div class="easy-wp-smtp-mailers-picker__item">
-								<div class="easy-wp-smtp-mailers-picker__mailer <?php echo 'easy-wp-smtp-mailers-picker__mailer--' . esc_attr( $provider->get_slug() ); ?><?php echo $mailer === $provider->get_slug() ? ' easy-wp-smtp-mailers-picker__mailer--active' : ''; ?><?php echo $provider->is_recommended() ? ' easy-wp-smtp-mailers-picker__mailer--recommended' : ''; ?><?php echo $provider->is_disabled() ? ' easy-wp-smtp-mailers-picker__mailer--disabled' : ''; ?>"<?php echo $provider->is_recommended() ? ' data-recommended-text="' . esc_html__( 'Recommended', 'easy-wp-smtp' ) . '"' : ''; ?><?php echo $provider->is_disabled() ? ' data-disabled-text="' . esc_html__( 'Pro', 'easy-wp-smtp' ) . '"' : ''; ?>>
-									<div class="easy-wp-smtp-mailers-picker__image">
+								<?php if ( $provider->is_disabled() ) : ?>
+									<input type="radio" name="easy-wp-smtp[mail][mailer]" disabled
+												 class="easy-wp-smtp-mailers-picker__input easy-wp-smtp-educate"
+												 id="easy-wp-smtp-setting-mailer-<?php echo esc_attr( $provider->get_slug() ); ?>"
+												 value="<?php echo esc_attr( $provider->get_slug() ); ?>"
+												 data-title="<?php echo esc_attr( $provider->get_title() ); ?>"
+									/>
+								<?php else : ?>
+									<input id="easy-wp-smtp-setting-mailer-<?php echo esc_attr( $provider->get_slug() ); ?>"
+												 type="radio" name="easy-wp-smtp[mail][mailer]"
+												 value="<?php echo esc_attr( $provider->get_slug() ); ?>"
+												 class="easy-wp-smtp-mailers-picker__input"
+												 <?php checked( $provider->get_slug(), $mailer ); ?>
+												 <?php disabled( $connection_options->is_const_defined( 'mail', 'mailer' ) ); ?>
+									/>
+								<?php endif; ?>
+								<label for="easy-wp-smtp-setting-mailer-<?php echo esc_attr( $provider->get_slug() ); ?>" class="easy-wp-smtp-mailers-picker__mailer <?php echo 'easy-wp-smtp-mailers-picker__mailer--' . esc_attr( $provider->get_slug() ); ?><?php echo $provider->is_recommended() ? ' easy-wp-smtp-mailers-picker__mailer--recommended' : ''; ?><?php echo $provider->is_disabled() ? ' easy-wp-smtp-mailers-picker__mailer--disabled' : ''; ?>"<?php echo $provider->is_recommended() ? ' data-recommended-text="' . esc_html__( 'Recommended', 'easy-wp-smtp' ) . '"' : ''; ?><?php echo $provider->is_disabled() ? ' data-disabled-text="' . esc_html__( 'Pro', 'easy-wp-smtp' ) . '"' : ''; ?>>
+									<span class="easy-wp-smtp-mailers-picker__image">
 										<img src="<?php echo esc_url( $provider->get_logo_url() ); ?>"
 												 alt="<?php echo esc_attr( $provider->get_title() ); ?>">
-									</div>
+									</span>
 
 									<?php if ( in_array( $provider->get_slug(), [ 'mail', 'smtp' ], true ) ) : ?>
-										<div class="easy-wp-smtp-mailers-picker__title">
+										<span class="easy-wp-smtp-mailers-picker__title">
 											<?php echo esc_html( $provider->get_title() ); ?>
-										</div>
+										</span>
 									<?php endif; ?>
-
-									<?php if ( $provider->is_disabled() ) : ?>
-										<input type="radio" name="easy-wp-smtp[mail][mailer]" disabled
-													 class="easy-wp-smtp-mailers-picker__input easy-wp-smtp-educate"
-													 id="easy-wp-smtp-setting-mailer-<?php echo esc_attr( $provider->get_slug() ); ?>"
-													 value="<?php echo esc_attr( $provider->get_slug() ); ?>"
-													 data-title="<?php echo esc_attr( $provider->get_title() ); ?>"
-										/>
-									<?php else : ?>
-										<input id="easy-wp-smtp-setting-mailer-<?php echo esc_attr( $provider->get_slug() ); ?>"
-													 type="radio" name="easy-wp-smtp[mail][mailer]"
-													 value="<?php echo esc_attr( $provider->get_slug() ); ?>"
-													 class="easy-wp-smtp-mailers-picker__input"
-											<?php checked( $provider->get_slug(), $mailer ); ?>
-											<?php disabled( $connection_options->is_const_defined( 'mail', 'mailer' ) ); ?>
-										/>
-									<?php endif; ?>
-								</div>
+								</label>
 							</div>
 						<?php endforeach; ?>
+						<div class="easy-wp-smtp-mailers-picker__item easy-wp-smtp-mailers-picker__item--double">
+							<div class="easy-wp-smtp-mailers-picker__suggest-mailer">
+								<?php esc_html_e( 'Don\'t see what you\'re looking for?', 'easy-wp-smtp' ); ?>
+								<?php
+								printf(
+									'<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>',
+									esc_url( easy_wp_smtp()->get_utm_url( 'https://easywpsmtp.com/suggest-a-mailer/', 'Suggest a Mailer' ) ),
+									esc_html__( 'Suggest a Mailer', 'easy-wp-smtp' )
+								);
+								?>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -435,7 +428,7 @@ class ConnectionSettings {
 		// Prevent redirect to setup wizard from settings page after successful auth.
 		if (
 			! empty( $data['mail']['mailer'] ) &&
-			in_array( $data['mail']['mailer'], [ 'outlook' ], true )
+			in_array( $data['mail']['mailer'], [ 'gmail', 'outlook' ], true )
 		) {
 			$data[ $data['mail']['mailer'] ]['is_setup_wizard_auth'] = false;
 		}

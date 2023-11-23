@@ -2,11 +2,11 @@ body.login{
   background: #ffffff;
 }
   .login h1 a {
-    background-image: url(../assets/img/logos/maneige_favicon.svg);
-    /*background-size: 90%;*/
-    width: 90px;
+    background-image: url(../assets/img/logos/Musique_Levis_logo.png);
+    background-size: 90%;
+    width: 250px;
     margin-bottom: 0;
-    height: 65px;
+    height: 125px;
   }
 
   body.login form{

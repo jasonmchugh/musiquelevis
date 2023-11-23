@@ -172,4 +172,18 @@ class Helpers {
 
 		return false;
 	}
+
+	/**
+	 * Get the default user agent.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @return string
+	 */
+	public static function get_default_user_agent() {
+
+		$license_type = easy_wp_smtp()->get_license_type();
+
+		return 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' ) . '; EasyWPSMTP/' . $license_type . '-' . EasyWPSMTP_PLUGIN_VERSION;
+	}
 }
