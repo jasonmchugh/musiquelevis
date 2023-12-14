@@ -4,10 +4,10 @@
  */
 
  .page__wrapper {
-	margin-top: 9.6em;
+	margin-top: 10em;
 
 	@media #{$lg} {
-		margin-top: 7.875em;
+		margin-top: 8.875em;
 	}
 
 	@media #{$md} {
@@ -48,7 +48,7 @@
 	top: 50%;
 	transform: translateY(-50%);
 	font-size: 2.5em;
-	font-family: $font-oswald;
+	font-family: $font-noto;
 }
 
 .page__content {
@@ -73,11 +73,12 @@
 
 	img {
 		width: 100%;
+		border-radius: 25px;
 	}
 
 	h2 {
 		font-size: 1em;
-		font-family: $font-worksans;
+		font-family: $font-inter;
 		font-weight: bold;
 	}
 

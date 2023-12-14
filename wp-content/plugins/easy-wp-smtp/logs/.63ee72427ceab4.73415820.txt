@@ -26,3 +26,25 @@
 [11/23/2023 2:13:08 PM] - *** The following From address failed: info@instantcomptant.ca : MAIL FROM command failed,Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
 ,550,SMTP server error: MAIL FROM command failed Detail: Access denied - Invalid HELO name (See RFC2821 4.1.1.1)
  SMTP code: 550 ***
+[11/28/2023 2:46:14 PM] - Headers: MIME-Version: 1.0
+ | Content-type:text/html;charset=UTF-8
+, To: , Subject: 4 WordPress Hardening recommendations for https://musiquelevis
+[11/28/2023 2:46:14 PM] - *** You must provide at least one recipient email address. ***
+[11/28/2023 2:46:27 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] Problems found on musiquelevis
+[11/28/2023 2:46:34 PM] - Headers: , To: alertes@difusion.ca, Subject: Wordfence activity for 28 novembre 2023 on musiquelevis
+[11/28/2023 2:46:57 PM] - *** SMTP Error: Could not connect to SMTP host. Failed to connect to server ***
+[11/28/2023 2:47:04 PM] - *** SMTP Error: Could not connect to SMTP host. Failed to connect to server ***
+[11/28/2023 4:41:16 PM] - Headers: , To: jmchugh@comrad.ca, Subject: Login Verification Required
+[11/28/2023 4:41:46 PM] - *** SMTP Error: Could not connect to SMTP host. Failed to connect to server ***
+[11/28/2023 4:41:46 PM] - Headers: , To: sebastienrouleau@hotmail.com, Subject: [Musique Lévis] Votre site connaît un problème technique
+[11/28/2023 4:42:16 PM] - *** SMTP Error: Could not connect to SMTP host. Failed to connect to server ***
+[11/29/2023 4:51:06 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] Problems found on musiquelevis
+[11/29/2023 4:51:36 PM] - *** SMTP Error: Could not connect to SMTP host. Failed to connect to server ***
+[12/04/2023 1:48:56 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] Problems found on musiquelevis
+[12/04/2023 1:48:58 PM] - Headers: , To: jmchugh@comrad.ca, Subject: Login Verification Required
+[12/04/2023 1:49:27 PM] - *** SMTP Error: Could not connect to SMTP host. Failed to connect to server ***
+[12/04/2023 1:49:29 PM] - *** SMTP Error: Could not connect to SMTP host. Failed to connect to server ***
+[12/04/2023 1:49:29 PM] - Headers: , To: sebastienrouleau@hotmail.com, Subject: [Musique Lévis] Votre site connaît un problème technique
+[12/04/2023 1:49:59 PM] - *** SMTP Error: Could not connect to SMTP host. Failed to connect to server ***
+[12/04/2023 2:05:48 PM] - Headers: , To: alertes@difusion.ca, Subject: [Wordfence Alert] musiquelevis Wordfence Deactivated
+[12/04/2023 2:06:18 PM] - *** SMTP Error: Could not connect to SMTP host. Failed to connect to server ***

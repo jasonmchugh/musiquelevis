@@ -1,7 +1,7 @@
 .btn,
 .button {
 	border: none;
-	border-radius: 0.5em;
+	border-radius: 2em;
 	text-transform: uppercase;
 	transition: all $speed $easing;
 	display: inline-block;
@@ -10,7 +10,7 @@
 	letter-spacing: -0.02em;
 	padding: 0.875em 2.250em;
 	line-height: 1;
-	font-family: $font-worksans;
+	font-family: $font-inter;
 	font-size: 1em;
 }
 

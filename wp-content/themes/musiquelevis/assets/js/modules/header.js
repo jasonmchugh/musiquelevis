@@ -55,6 +55,6 @@
 	    }
 	}
 
-	$('#menu-main-nav').prepend('<a class="logo-small" href="/" style="display:none;"></a>');
+	//$('#menu-main-nav').prepend('<a class="logo-small" href="/" style="display:none;"></a>');
 
 })(jQuery);

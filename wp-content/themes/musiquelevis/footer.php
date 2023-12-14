@@ -31,9 +31,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php } ?>
 
 		<footer>
-			<div class="_container">
+			<div class="_container--medium">
 				<div class="_row">
-					<div class="_col _col--xl-6 _col--md-6 _col--sm-12">
+					<div class="_col _col--xl-3 _col--md-3 _col--sm-12">
 						<?php dynamic_sidebar( 'footer1' ); ?>
 					</div>
 					<div class="_col _col--xl-3 _col--md-3 _col--sm-12">
@@ -42,18 +42,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<div class="_col _col--xl-3 _col--md-3 _col--sm-12">
 						<?php dynamic_sidebar( 'footer3' ); ?>
 					</div>
+					<div class="_col _col--xl-3 _col--md-3 _col--sm-12">
+						<?php dynamic_sidebar( 'footer4' ); ?><a href="javascript:Didomi.preferences.show()" class="consent">Consentement</a>
+					</div>
 				</div>
 				<div class="_row copyrights">
-					<div class="_col _col--xl-4 _col--md-4 _col--sm-12">
+					<div class="_col _col--xl-12 _col--md-12 _col--sm-12">
 						<?php echo date('Y'); ?> © Musique Lévis <i>-</i> <span><?php _e( 'Tous droits réservés.', 'bravad' ); ?></span>
-					</div>
-					<div class="_col _col--xl-8 _col--md-8 _col--sm-12 right">
-						<?php /*<a class="logo__wrap" href="<?php echo get_home_url(); ?>">
-							<?php
-								echo file_get_contents(str_replace('/index.php', '', $_SERVER['SCRIPT_FILENAME']) . '/wp-content/themes/musiquelevis/assets/img/instant-comptant.svg');
-							?>
-						</a>*/ ?>
-						<?php dynamic_sidebar( 'footer4' ); ?><a href="javascript:Didomi.preferences.show()" class="consent">Consentement</a>
 					</div>
 				</div>
 			</div>

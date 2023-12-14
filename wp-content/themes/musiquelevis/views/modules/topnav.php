@@ -1,6 +1,6 @@
 <?php include_once('preprocess/header.php'); ?>
 
-<div class="top-nav-outer _col _col--xl-8 _col--md-12">
+<div class="top-nav-outer">
 
 	<nav class="top-nav">
 

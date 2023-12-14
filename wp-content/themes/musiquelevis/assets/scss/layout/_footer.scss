@@ -20,6 +20,8 @@ footer {
 	.menu-item {
 		margin-bottom: 1.5em;
 		padding: 0;
+		color: $white;
+		text-align: left;
 
 		@media #{$lg} {
 			font-size: 0.9em;
@@ -44,7 +46,7 @@ footer {
 		z-index: 0;
 
 		li {
-			margin: 0 1em;
+			margin: 0;
 		}
 
 	}
@@ -52,8 +54,7 @@ footer {
 }
 
 #menu-footer-produits {
-	text-transform: uppercase;
-	font-weight: bold;
+	font-weight: 600;
 
 	.sub-menu {
 		display: block;
@@ -79,8 +80,7 @@ footer {
 }
 
 #menu-footer-pages {
-	text-transform: uppercase;
-	font-weight: bold;
+	font-weight: 600;
 
 	.menu-item {
 		display: block;
@@ -93,8 +93,7 @@ footer {
 }
 
 #menu-footer-contact {
-	text-transform: uppercase;
-	font-weight: bold;
+	font-weight: 600;
 
 	.sub-menu {
 		display: block;
@@ -115,7 +114,7 @@ footer {
 }
 
 #menu-footer-secondary {
-	text-align: right;
+	text-align: left;
 
 	@media #{$sm} {
 		text-align: center;
@@ -133,6 +132,8 @@ footer {
 		a {
 			display: inline-block;
 			margin: 0;
+			margin-bottom: 1em;
+			display: block;
 
 			@media #{$xs} {
 				display: block;
@@ -168,6 +169,7 @@ footer {
 .copyrights {
 	margin-top: 4em;
 	position: relative;
+	text-align: center;
 
 	@media #{$md} {
 		margin: 0;

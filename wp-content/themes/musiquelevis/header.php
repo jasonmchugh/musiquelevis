@@ -31,7 +31,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<meta name="theme-color" content="#ffffff">
 
     <!-- Inline Style -->
-    <link href="https://fonts.googleapis.com/css?family=Oswald|Work+Sans:400,700" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCINVRmiU2AlezhqfymFgNAkd14yXTRkk"></script>
     
 

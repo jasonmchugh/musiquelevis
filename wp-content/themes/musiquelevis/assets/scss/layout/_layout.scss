@@ -89,7 +89,7 @@
 }
 #head {
 	background: $white;
-	padding: 1.5rem 0;
+	padding: 0.75rem 0;
 	z-index: 3;
 	position: relative;
 
@@ -193,7 +193,7 @@
 }
 
 .content {
-	margin-top: 9.5em;
+	margin-top: 11.5em;
 	position: relative;
 
 	@media #{$lg} {

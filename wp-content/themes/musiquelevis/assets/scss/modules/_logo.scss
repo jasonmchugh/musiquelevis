@@ -5,7 +5,7 @@
 .logo__wrap {
 	display: block;
 	width: auto;
-	max-width: 13em;
+	max-width: 12em;
 	transition: all $speed $easing;
 
 	@media #{$md} {

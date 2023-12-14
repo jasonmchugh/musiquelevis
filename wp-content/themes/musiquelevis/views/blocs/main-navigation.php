@@ -3,9 +3,7 @@
 
 	<!-- Main Nav & Quick Cart -->
 	<nav class="main-nav js-main-nav">
-		<div class="_container">
-			<?php get_template_part( 'views/modules/cart' ); ?>
-		</div>
+		<?php get_template_part( 'views/modules/cart' ); ?>
 	</nav>
 
 </div>

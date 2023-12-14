@@ -17,11 +17,9 @@
 .cart-content {
 	background: $yellow;
 	color: $black;
-	position: absolute;
-	right: 0;
-	top: 0;
+	display: inline-block;
 	height: 100%;
-	padding: 0.8rem 2.18rem;
+	padding: 1.35rem 2.18rem;
 	transition: all $speed $easing;
 
 	&:hover {
@@ -99,6 +97,7 @@
 	z-index: -1;
 	max-width: 100%;
 	min-width: 28rem;
+	transition: all $speed $easing;
 
 	@media #{$md} {
 		display: none;
@@ -167,6 +166,7 @@
 		color: $black;
 		margin-top: 1em;
 		width: 100%;
+		border-radius: 2em;
 
 		&:hover {
 			background: $blue;
@@ -192,6 +192,7 @@
 
 		.cart-dropdown {
 			margin-top: 0;
+			z-index: 55;
 		}
 
 	}

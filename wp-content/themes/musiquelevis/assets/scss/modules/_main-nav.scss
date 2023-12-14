@@ -6,6 +6,8 @@
 .main-nav__wrap {
 	background: $black;
 	transition: 0.5s;
+	text-align: right;
+	position: relative;
 
 	@media #{$md} {
 		top: -60em;
@@ -24,7 +26,7 @@
 
 .main-nav {
 	position: relative;
-	z-index: 2;
+	display: inline-block;
 
 	@media #{$md} {
 		padding-top: 0;
@@ -40,18 +42,21 @@
 #menu-main-nav {
 	position: relative;
 	transition: all .3s ease-out;
-	background: $black;
+	text-align: right;
+	margin-bottom: 0;
 }
 
 .menu-item {
 	display: inline-block;
-	color: $white;
+	color: $black;
+	font-weight: 500;
 	transition: all $speed $easing;
 	margin: 0;
-	padding: 1em 0;
+	padding: 2em 0;
+	text-align: right;
 
 	&:after {
-		content: "|";
+		content: "";
 		color: $white;
 		margin: 0 1em;
 

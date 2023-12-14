@@ -85,14 +85,16 @@
 	}
 
 ?>
-<div class="newsletter _container">
+<div class="newsletter">
+	<div class="_container--medium">
+		<div class="_row">
+			<h3><?php the_field('titre_newsletter', 'options') ?></h3>
+			<p><?php the_field('texte_newsletter', 'options') ?></p>
+		</div>
 
-	<div class="_row">
-		<h2><?php the_field('titre_newsletter', 'options') ?></h2>
-		<p><?php the_field('texte_newsletter', 'options') ?></p>
-	</div>
-
-	<div class="_row">
+		<div class="_row">
+			<?php echo apply_shortcodes( '[contact-form-7 id="380235" title="Formulaire infolettre - Fr"]' ); ?>
+		</div>
 	</div>
 
 </div>

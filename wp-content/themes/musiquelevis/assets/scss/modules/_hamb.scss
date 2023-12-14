@@ -1,5 +1,4 @@
 .main-nav__btn--wrapper {
-	display: none;
 	z-index: 100;
 
 	@media #{$md} {
@@ -15,7 +14,7 @@
 
 .main-nav__btn {
 	position: absolute;
-	display: block;
+	display: none;
 	width: 2.625em;
 	height: 1.438em;
 	right: 0;
